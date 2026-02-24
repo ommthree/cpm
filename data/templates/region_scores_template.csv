@@ -1,0 +1,58 @@
+Region,CarbonPrice,EnergyPrice,GDPDeviation,FloodSeverity,StormSeverity,HeatDroughtSeverity,Notes
+North America,0.7,0.6,1.0,0.5,0.6,0.5,Moderate policy risk; varied hazard exposure
+Europe,0.9,0.8,0.8,0.4,0.4,0.4,Highest policy stringency (EU ETS)
+Asia-Pacific (developed),0.7,0.7,0.9,0.6,0.8,0.6,Strong typhoon/flood exposure (Japan, AUS)
+Asia-Pacific (emerging),0.6,0.9,1.0,0.8,0.9,0.7,High physical risk; rapid development
+Latin America,0.5,0.7,1.0,0.7,0.7,0.6,Moderate policy; hurricane/flood exposure
+Middle East & Africa,0.4,1.0,0.9,0.6,0.5,0.9,Fossil-dependent; extreme heat/drought
+Global,0.7,0.7,0.8,0.5,0.5,0.5,Weighted average for global corporations
+
+# CSV Template: Region Sensitivity Scores (R matrix)
+#
+# Column Definitions:
+# - Region: Region name (string, must match portfolio region taxonomy exactly)
+# - CarbonPrice: Sensitivity to carbon price policies (0-1 scale)
+# - EnergyPrice: Sensitivity to energy price shocks (0-1 scale)
+# - GDPDeviation: Sensitivity to economic shocks (0-1 scale)
+# - FloodSeverity: Regional flood hazard propensity (0-1 scale)
+# - StormSeverity: Regional storm/cyclone propensity (0-1 scale)
+# - HeatDroughtSeverity: Regional heat stress and drought propensity (0-1 scale)
+# - Notes: Explanation of regional characteristics (string)
+#
+# Scoring Guidance:
+# - 1.0 = Maximum exposure/vulnerability for this region
+# - 0.5 = Moderate exposure
+# - 0.0 = Minimal exposure
+#
+# Transition Risk Scoring (CarbonPrice, EnergyPrice, GDPDeviation):
+# - CarbonPrice: Policy stringency and likelihood of carbon pricing
+#   * High (0.8-1.0): Europe, developed Asia-Pacific (strong climate policy)
+#   * Medium (0.5-0.7): North America, global average
+#   * Low (0.0-0.4): Regions with weak/no carbon pricing
+# - EnergyPrice: Dependence on fossil fuel imports and energy intensity
+#   * High: Emerging Asia, Middle East (oil-dependent economies)
+#   * Medium: Europe, developed economies
+#   * Low: Regions with diversified energy mix
+# - GDPDeviation: Economic vulnerability and volatility
+#   * High: Emerging markets, commodity-dependent regions
+#   * Medium: Developed economies
+#
+# Physical Risk Scoring (FloodSeverity, StormSeverity, HeatDroughtSeverity):
+# - Based on historical hazard frequency and projected climate change impacts
+# - FloodSeverity: Coastal exposure, river basins, urban flooding risk
+#   * High: Asia-Pacific (monsoons, typhoons), parts of Latin America
+#   * Medium: North America, Europe
+# - StormSeverity: Tropical cyclone tracks, severe weather frequency
+#   * High: Asia-Pacific (typhoons), Latin America (hurricanes)
+#   * Medium: North America (hurricanes, tornadoes)
+#   * Low: Europe, Middle East
+# - HeatDroughtSeverity: Temperature extremes, water stress
+#   * High: Middle East & Africa, parts of Asia-Pacific
+#   * Medium: Latin America, Mediterranean Europe
+#   * Low: Northern Europe, temperate zones
+#
+# Data Sources:
+# - Policy stringency: OECD Climate Policy Tracker, World Bank carbon pricing database
+# - Energy mix: IEA World Energy Outlook
+# - Physical hazards: World Bank Climate Change Knowledge Portal, EM-DAT disaster database
+# - Climate projections: IPCC regional assessments, NGFS physical risk indicators

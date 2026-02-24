@@ -1,0 +1,501 @@
+ObligorID,Name,Sector,Region,PD,LGD,EAD,ExpectedReturn,Notes
+OBL001,Global Energy Corp,Energy - Oil & Gas,Global,0.025,0.45,15000000,0.085,Major oil & gas producer
+OBL002,European Coal Industries,Energy - Coal,Europe,0.035,0.50,8000000,0.095,Coal mining and power generation
+OBL003,North American Wind Power,Energy - Renewables,North America,0.015,0.40,12000000,0.065,Wind farm operator
+OBL004,Asia Pacific Utilities,Utilities,Asia-Pacific (developed),0.020,0.42,20000000,0.070,Integrated utility company
+OBL005,Global Shipping Lines,Transportation,Global,0.028,0.48,9000000,0.090,Container shipping
+OBL006,European Steel Manufacturing,Manufacturing - Heavy Industry,Europe,0.032,0.47,11000000,0.078,Steel production
+OBL007,Asian Electronics Assembly,Manufacturing - Light Industry,Asia-Pacific (emerging),0.022,0.38,7000000,0.072,Consumer electronics
+OBL008,Latin American Agriculture,Agriculture,Latin America,0.030,0.52,5500000,0.088,Crop production and export
+OBL009,North American Real Estate,Real Estate & Construction,North America,0.018,0.35,18000000,0.062,Commercial property development
+OBL010,European Investment Bank,Financial Services,Europe,0.012,0.30,50000000,0.055,Corporate and infrastructure lending
+OBL011,Global Tech Services,Technology & Services,Global,0.010,0.28,8000000,0.068,Cloud computing services
+OBL012,Asian Consumer Goods,Consumer Goods,Asia-Pacific (emerging),0.024,0.42,6500000,0.080,Food and beverage manufacturing
+OBL013,European Healthcare Systems,Healthcare,Europe,0.008,0.25,12000000,0.048,Hospital operator
+OBL014,African Mining Corp,Mining & Metals,Middle East & Africa,0.040,0.55,10000000,0.105,Copper and gold mining
+OBL015,Canadian Energy Services,Energy - Oil & Gas,North America,0.030,0.46,7500000,0.092,Oil field services
+OBL016,Australian Coal Export,Energy - Coal,Asia-Pacific (developed),0.038,0.52,9500000,0.098,Metallurgical coal export
+OBL017,European Solar Energy,Energy - Renewables,Europe,0.012,0.38,10000000,0.060,Solar power generation
+OBL018,Asian Water Utilities,Utilities,Asia-Pacific (emerging),0.025,0.44,8500000,0.075,Water and wastewater services
+OBL019,Latin American Airlines,Transportation,Latin America,0.045,0.58,6000000,0.110,Regional airline operator
+OBL020,North American Automotive,Manufacturing - Heavy Industry,North America,0.028,0.45,13000000,0.082,Automobile manufacturing
+OBL021,European Textiles,Manufacturing - Light Industry,Europe,0.026,0.40,4500000,0.074,Textile and apparel production
+OBL022,African Agriculture Export,Agriculture,Middle East & Africa,0.042,0.60,4000000,0.095,Agricultural commodities
+OBL023,Asian Property Development,Real Estate & Construction,Asia-Pacific (emerging),0.022,0.37,14000000,0.070,Residential and commercial development
+OBL024,Global Investment Fund,Financial Services,Global,0.008,0.28,35000000,0.052,Multi-asset investment fund
+OBL025,North American Software,Technology & Services,North America,0.009,0.26,9000000,0.065,Enterprise software solutions
+OBL026,European Food Processing,Consumer Goods,Europe,0.020,0.40,7500000,0.072,Processed food manufacturing
+OBL027,Asian Pharmaceutical,Healthcare,Asia-Pacific (developed),0.011,0.30,11000000,0.055,Generic drug manufacturing
+OBL028,Latin American Metals,Mining & Metals,Latin America,0.036,0.50,8500000,0.098,Base metals mining
+OBL029,Middle East Oil Production,Energy - Oil & Gas,Middle East & Africa,0.022,0.44,22000000,0.088,Crude oil production
+OBL030,North American Coal Mining,Energy - Coal,North America,0.040,0.54,6500000,0.102,Thermal coal mining
+OBL031,European Offshore Wind,Energy - Renewables,Europe,0.014,0.39,15000000,0.063,Offshore wind development
+OBL032,Global Electric Utility,Utilities,Global,0.018,0.41,25000000,0.068,International power generation
+OBL033,Asian Logistics,Transportation,Asia-Pacific (emerging),0.027,0.43,5500000,0.085,Freight and logistics services
+OBL034,European Chemicals,Manufacturing - Heavy Industry,Europe,0.030,0.46,10500000,0.080,Chemical manufacturing
+OBL035,North American Packaging,Manufacturing - Light Industry,North America,0.023,0.39,5000000,0.070,Packaging materials production
+OBL036,Latin American Forestry,Agriculture,Latin America,0.034,0.48,4500000,0.090,Timber production and processing
+OBL037,Asian Infrastructure,Real Estate & Construction,Asia-Pacific (developed),0.016,0.34,19000000,0.064,Infrastructure construction
+OBL038,European Banking Group,Financial Services,Europe,0.010,0.29,45000000,0.053,Retail and commercial banking
+OBL039,North American Cloud Services,Technology & Services,North America,0.008,0.27,10000000,0.062,Data center operations
+OBL040,Asian Retail Chain,Consumer Goods,Asia-Pacific (emerging),0.025,0.41,6000000,0.078,Multi-format retail
+OBL041,European Medical Devices,Healthcare,Europe,0.009,0.28,9500000,0.050,Medical equipment manufacturing
+OBL042,Australian Mining Services,Mining & Metals,Asia-Pacific (developed),0.032,0.47,7000000,0.088,Mining support services
+OBL043,Canadian Oil Sands,Energy - Oil & Gas,North America,0.033,0.48,12000000,0.094,Oil sands extraction
+OBL044,Asian Coal Power,Energy - Coal,Asia-Pacific (emerging),0.036,0.51,11000000,0.096,Coal-fired power generation
+OBL045,European Hydro Power,Energy - Renewables,Europe,0.010,0.36,13000000,0.058,Hydroelectric generation
+OBL046,Latin American Gas Utility,Utilities,Latin America,0.024,0.43,9000000,0.074,Natural gas distribution
+OBL047,North American Rail Freight,Transportation,North America,0.020,0.40,14000000,0.076,Railway freight services
+OBL048,European Cement,Manufacturing - Heavy Industry,Europe,0.034,0.48,8000000,0.084,Cement production
+OBL049,Asian Electronics Components,Manufacturing - Light Industry,Asia-Pacific (developed),0.019,0.37,8500000,0.071,Semiconductor components
+OBL050,African Cocoa Production,Agriculture,Middle East & Africa,0.038,0.54,3500000,0.092,Cocoa farming and export
+OBL051,European Commercial Property,Real Estate & Construction,Europe,0.015,0.33,21000000,0.061,Office and retail properties
+OBL052,Global Asset Manager,Financial Services,Global,0.007,0.27,40000000,0.051,Institutional asset management
+OBL053,North American Cybersecurity,Technology & Services,North America,0.011,0.29,7500000,0.066,Security software and services
+OBL054,Asian Beverages,Consumer Goods,Asia-Pacific (emerging),0.022,0.39,7000000,0.075,Soft drink manufacturing
+OBL055,European Biotech,Healthcare,Europe,0.015,0.32,8000000,0.058,Biotechnology research
+OBL056,Latin American Copper,Mining & Metals,Latin America,0.037,0.51,9500000,0.100,Copper mining and refining
+OBL057,Middle East Gas Production,Energy - Oil & Gas,Middle East & Africa,0.020,0.43,18000000,0.086,Natural gas production
+OBL058,European Lignite Mining,Energy - Coal,Europe,0.042,0.56,5500000,0.105,Lignite coal mining
+OBL059,North American Geothermal,Energy - Renewables,North America,0.013,0.38,9500000,0.062,Geothermal power generation
+OBL060,Asian Telecom Infrastructure,Utilities,Asia-Pacific (developed),0.017,0.40,16000000,0.069,Telecommunications network
+OBL061,European Aviation,Transportation,Europe,0.035,0.52,10000000,0.095,Airline operations
+OBL062,North American Aluminum,Manufacturing - Heavy Industry,North America,0.031,0.46,9000000,0.082,Aluminum smelting
+OBL063,Asian Semiconductor Fab,Manufacturing - Light Industry,Asia-Pacific (developed),0.016,0.35,12000000,0.068,Semiconductor fabrication
+OBL064,Latin American Cattle,Agriculture,Latin America,0.032,0.50,4200000,0.089,Cattle ranching and beef export
+OBL065,North American Residential Construction,Real Estate & Construction,North America,0.021,0.38,11000000,0.072,Homebuilding and development
+OBL066,European Insurance Group,Financial Services,Europe,0.009,0.28,38000000,0.052,Property and casualty insurance
+OBL067,Global Consulting Services,Technology & Services,Global,0.010,0.28,6500000,0.064,Management consulting
+OBL068,Asian Personal Care,Consumer Goods,Asia-Pacific (emerging),0.023,0.40,5500000,0.077,Personal care products
+OBL069,North American Healthcare REIT,Healthcare,North America,0.012,0.31,15000000,0.056,Healthcare real estate investment
+OBL070,Australian Iron Ore,Mining & Metals,Asia-Pacific (developed),0.029,0.45,13000000,0.090,Iron ore mining and export
+OBL071,European Integrated Oil,Energy - Oil & Gas,Europe,0.024,0.44,20000000,0.087,Integrated oil and gas company
+OBL072,Asian Thermal Coal,Energy - Coal,Asia-Pacific (emerging),0.039,0.53,7500000,0.099,Thermal coal production
+OBL073,Latin American Solar,Energy - Renewables,Latin America,0.016,0.41,8000000,0.068,Solar project development
+OBL074,North American Electric Grid,Utilities,North America,0.014,0.38,22000000,0.066,Transmission and distribution
+OBL075,Middle East Airlines,Transportation,Middle East & Africa,0.033,0.50,7000000,0.093,International airline
+OBL076,European Petrochemicals,Manufacturing - Heavy Industry,Europe,0.029,0.45,11500000,0.081,Petrochemical production
+OBL077,Asian Automotive Parts,Manufacturing - Light Industry,Asia-Pacific (emerging),0.024,0.40,6500000,0.073,Auto components manufacturing
+OBL078,African Coffee Export,Agriculture,Middle East & Africa,0.040,0.55,3800000,0.094,Coffee farming and export
+OBL079,European Hotel Chain,Real Estate & Construction,Europe,0.026,0.42,9000000,0.076,Hotel operations and property
+OBL080,Asian Commercial Bank,Financial Services,Asia-Pacific (developed),0.011,0.30,32000000,0.054,Commercial banking
+OBL081,North American Data Analytics,Technology & Services,North America,0.012,0.30,5500000,0.067,Business intelligence software
+OBL082,European Luxury Goods,Consumer Goods,Europe,0.017,0.36,8500000,0.070,Luxury fashion and accessories
+OBL083,Latin American Healthcare,Healthcare,Latin America,0.020,0.37,7000000,0.065,Private hospital network
+OBL084,Canadian Potash,Mining & Metals,North America,0.028,0.44,8000000,0.086,Potash mining and export
+OBL085,Middle East Refining,Energy - Oil & Gas,Middle East & Africa,0.023,0.44,16000000,0.088,Oil refining
+OBL086,North American Coal Utility,Energy - Coal,North America,0.041,0.55,6000000,0.104,Coal-fired utility
+OBL087,European Biomass Power,Energy - Renewables,Europe,0.015,0.39,7500000,0.064,Biomass energy generation
+OBL088,Asian Gas Distribution,Utilities,Asia-Pacific (emerging),0.026,0.44,10000000,0.076,Natural gas utility
+OBL089,Latin American Shipping,Transportation,Latin America,0.031,0.47,5000000,0.087,Marine shipping services
+OBL090,European Nickel Mining,Mining & Metals,Europe,0.033,0.48,7500000,0.092,Nickel mining and processing
+OBL091,North American Oil Refining,Energy - Oil & Gas,North America,0.026,0.45,14000000,0.089,Petroleum refining
+OBL092,Asian Coking Coal,Energy - Coal,Asia-Pacific (developed),0.037,0.52,8500000,0.097,Metallurgical coal for steel
+OBL093,European Wave Energy,Energy - Renewables,Europe,0.018,0.42,6000000,0.069,Wave power technology
+OBL094,Global Satellite Services,Utilities,Global,0.013,0.37,12000000,0.067,Satellite communications
+OBL095,North American Trucking,Transportation,North America,0.029,0.46,6500000,0.084,Long-haul trucking
+OBL096,European Glass Manufacturing,Manufacturing - Heavy Industry,Europe,0.027,0.43,7000000,0.078,Glass production
+OBL097,Asian Medical Devices,Manufacturing - Light Industry,Asia-Pacific (developed),0.015,0.34,9000000,0.069,Medical equipment manufacturing
+OBL098,Latin American Soybean,Agriculture,Latin America,0.031,0.49,4600000,0.088,Soybean production and processing
+OBL099,Asian Office Buildings,Real Estate & Construction,Asia-Pacific (emerging),0.019,0.36,13500000,0.071,Office property development
+OBL100,European Private Equity,Financial Services,Europe,0.014,0.32,28000000,0.060,Private equity fund
+OBL101,North American IT Services,Technology & Services,North America,0.011,0.29,7000000,0.065,IT outsourcing and support
+OBL102,Asian Home Appliances,Consumer Goods,Asia-Pacific (emerging),0.021,0.39,6200000,0.076,Appliance manufacturing
+OBL103,European Pharmaceuticals,Healthcare,Europe,0.008,0.27,14000000,0.050,Branded pharmaceuticals
+OBL104,Australian Nickel,Mining & Metals,Asia-Pacific (developed),0.030,0.46,8500000,0.091,Nickel and cobalt mining
+OBL105,Russian Oil Export,Energy - Oil & Gas,Europe,0.028,0.46,19000000,0.091,Crude oil production and export
+OBL106,Chinese Coal Mining,Energy - Coal,Asia-Pacific (emerging),0.035,0.50,10000000,0.095,Thermal and coking coal
+OBL107,North American Wind Farm,Energy - Renewables,North America,0.014,0.39,11000000,0.064,Onshore wind power
+OBL108,European Nuclear Utility,Utilities,Europe,0.016,0.40,24000000,0.068,Nuclear power generation
+OBL109,Asian Container Ports,Transportation,Asia-Pacific (developed),0.021,0.41,12000000,0.075,Port operations
+OBL110,North American Iron & Steel,Manufacturing - Heavy Industry,North America,0.033,0.47,10000000,0.083,Integrated steel mill
+OBL111,European Pharmaceuticals,Manufacturing - Light Industry,Europe,0.013,0.32,10500000,0.062,Generic drug production
+OBL112,African Palm Oil,Agriculture,Middle East & Africa,0.041,0.56,3900000,0.096,Palm oil plantation
+OBL113,North American Shopping Malls,Real Estate & Construction,North America,0.023,0.40,16000000,0.073,Retail property REIT
+OBL114,Asian Life Insurance,Financial Services,Asia-Pacific (developed),0.009,0.29,36000000,0.053,Life insurance and annuities
+OBL115,European SaaS Company,Technology & Services,Europe,0.010,0.28,8000000,0.063,Cloud-based software
+OBL116,Latin American Retail,Consumer Goods,Latin America,0.027,0.43,5800000,0.079,Supermarket chain
+OBL117,North American Dialysis,Healthcare,North America,0.013,0.31,9000000,0.057,Kidney dialysis centers
+OBL118,Chilean Lithium,Mining & Metals,Latin America,0.025,0.43,9000000,0.085,Lithium mining and processing
+OBL119,Norwegian Oil Offshore,Energy - Oil & Gas,Europe,0.021,0.43,17000000,0.084,Offshore oil production
+OBL120,Indonesian Coal Export,Energy - Coal,Asia-Pacific (emerging),0.038,0.53,9000000,0.098,Thermal coal export
+OBL121,Brazilian Hydroelectric,Energy - Renewables,Latin America,0.017,0.41,10500000,0.069,Large hydro power
+OBL122,Indian Power Grid,Utilities,Asia-Pacific (emerging),0.024,0.43,13000000,0.074,Electricity transmission
+OBL123,European Cruise Lines,Transportation,Europe,0.040,0.54,8000000,0.102,Cruise ship operator
+OBL124,Japanese Automotive,Manufacturing - Heavy Industry,Asia-Pacific (developed),0.022,0.41,15000000,0.078,Automobile manufacturing
+OBL125,Taiwanese Semiconductors,Manufacturing - Light Industry,Asia-Pacific (developed),0.014,0.33,13500000,0.067,Advanced chip manufacturing
+OBL126,Brazilian Agriculture,Agriculture,Latin America,0.030,0.48,5000000,0.087,Diversified agriculture
+OBL127,Singapore Property,Real Estate & Construction,Asia-Pacific (developed),0.015,0.34,17000000,0.065,Commercial real estate
+OBL128,Swiss Banking,Financial Services,Europe,0.007,0.26,42000000,0.049,Private and wealth management
+OBL129,Israeli Technology,Technology & Services,Middle East & Africa,0.009,0.27,7500000,0.061,Cybersecurity and defense tech
+OBL130,Korean Consumer Electronics,Consumer Goods,Asia-Pacific (developed),0.018,0.37,9500000,0.072,Electronics manufacturing
+OBL131,German Healthcare,Healthcare,Europe,0.008,0.27,11500000,0.051,Healthcare services
+OBL132,South African Platinum,Mining & Metals,Middle East & Africa,0.035,0.50,9500000,0.094,Platinum group metals mining
+OBL133,Saudi Aramco Affiliate,Energy - Oil & Gas,Middle East & Africa,0.019,0.42,23000000,0.085,Oil and gas production
+OBL134,Polish Coal Mining,Energy - Coal,Europe,0.043,0.57,5000000,0.106,Hard coal mining
+OBL135,Danish Wind Energy,Energy - Renewables,Europe,0.011,0.37,12500000,0.061,Offshore wind farms
+OBL136,Mexican Telecom,Utilities,Latin America,0.022,0.42,14000000,0.073,Telecommunications services
+OBL137,Turkish Airlines,Transportation,Europe,0.036,0.51,7500000,0.094,International airline
+OBL138,South Korean Steel,Manufacturing - Heavy Industry,Asia-Pacific (developed),0.026,0.44,12000000,0.080,Steel production
+OBL139,Vietnamese Textiles,Manufacturing - Light Industry,Asia-Pacific (emerging),0.025,0.41,4800000,0.075,Garment manufacturing
+OBL140,Argentine Beef,Agriculture,Latin America,0.034,0.51,4300000,0.090,Beef production and export
+OBL141,Australian Property,Real Estate & Construction,Asia-Pacific (developed),0.016,0.35,15500000,0.066,Residential property development
+OBL142,Japanese Banks,Financial Services,Asia-Pacific (developed),0.010,0.29,38000000,0.052,Megabank
+OBL143,Indian IT Services,Technology & Services,Asia-Pacific (emerging),0.015,0.33,8500000,0.068,Software development outsourcing
+OBL144,Mexican Food & Beverage,Consumer Goods,Latin America,0.023,0.40,6500000,0.076,Food processing
+OBL145,Thai Hospitals,Healthcare,Asia-Pacific (emerging),0.018,0.36,8000000,0.064,Private hospital group
+OBL146,Zambian Copper,Mining & Metals,Middle East & Africa,0.042,0.58,7000000,0.103,Copper mining
+OBL147,Brazilian Oil,Energy - Oil & Gas,Latin America,0.027,0.45,16000000,0.089,Offshore oil production
+OBL148,Indian Coal Power,Energy - Coal,Asia-Pacific (emerging),0.037,0.52,11500000,0.096,Coal-fired generation
+OBL149,Spanish Solar,Energy - Renewables,Europe,0.013,0.38,9000000,0.063,Solar photovoltaic
+OBL150,Philippine Water,Utilities,Asia-Pacific (emerging),0.027,0.45,7500000,0.077,Water utility
+OBL151,Greek Shipping,Transportation,Europe,0.032,0.48,6000000,0.088,Dry bulk shipping
+OBL152,Austrian Steel,Manufacturing - Heavy Industry,Europe,0.028,0.45,8500000,0.081,Specialty steel
+OBL153,Malaysian Electronics,Manufacturing - Light Industry,Asia-Pacific (emerging),0.020,0.38,7000000,0.073,Electronics assembly
+OBL154,Colombian Coffee,Agriculture,Latin America,0.033,0.50,3700000,0.091,Coffee production
+OBL155,Hong Kong Property,Real Estate & Construction,Asia-Pacific (developed),0.017,0.35,19000000,0.067,Residential and commercial property
+OBL156,Singaporean Bank,Financial Services,Asia-Pacific (developed),0.008,0.28,40000000,0.051,Regional banking
+OBL157,Swedish Fintech,Technology & Services,Europe,0.011,0.29,6000000,0.065,Digital payments
+OBL158,Chinese E-commerce,Consumer Goods,Asia-Pacific (emerging),0.019,0.37,10000000,0.074,Online retail platform
+OBL159,Canadian Biotech,Healthcare,North America,0.016,0.34,7500000,0.060,Biopharmaceuticals
+OBL160,Peruvian Copper,Mining & Metals,Latin America,0.036,0.50,10000000,0.099,Copper and molybdenum mining
+OBL161,Kazakh Oil,Energy - Oil & Gas,Asia-Pacific (emerging),0.029,0.46,14000000,0.090,Oil production
+OBL162,Colombian Coal,Energy - Coal,Latin America,0.039,0.54,6500000,0.100,Thermal coal export
+OBL163,Icelandic Geothermal,Energy - Renewables,Europe,0.010,0.36,8500000,0.060,Geothermal energy
+OBL164,Chilean Utility,Utilities,Latin America,0.021,0.41,11000000,0.072,Electric utility
+OBL165,UAE Airlines,Transportation,Middle East & Africa,0.030,0.47,9000000,0.089,International carrier
+OBL166,Finnish Paper,Manufacturing - Heavy Industry,Europe,0.025,0.43,7500000,0.079,Pulp and paper
+OBL167,Thailand Automotive,Manufacturing - Light Industry,Asia-Pacific (emerging),0.023,0.40,7500000,0.074,Auto assembly
+OBL168,Kenyan Tea,Agriculture,Middle East & Africa,0.039,0.54,3600000,0.093,Tea production and export
+OBL169,Canadian REIT,Real Estate & Construction,North America,0.014,0.33,17500000,0.064,Diversified REIT
+OBL170,Korean Insurance,Financial Services,Asia-Pacific (developed),0.010,0.29,34000000,0.053,General insurance
+OBL171,Dutch Technology,Technology & Services,Europe,0.009,0.28,7000000,0.062,Semiconductor equipment
+OBL172,Indonesian Palm Oil,Consumer Goods,Asia-Pacific (emerging),0.026,0.43,5500000,0.080,Palm oil products
+OBL173,New Zealand Healthcare,Healthcare,Asia-Pacific (developed),0.012,0.30,8500000,0.055,Healthcare provider
+OBL174,Moroccan Phosphate,Mining & Metals,Middle East & Africa,0.031,0.47,8000000,0.088,Phosphate mining
+OBL175,Mexican Oil,Energy - Oil & Gas,Latin America,0.026,0.45,15000000,0.088,Oil production
+OBL176,Vietnamese Coal,Energy - Coal,Asia-Pacific (emerging),0.037,0.52,7000000,0.097,Coal mining
+OBL177,Portuguese Wind,Energy - Renewables,Europe,0.014,0.39,8000000,0.064,Wind power
+OBL178,Moroccan Telecom,Utilities,Middle East & Africa,0.025,0.44,9000000,0.075,Mobile telecommunications
+OBL179,Singapore Airlines,Transportation,Asia-Pacific (developed),0.028,0.46,11000000,0.086,International airline
+OBL180,Belgian Chemicals,Manufacturing - Heavy Industry,Europe,0.029,0.45,9500000,0.081,Specialty chemicals
+OBL181,Philippines Electronics,Manufacturing - Light Industry,Asia-Pacific (emerging),0.022,0.39,6000000,0.073,Electronics components
+OBL182,Ethiopian Coffee,Agriculture,Middle East & Africa,0.041,0.56,3500000,0.095,Coffee farming
+OBL183,Irish Property,Real Estate & Construction,Europe,0.018,0.36,14000000,0.068,Commercial property
+OBL184,Australian Bank,Financial Services,Asia-Pacific (developed),0.009,0.28,41000000,0.052,Retail banking
+OBL185,Norwegian Software,Technology & Services,Europe,0.010,0.28,6500000,0.063,Maritime software
+OBL186,Japanese Retail,Consumer Goods,Asia-Pacific (developed),0.019,0.37,8000000,0.071,Department stores
+OBL187,Chilean Hospitals,Healthcare,Latin America,0.019,0.37,7500000,0.066,Private healthcare
+OBL188,Mongolian Coal,Mining & Metals,Asia-Pacific (emerging),0.040,0.55,7500000,0.101,Coking coal export
+OBL189,Angola Oil,Energy - Oil & Gas,Middle East & Africa,0.034,0.49,13000000,0.092,Oil production
+OBL190,Ukrainian Coal,Energy - Coal,Europe,0.044,0.58,4500000,0.107,Thermal coal
+OBL191,Costa Rica Renewables,Energy - Renewables,Latin America,0.015,0.40,7000000,0.067,Renewable energy mix
+OBL192,Kenyan Telecom,Utilities,Middle East & Africa,0.028,0.45,8000000,0.076,Mobile services
+OBL193,Malaysian Airlines,Transportation,Asia-Pacific (emerging),0.034,0.50,6500000,0.091,Regional airline
+OBL194,Czech Manufacturing,Manufacturing - Heavy Industry,Europe,0.027,0.44,8000000,0.080,Industrial machinery
+OBL195,Bangladesh Textiles,Manufacturing - Light Industry,Asia-Pacific (emerging),0.028,0.44,4500000,0.076,Garment export
+OBL196,Ghana Cocoa,Agriculture,Middle East & Africa,0.040,0.55,3700000,0.094,Cocoa beans
+OBL197,Norwegian Property,Real Estate & Construction,Europe,0.013,0.32,16000000,0.063,Office properties
+OBL198,Hong Kong Insurance,Financial Services,Asia-Pacific (developed),0.011,0.30,33000000,0.054,Life and general insurance
+OBL199,Finnish Gaming,Technology & Services,Europe,0.012,0.30,7500000,0.065,Mobile games
+OBL200,Chinese Beverages,Consumer Goods,Asia-Pacific (emerging),0.021,0.39,7500000,0.075,Alcoholic beverages
+OBL201,Panama Healthcare,Healthcare,Latin America,0.021,0.38,6500000,0.067,Medical services
+OBL202,Botswana Diamonds,Mining & Metals,Middle East & Africa,0.027,0.44,9000000,0.086,Diamond mining
+OBL203,Ecuadorian Oil,Energy - Oil & Gas,Latin America,0.031,0.47,10000000,0.090,Crude oil export
+OBL204,Mongolian Mining,Energy - Coal,Asia-Pacific (emerging),0.041,0.56,6000000,0.102,Coal mining
+OBL205,Uruguayan Wind,Energy - Renewables,Latin America,0.016,0.40,6500000,0.068,Wind energy
+OBL206,Egyptian Gas,Utilities,Middle East & Africa,0.026,0.44,10500000,0.075,Natural gas utility
+OBL207,Qatar Airways,Transportation,Middle East & Africa,0.029,0.46,10000000,0.088,International airline
+OBL208,Romanian Steel,Manufacturing - Heavy Industry,Europe,0.030,0.46,7000000,0.082,Steel production
+OBL209,Sri Lankan Textiles,Manufacturing - Light Industry,Asia-Pacific (emerging),0.027,0.43,4200000,0.075,Apparel manufacturing
+OBL210,Ivory Coast Cocoa,Agriculture,Middle East & Africa,0.041,0.56,3600000,0.095,Cocoa export
+OBL211,Polish Property,Real Estate & Construction,Europe,0.020,0.38,12000000,0.071,Residential development
+OBL212,Thai Bank,Financial Services,Asia-Pacific (emerging),0.016,0.34,29000000,0.061,Commercial bank
+OBL213,Estonian IT,Technology & Services,Europe,0.013,0.31,5500000,0.064,Software development
+OBL214,Philippine Food,Consumer Goods,Asia-Pacific (emerging),0.024,0.41,5000000,0.077,Food manufacturing
+OBL215,Panamanian Healthcare,Healthcare,Latin America,0.020,0.37,6000000,0.066,Hospital operator
+OBL216,DRC Copper,Mining & Metals,Middle East & Africa,0.045,0.60,8000000,0.108,Copper and cobalt
+OBL217,Trinidad Oil & Gas,Energy - Oil & Gas,Latin America,0.028,0.46,11000000,0.089,Oil and gas production
+OBL218,Serbian Coal,Energy - Coal,Europe,0.042,0.56,4800000,0.105,Lignite mining
+OBL219,Kenyan Geothermal,Energy - Renewables,Middle East & Africa,0.022,0.43,7500000,0.073,Geothermal power
+OBL220,Pakistani Telecom,Utilities,Asia-Pacific (emerging),0.029,0.46,9500000,0.078,Mobile operator
+OBL221,Ethiopian Airlines,Transportation,Middle East & Africa,0.033,0.49,7000000,0.090,International carrier
+OBL222,Hungarian Automotive,Manufacturing - Heavy Industry,Europe,0.025,0.43,9000000,0.079,Auto parts
+OBL223,Cambodia Textiles,Manufacturing - Light Industry,Asia-Pacific (emerging),0.029,0.45,4000000,0.076,Garment export
+OBL224,Uganda Coffee,Agriculture,Middle East & Africa,0.042,0.57,3400000,0.096,Coffee export
+OBL225,Czech Property,Real Estate & Construction,Europe,0.019,0.37,13000000,0.069,Mixed-use development
+OBL226,Indonesian Bank,Financial Services,Asia-Pacific (emerging),0.018,0.36,27000000,0.063,Retail bank
+OBL227,Lithuanian Technology,Technology & Services,Europe,0.014,0.32,5000000,0.065,Laser technology
+OBL228,Vietnamese Seafood,Consumer Goods,Asia-Pacific (emerging),0.026,0.42,4500000,0.078,Seafood processing
+OBL229,Guatemalan Healthcare,Healthcare,Latin America,0.023,0.40,5500000,0.068,Private hospitals
+OBL230,Namibian Uranium,Mining & Metals,Middle East & Africa,0.032,0.48,8500000,0.090,Uranium mining
+OBL231,Oman Oil,Energy - Oil & Gas,Middle East & Africa,0.024,0.44,14000000,0.087,Oil production
+OBL232,Bosnia Coal,Energy - Coal,Europe,0.043,0.57,4500000,0.106,Coal mining
+OBL233,Moroccan Solar,Energy - Renewables,Middle East & Africa,0.020,0.42,7000000,0.072,Concentrated solar power
+OBL234,Tanzanian Telecom,Utilities,Middle East & Africa,0.030,0.47,7500000,0.077,Mobile services
+OBL235,South African Airlines,Transportation,Middle East & Africa,0.037,0.52,6500000,0.095,Regional airline
+OBL236,Slovak Steel,Manufacturing - Heavy Industry,Europe,0.029,0.45,7500000,0.081,Steel products
+OBL237,Pakistan Textiles,Manufacturing - Light Industry,Asia-Pacific (emerging),0.028,0.44,4300000,0.076,Textile manufacturing
+OBL238,Cameroon Cocoa,Agriculture,Middle East & Africa,0.041,0.56,3500000,0.095,Cocoa production
+OBL239,Croatian Property,Real Estate & Construction,Europe,0.021,0.39,11000000,0.070,Tourism properties
+OBL240,Philippine Bank,Financial Services,Asia-Pacific (emerging),0.017,0.35,26000000,0.062,Universal bank
+OBL241,Slovenian Manufacturing,Technology & Services,Europe,0.015,0.33,6000000,0.066,Industrial automation
+OBL242,Laos Hydropower,Energy - Renewables,Asia-Pacific (emerging),0.024,0.43,8500000,0.074,Hydroelectric dams
+OBL243,Jordanian Utilities,Utilities,Middle East & Africa,0.027,0.45,8000000,0.076,Electric utility
+OBL244,Bangladeshi Airlines,Transportation,Asia-Pacific (emerging),0.035,0.51,5000000,0.092,National carrier
+OBL245,Serbian Manufacturing,Manufacturing - Heavy Industry,Europe,0.028,0.45,6500000,0.080,Heavy machinery
+OBL246,Myanmar Textiles,Manufacturing - Light Industry,Asia-Pacific (emerging),0.031,0.47,3800000,0.077,Garment manufacturing
+OBL247,Tanzania Gold,Mining & Metals,Middle East & Africa,0.036,0.51,9000000,0.097,Gold mining
+OBL248,Brunei Oil,Energy - Oil & Gas,Asia-Pacific (developed),0.022,0.43,12000000,0.086,Oil and gas
+OBL249,North Macedonia Coal,Energy - Coal,Europe,0.042,0.56,4200000,0.105,Lignite mining
+OBL250,Albania Hydro,Energy - Renewables,Europe,0.019,0.41,6000000,0.071,Hydropower
+OBL251,Lebanese Telecom,Utilities,Middle East & Africa,0.032,0.48,7000000,0.079,Telecommunications
+OBL252,Tunisian Airlines,Transportation,Middle East & Africa,0.036,0.51,5500000,0.093,Regional carrier
+OBL253,Bulgarian Steel,Manufacturing - Heavy Industry,Europe,0.031,0.47,6000000,0.083,Steel manufacturing
+OBL254,Nepal Textiles,Manufacturing - Light Industry,Asia-Pacific (emerging),0.030,0.46,3500000,0.077,Garment export
+OBL255,Malawi Tea,Agriculture,Middle East & Africa,0.043,0.58,3300000,0.097,Tea plantation
+OBL256,Latvian Property,Real Estate & Construction,Europe,0.022,0.40,10000000,0.072,Commercial real estate
+OBL257,Vietnamese Bank,Financial Services,Asia-Pacific (emerging),0.019,0.37,24000000,0.064,Commercial banking
+OBL258,Icelandic Software,Technology & Services,Europe,0.011,0.29,5500000,0.063,Gaming software
+OBL259,Pakistani Food,Consumer Goods,Asia-Pacific (emerging),0.025,0.42,4800000,0.078,Food processing
+OBL260,Honduras Healthcare,Healthcare,Latin America,0.024,0.41,5000000,0.069,Medical services
+OBL261,Mali Gold,Mining & Metals,Middle East & Africa,0.044,0.59,7500000,0.106,Gold mining
+OBL262,Papua New Guinea Oil,Energy - Oil & Gas,Asia-Pacific (emerging),0.033,0.48,10000000,0.091,Oil and gas extraction
+OBL263,Kosovo Coal,Energy - Coal,Europe,0.044,0.58,4000000,0.107,Lignite mining
+OBL264,Jordan Solar,Energy - Renewables,Middle East & Africa,0.021,0.43,6500000,0.073,Solar energy
+OBL265,Ghana Telecom,Utilities,Middle East & Africa,0.029,0.46,7000000,0.077,Mobile operator
+OBL266,Azerbaijan Airlines,Transportation,Asia-Pacific (emerging),0.034,0.50,6000000,0.091,National carrier
+OBL267,Macedonian Manufacturing,Manufacturing - Heavy Industry,Europe,0.030,0.46,5500000,0.082,Metal products
+OBL268,Cambodia Manufacturing,Manufacturing - Light Industry,Asia-Pacific (emerging),0.029,0.45,3600000,0.076,Electronics assembly
+OBL269,Rwanda Coffee,Agriculture,Middle East & Africa,0.042,0.57,3200000,0.096,Specialty coffee
+OBL270,Lithuanian Property,Real Estate & Construction,Europe,0.020,0.38,9500000,0.070,Office and retail
+OBL271,Sri Lankan Bank,Financial Services,Asia-Pacific (emerging),0.020,0.38,22000000,0.065,Commercial bank
+OBL272,Georgian Wine,Consumer Goods,Europe,0.024,0.41,4000000,0.077,Wine production and export
+OBL273,Bhutan Hydro,Energy - Renewables,Asia-Pacific (emerging),0.018,0.41,7000000,0.070,Hydroelectric power
+OBL274,Zambian Telecom,Utilities,Middle East & Africa,0.031,0.47,6500000,0.078,Mobile services
+OBL275,Oman Airlines,Transportation,Middle East & Africa,0.032,0.48,7000000,0.089,International airline
+OBL276,Armenian Mining,Mining & Metals,Europe,0.035,0.50,6000000,0.093,Copper and gold
+OBL277,Turkmenistan Gas,Energy - Oil & Gas,Asia-Pacific (emerging),0.030,0.47,11000000,0.090,Natural gas production
+OBL278,Montenegro Coal,Energy - Coal,Europe,0.043,0.57,3800000,0.106,Lignite mining
+OBL279,Senegal Solar,Energy - Renewables,Middle East & Africa,0.022,0.43,6000000,0.074,Solar projects
+OBL280,Uzbekistan Telecom,Utilities,Asia-Pacific (emerging),0.028,0.45,8000000,0.076,Telecommunications
+OBL281,Mauritius Airlines,Transportation,Middle East & Africa,0.031,0.48,5500000,0.088,Island carrier
+OBL282,Georgian Steel,Manufacturing - Heavy Industry,Europe,0.032,0.48,5000000,0.084,Steel production
+OBL283,Mongolia Textiles,Manufacturing - Light Industry,Asia-Pacific (emerging),0.031,0.47,3400000,0.078,Cashmere products
+OBL284,Burundi Coffee,Agriculture,Middle East & Africa,0.045,0.60,3100000,0.098,Coffee export
+OBL285,Estonian Property,Real Estate & Construction,Europe,0.017,0.35,11000000,0.068,Residential and commercial
+OBL286,Cambodian Bank,Financial Services,Asia-Pacific (emerging),0.022,0.40,20000000,0.066,Microfinance and banking
+OBL287,Maltese Gaming,Technology & Services,Europe,0.010,0.28,6500000,0.062,Online gambling platform
+OBL288,Nepalese Food,Consumer Goods,Asia-Pacific (emerging),0.027,0.43,3900000,0.079,Food and beverage
+OBL289,Bolivia Healthcare,Healthcare,Latin America,0.025,0.42,4500000,0.070,Healthcare services
+OBL290,Burkina Faso Gold,Mining & Metals,Middle East & Africa,0.044,0.59,6500000,0.105,Gold mining
+OBL291,Timor-Leste Oil,Energy - Oil & Gas,Asia-Pacific (emerging),0.035,0.50,8000000,0.093,Offshore oil
+OBL292,Moldova Energy,Utilities,Europe,0.033,0.49,5500000,0.082,Electric utility
+OBL293,Mozambique Gas,Energy - Oil & Gas,Middle East & Africa,0.032,0.48,10000000,0.091,LNG production
+OBL294,Benin Agriculture,Agriculture,Middle East & Africa,0.041,0.56,3400000,0.095,Cotton and crops
+OBL295,Fiji Tourism,Real Estate & Construction,Asia-Pacific (emerging),0.026,0.43,7000000,0.075,Resort properties
+OBL296,Barbados Finance,Financial Services,Latin America,0.015,0.33,18000000,0.060,Offshore banking
+OBL297,Cyprus Technology,Technology & Services,Europe,0.012,0.30,5000000,0.064,Financial technology
+OBL298,Mauritania Mining,Mining & Metals,Middle East & Africa,0.040,0.55,7000000,0.100,Iron ore mining
+OBL299,Gabon Oil,Energy - Oil & Gas,Middle East & Africa,0.033,0.49,9000000,0.092,Oil production
+OBL300,Tajikistan Hydro,Energy - Renewables,Asia-Pacific (emerging),0.027,0.45,6500000,0.076,Hydroelectric generation
+OBL301,Bahrain Finance,Financial Services,Middle East & Africa,0.016,0.34,25000000,0.061,Islamic banking
+OBL302,Madagascar Mining,Mining & Metals,Middle East & Africa,0.043,0.58,6000000,0.103,Nickel and cobalt
+OBL303,Nicaragua Agriculture,Agriculture,Latin America,0.036,0.52,3700000,0.092,Agricultural exports
+OBL304,Iceland Aluminum,Manufacturing - Heavy Industry,Europe,0.024,0.42,8000000,0.078,Aluminum smelting
+OBL305,Laos Mining,Mining & Metals,Asia-Pacific (emerging),0.038,0.53,6500000,0.098,Copper and gold
+OBL306,Guyana Oil,Energy - Oil & Gas,Latin America,0.034,0.49,9500000,0.093,Offshore oil development
+OBL307,Luxembourg Finance,Financial Services,Europe,0.006,0.25,48000000,0.047,Private banking and funds
+OBL308,Suriname Gold,Mining & Metals,Latin America,0.039,0.54,5500000,0.100,Gold mining
+OBL309,Kyrgyzstan Mining,Mining & Metals,Asia-Pacific (emerging),0.041,0.56,5000000,0.102,Gold mining
+OBL310,Haiti Agriculture,Agriculture,Latin America,0.046,0.62,3000000,0.100,Agricultural products
+OBL311,Monaco Property,Real Estate & Construction,Europe,0.008,0.26,22000000,0.055,Luxury real estate
+OBL312,Maldives Tourism,Real Estate & Construction,Asia-Pacific (emerging),0.024,0.42,8000000,0.074,Resort development
+OBL313,Seychelles Tourism,Real Estate & Construction,Middle East & Africa,0.025,0.43,6000000,0.075,Hotel and resort
+OBL314,Belize Tourism,Real Estate & Construction,Latin America,0.028,0.45,5000000,0.078,Tourism infrastructure
+OBL315,Brunei Gas,Utilities,Asia-Pacific (developed),0.020,0.42,10000000,0.073,LNG export
+OBL316,Qatar LNG,Energy - Oil & Gas,Middle East & Africa,0.019,0.42,21000000,0.084,Liquefied natural gas
+OBL317,Kuwait Oil,Energy - Oil & Gas,Middle East & Africa,0.021,0.43,18000000,0.086,Oil production
+OBL318,UAE Property,Real Estate & Construction,Middle East & Africa,0.019,0.37,16000000,0.069,Commercial development
+OBL319,Liechtenstein Manufacturing,Manufacturing - Light Industry,Europe,0.009,0.27,7000000,0.061,Precision manufacturing
+OBL320,Andorra Tourism,Real Estate & Construction,Europe,0.020,0.38,6500000,0.071,Ski resort properties
+OBL321,San Marino Finance,Financial Services,Europe,0.014,0.32,15000000,0.059,Banking services
+OBL322,Bhutan Tourism,Real Estate & Construction,Asia-Pacific (emerging),0.023,0.41,4500000,0.073,Eco-tourism
+OBL323,Tonga Agriculture,Agriculture,Asia-Pacific (emerging),0.037,0.53,2800000,0.093,Agricultural exports
+OBL324,Samoa Tourism,Real Estate & Construction,Asia-Pacific (emerging),0.030,0.47,4000000,0.079,Resort properties
+OBL325,Vanuatu Agriculture,Agriculture,Asia-Pacific (emerging),0.035,0.51,3000000,0.091,Copra and cocoa
+OBL326,Solomon Islands Logging,Agriculture,Asia-Pacific (emerging),0.040,0.55,3200000,0.096,Timber export
+OBL327,Cape Verde Tourism,Real Estate & Construction,Middle East & Africa,0.029,0.46,5000000,0.078,Beach resorts
+OBL328,Comoros Agriculture,Agriculture,Middle East & Africa,0.044,0.59,2700000,0.097,Vanilla and spices
+OBL329,Djibouti Logistics,Transportation,Middle East & Africa,0.032,0.48,6000000,0.089,Port services
+OBL330,Eritrea Mining,Mining & Metals,Middle East & Africa,0.045,0.60,5000000,0.106,Gold and copper
+OBL331,Equatorial Guinea Oil,Energy - Oil & Gas,Middle East & Africa,0.036,0.51,8500000,0.094,Oil production
+OBL332,Gambia Tourism,Real Estate & Construction,Middle East & Africa,0.034,0.50,4000000,0.083,Beach resorts
+OBL333,Guinea Bauxite,Mining & Metals,Middle East & Africa,0.039,0.54,6500000,0.099,Bauxite mining
+OBL334,Guinea-Bissau Agriculture,Agriculture,Middle East & Africa,0.045,0.60,2600000,0.098,Cashew nuts
+OBL335,Lesotho Textiles,Manufacturing - Light Industry,Middle East & Africa,0.036,0.51,3300000,0.084,Apparel manufacturing
+OBL336,Liberia Shipping,Transportation,Middle East & Africa,0.038,0.53,5000000,0.095,Ship registry
+OBL337,Mauritania Fishing,Agriculture,Middle East & Africa,0.040,0.55,3500000,0.095,Fishing and seafood
+OBL338,Niger Uranium,Mining & Metals,Middle East & Africa,0.042,0.57,6000000,0.103,Uranium mining
+OBL339,Sao Tome Cocoa,Agriculture,Middle East & Africa,0.044,0.59,2500000,0.097,Cocoa production
+OBL340,Sierra Leone Mining,Mining & Metals,Middle East & Africa,0.043,0.58,5500000,0.104,Diamond and minerals
+OBL341,Swaziland Sugar,Agriculture,Middle East & Africa,0.037,0.52,3400000,0.092,Sugar production
+OBL342,Togo Phosphate,Mining & Metals,Middle East & Africa,0.038,0.53,5000000,0.097,Phosphate mining
+OBL343,Chad Oil,Energy - Oil & Gas,Middle East & Africa,0.041,0.56,7000000,0.098,Oil production
+OBL344,Central African Republic Mining,Mining & Metals,Middle East & Africa,0.048,0.65,4000000,0.110,Diamond mining
+OBL345,Somalia Telecommunications,Utilities,Middle East & Africa,0.046,0.61,4500000,0.095,Mobile services
+OBL346,South Sudan Oil,Energy - Oil & Gas,Middle East & Africa,0.047,0.62,6000000,0.105,Oil production
+OBL347,Afghanistan Mining,Mining & Metals,Asia-Pacific (emerging),0.050,0.67,4500000,0.115,Mineral extraction
+OBL348,Yemen Oil,Energy - Oil & Gas,Middle East & Africa,0.048,0.63,5500000,0.106,Oil production
+OBL349,Syria Telecommunications,Utilities,Middle East & Africa,0.049,0.64,3500000,0.100,Telecom services
+OBL350,Venezuela Oil,Energy - Oil & Gas,Latin America,0.045,0.60,8000000,0.103,Oil production
+OBL351,Argentina Lithium,Mining & Metals,Latin America,0.026,0.43,8500000,0.084,Lithium mining
+OBL352,Peru Gold,Mining & Metals,Latin America,0.033,0.49,9500000,0.095,Gold and silver mining
+OBL353,Panama Logistics,Transportation,Latin America,0.025,0.43,7500000,0.080,Canal and port services
+OBL354,Jamaica Bauxite,Mining & Metals,Latin America,0.035,0.50,6000000,0.093,Bauxite and alumina
+OBL355,Paraguay Agriculture,Agriculture,Latin America,0.032,0.49,4100000,0.089,Soy and beef
+OBL356,Dominican Republic Tourism,Real Estate & Construction,Latin America,0.027,0.44,7000000,0.076,Resort development
+OBL357,El Salvador Manufacturing,Manufacturing - Light Industry,Latin America,0.030,0.46,4000000,0.079,Textile and apparel
+OBL358,Nicaragua Mining,Mining & Metals,Latin America,0.038,0.53,5500000,0.099,Gold mining
+OBL359,Honduras Agriculture,Agriculture,Latin America,0.034,0.50,3800000,0.091,Coffee and bananas
+OBL360,Trinidad LNG,Energy - Oil & Gas,Latin America,0.026,0.45,10500000,0.088,Liquefied natural gas
+OBL361,Bahamas Tourism,Real Estate & Construction,Latin America,0.023,0.41,8500000,0.073,Resort and casino
+OBL362,Cayman Finance,Financial Services,Latin America,0.008,0.27,35000000,0.050,Offshore financial services
+OBL363,Aruba Tourism,Real Estate & Construction,Latin America,0.024,0.42,5500000,0.074,Tourism infrastructure
+OBL364,Curaçao Refining,Energy - Oil & Gas,Latin America,0.027,0.45,9000000,0.087,Oil refining
+OBL365,Saint Lucia Tourism,Real Estate & Construction,Latin America,0.029,0.46,4500000,0.078,Resort properties
+OBL366,Grenada Agriculture,Agriculture,Latin America,0.033,0.49,3000000,0.090,Nutmeg and spices
+OBL367,Saint Vincent Agriculture,Agriculture,Latin America,0.034,0.50,2900000,0.091,Banana and arrowroot
+OBL368,Antigua Tourism,Real Estate & Construction,Latin America,0.028,0.45,5000000,0.077,Tourism properties
+OBL369,Dominica Agriculture,Agriculture,Latin America,0.035,0.51,2800000,0.092,Banana production
+OBL370,Saint Kitts Tourism,Real Estate & Construction,Latin America,0.027,0.44,4800000,0.076,Resort development
+OBL371,Turks & Caicos Tourism,Real Estate & Construction,Latin America,0.022,0.40,6000000,0.072,Luxury resorts
+OBL372,British Virgin Islands Finance,Financial Services,Latin America,0.009,0.28,28000000,0.051,Offshore finance
+OBL373,Anguilla Tourism,Real Estate & Construction,Latin America,0.026,0.43,4200000,0.075,Beach resorts
+OBL374,Montserrat Tourism,Real Estate & Construction,Latin America,0.031,0.47,3000000,0.081,Tourism recovery
+OBL375,Bermuda Insurance,Financial Services,North America,0.010,0.29,32000000,0.054,Reinsurance
+OBL376,Greenland Mining,Mining & Metals,North America,0.034,0.49,6500000,0.092,Rare earth elements
+OBL377,Faroe Islands Fishing,Agriculture,Europe,0.026,0.43,4500000,0.081,Fishing and aquaculture
+OBL378,Jersey Finance,Financial Services,Europe,0.008,0.27,30000000,0.050,Wealth management
+OBL379,Guernsey Finance,Financial Services,Europe,0.008,0.27,29000000,0.050,Fund administration
+OBL380,Isle of Man Finance,Financial Services,Europe,0.009,0.28,27000000,0.051,Banking and insurance
+OBL381,Gibraltar Finance,Financial Services,Europe,0.011,0.29,24000000,0.055,Online gambling and finance
+OBL382,Channel Islands Property,Real Estate & Construction,Europe,0.014,0.32,13000000,0.063,Residential property
+OBL383,Macau Gaming,Consumer Goods,Asia-Pacific (developed),0.016,0.34,19000000,0.067,Casino operations
+OBL384,Hong Kong Finance,Financial Services,Asia-Pacific (developed),0.007,0.27,44000000,0.050,International banking
+OBL385,Singapore Finance,Financial Services,Asia-Pacific (developed),0.007,0.27,45000000,0.050,Wealth and asset management
+OBL386,Taiwan Semiconductor,Manufacturing - Light Industry,Asia-Pacific (developed),0.013,0.32,16000000,0.066,Advanced semiconductors
+OBL387,South Korea Display,Manufacturing - Light Industry,Asia-Pacific (developed),0.017,0.36,11000000,0.070,Display panels
+OBL388,Japan Automotive,Manufacturing - Heavy Industry,Asia-Pacific (developed),0.021,0.40,17000000,0.077,Auto manufacturing
+OBL389,New Zealand Dairy,Agriculture,Asia-Pacific (developed),0.018,0.37,8500000,0.074,Dairy processing and export
+OBL390,Australian LNG,Energy - Oil & Gas,Asia-Pacific (developed),0.020,0.42,19000000,0.084,LNG export
+OBL391,Canadian Oil Sands,Energy - Oil & Gas,North America,0.032,0.48,13500000,0.093,Oil sands production
+OBL392,Norwegian Salmon,Agriculture,Europe,0.019,0.38,7000000,0.073,Salmon aquaculture
+OBL393,Chilean Salmon,Agriculture,Latin America,0.028,0.45,6000000,0.082,Salmon farming
+OBL394,Scottish Whisky,Consumer Goods,Europe,0.015,0.34,9000000,0.068,Distillery and export
+OBL395,French Wine,Consumer Goods,Europe,0.018,0.36,10000000,0.071,Wine production
+OBL396,Italian Fashion,Consumer Goods,Europe,0.019,0.37,11000000,0.072,Luxury fashion
+OBL397,Swiss Watches,Consumer Goods,Europe,0.014,0.33,12000000,0.065,Luxury timepieces
+OBL398,German Automotive,Manufacturing - Heavy Industry,Europe,0.023,0.41,18000000,0.078,Premium automobiles
+OBL399,Dutch Chemicals,Manufacturing - Heavy Industry,Europe,0.027,0.44,10500000,0.080,Specialty chemicals
+OBL400,Belgian Pharmaceuticals,Healthcare,Europe,0.010,0.29,13000000,0.052,Pharmaceutical manufacturing
+OBL401,Swedish Mining,Mining & Metals,Europe,0.028,0.45,9000000,0.086,Iron ore mining
+OBL402,Finnish Forestry,Agriculture,Europe,0.024,0.42,7500000,0.079,Timber and pulp
+OBL403,Brazilian Iron Ore,Mining & Metals,Latin America,0.030,0.46,15000000,0.091,Iron ore mining and export
+OBL404,Australian Coal,Energy - Coal,Asia-Pacific (developed),0.036,0.51,10500000,0.096,Thermal and coking coal
+OBL405,Indonesian Nickel,Mining & Metals,Asia-Pacific (emerging),0.033,0.48,9000000,0.094,Nickel mining
+OBL406,Philippine Copper,Mining & Metals,Asia-Pacific (emerging),0.035,0.50,7500000,0.096,Copper and gold
+OBL407,Turkish Steel,Manufacturing - Heavy Industry,Europe,0.030,0.46,9500000,0.082,Steel manufacturing
+OBL408,Mexican Automotive,Manufacturing - Heavy Industry,Latin America,0.026,0.44,10000000,0.080,Auto assembly
+OBL409,Polish Manufacturing,Manufacturing - Heavy Industry,Europe,0.027,0.44,8000000,0.080,Industrial equipment
+OBL410,Czech Automotive,Manufacturing - Heavy Industry,Europe,0.024,0.42,9000000,0.078,Auto parts manufacturing
+OBL411,Hungarian Electronics,Manufacturing - Light Industry,Europe,0.020,0.38,7500000,0.072,Electronics assembly
+OBL412,Romanian Automotive,Manufacturing - Heavy Industry,Europe,0.025,0.43,8500000,0.079,Automobile production
+OBL413,Bulgarian Agriculture,Agriculture,Europe,0.031,0.47,4500000,0.087,Grain and vegetables
+OBL414,Greek Tourism,Real Estate & Construction,Europe,0.025,0.42,10000000,0.074,Hotel and resort
+OBL415,Portuguese Tourism,Real Estate & Construction,Europe,0.022,0.40,9000000,0.073,Tourism properties
+OBL416,Spanish Tourism,Real Estate & Construction,Europe,0.020,0.38,12000000,0.071,Resort development
+OBL417,Italian Tourism,Real Estate & Construction,Europe,0.019,0.37,11500000,0.070,Historic properties
+OBL418,Croatian Tourism,Real Estate & Construction,Europe,0.023,0.41,8500000,0.074,Coastal resorts
+OBL419,Slovenian Tourism,Real Estate & Construction,Europe,0.021,0.39,7000000,0.072,Alpine resorts
+OBL420,Austrian Tourism,Real Estate & Construction,Europe,0.016,0.35,10000000,0.067,Ski resorts
+OBL421,Swiss Tourism,Real Estate & Construction,Europe,0.013,0.32,12000000,0.062,Mountain resorts
+OBL422,Norwegian Hydropower,Energy - Renewables,Europe,0.009,0.36,14000000,0.059,Hydroelectric generation
+OBL423,Swedish Nuclear,Utilities,Europe,0.015,0.39,16000000,0.067,Nuclear power
+OBL424,Finnish Nuclear,Utilities,Europe,0.014,0.38,15000000,0.066,Nuclear generation
+OBL425,French Nuclear,Utilities,Europe,0.012,0.37,23000000,0.064,Nuclear power generation
+OBL426,British Gas,Utilities,Europe,0.021,0.41,14000000,0.072,Gas-fired generation
+OBL427,German Coal Power,Energy - Coal,Europe,0.038,0.53,10000000,0.097,Coal-fired generation
+OBL428,Polish Coal Power,Energy - Coal,Europe,0.041,0.55,9000000,0.100,Coal power generation
+OBL429,Czech Coal Power,Energy - Coal,Europe,0.039,0.54,8000000,0.098,Lignite power
+OBL430,Greek Lignite,Energy - Coal,Europe,0.040,0.55,7000000,0.099,Lignite mining and power
+OBL431,Spanish Wind,Energy - Renewables,Europe,0.012,0.38,11000000,0.062,Wind energy
+OBL432,German Wind,Energy - Renewables,Europe,0.013,0.38,12500000,0.063,Onshore and offshore wind
+OBL433,Danish Offshore Wind,Energy - Renewables,Europe,0.010,0.37,13500000,0.060,Offshore wind farms
+OBL434,UK Offshore Wind,Energy - Renewables,Europe,0.011,0.37,14500000,0.061,Offshore wind development
+OBL435,Dutch Offshore Wind,Energy - Renewables,Europe,0.012,0.38,11500000,0.062,North Sea wind farms
+OBL436,Belgian Offshore Wind,Energy - Renewables,Europe,0.013,0.38,9000000,0.063,Offshore wind
+OBL437,Irish Wind,Energy - Renewables,Europe,0.014,0.39,8500000,0.064,Onshore wind
+OBL438,Portuguese Solar,Energy - Renewables,Europe,0.015,0.39,8000000,0.065,Solar photovoltaic
+OBL439,Spanish Solar CSP,Energy - Renewables,Europe,0.016,0.40,9500000,0.066,Concentrated solar
+OBL440,Italian Solar,Energy - Renewables,Europe,0.014,0.39,9000000,0.064,Solar energy
+OBL441,Greek Solar,Energy - Renewables,Europe,0.015,0.40,7500000,0.065,Solar projects
+OBL442,Turkish Wind,Energy - Renewables,Europe,0.017,0.41,8500000,0.068,Wind energy
+OBL443,South African Wind,Energy - Renewables,Middle East & Africa,0.021,0.42,7000000,0.073,Wind power
+OBL444,South African Solar,Energy - Renewables,Middle East & Africa,0.020,0.42,7500000,0.072,Solar energy
+OBL445,Egyptian Wind,Energy - Renewables,Middle East & Africa,0.022,0.43,6500000,0.074,Wind farms
+OBL446,Moroccan Wind,Energy - Renewables,Middle East & Africa,0.021,0.42,7000000,0.073,Wind energy
+OBL447,Kenyan Wind,Energy - Renewables,Middle East & Africa,0.023,0.43,6000000,0.074,Wind power
+OBL448,Ethiopian Hydro,Energy - Renewables,Middle East & Africa,0.024,0.44,9000000,0.075,Hydroelectric dams
+OBL449,Zambian Hydro,Energy - Renewables,Middle East & Africa,0.025,0.44,6500000,0.076,Hydropower
+OBL450,Mozambique Hydro,Energy - Renewables,Middle East & Africa,0.026,0.45,7000000,0.077,Hydroelectric
+OBL451,Brazilian Wind,Energy - Renewables,Latin America,0.017,0.41,9000000,0.069,Wind energy
+OBL452,Mexican Wind,Energy - Renewables,Latin America,0.018,0.41,8000000,0.070,Wind power
+OBL453,Chilean Wind,Energy - Renewables,Latin America,0.016,0.40,7500000,0.068,Wind farms
+OBL454,Peruvian Hydro,Energy - Renewables,Latin America,0.019,0.42,8500000,0.071,Hydroelectric
+OBL455,Colombian Hydro,Energy - Renewables,Latin America,0.020,0.42,9000000,0.072,Hydropower
+OBL456,Argentine Wind,Energy - Renewables,Latin America,0.018,0.41,7000000,0.070,Wind energy
+OBL457,Canadian Hydro,Energy - Renewables,North America,0.011,0.37,17000000,0.061,Hydroelectric
+OBL458,US Solar,Energy - Renewables,North America,0.012,0.38,16000000,0.062,Utility-scale solar
+OBL459,US Wind,Energy - Renewables,North America,0.013,0.38,15500000,0.063,Wind energy
+OBL460,Mexican Solar,Energy - Renewables,Latin America,0.017,0.40,8500000,0.069,Solar projects
+OBL461,Chinese Wind,Energy - Renewables,Asia-Pacific (emerging),0.015,0.39,14000000,0.065,Wind power
+OBL462,Chinese Solar,Energy - Renewables,Asia-Pacific (emerging),0.014,0.39,15000000,0.064,Solar energy
+OBL463,Indian Wind,Energy - Renewables,Asia-Pacific (emerging),0.018,0.41,10000000,0.070,Wind farms
+OBL464,Indian Solar,Energy - Renewables,Asia-Pacific (emerging),0.017,0.40,11000000,0.069,Solar power
+OBL465,Vietnamese Wind,Energy - Renewables,Asia-Pacific (emerging),0.019,0.41,7500000,0.071,Offshore wind
+OBL466,Thai Solar,Energy - Renewables,Asia-Pacific (emerging),0.018,0.41,8000000,0.070,Solar energy
+OBL467,Indonesian Geothermal,Energy - Renewables,Asia-Pacific (emerging),0.020,0.42,9000000,0.072,Geothermal power
+OBL468,Philippine Geothermal,Energy - Renewables,Asia-Pacific (emerging),0.021,0.42,8500000,0.073,Geothermal generation
+OBL469,Japanese Solar,Energy - Renewables,Asia-Pacific (developed),0.013,0.38,12000000,0.063,Solar photovoltaic
+OBL470,Australian Solar,Energy - Renewables,Asia-Pacific (developed),0.014,0.39,11500000,0.064,Solar energy
+OBL471,Australian Wind,Energy - Renewables,Asia-Pacific (developed),0.015,0.39,10500000,0.065,Wind power
+OBL472,New Zealand Wind,Energy - Renewables,Asia-Pacific (developed),0.014,0.39,9000000,0.064,Wind energy
+OBL473,New Zealand Geothermal,Energy - Renewables,Asia-Pacific (developed),0.013,0.38,9500000,0.063,Geothermal power
+OBL474,Icelandic Hydro,Energy - Renewables,Europe,0.009,0.36,10000000,0.059,Hydroelectric
+OBL475,Norwegian Oil,Energy - Oil & Gas,Europe,0.020,0.42,20000000,0.085,North Sea oil
+OBL476,UK North Sea Oil,Energy - Oil & Gas,Europe,0.025,0.44,15000000,0.087,Oil production
+OBL477,Danish North Sea,Energy - Oil & Gas,Europe,0.023,0.43,11000000,0.086,Oil and gas
+OBL478,Dutch Gas,Energy - Oil & Gas,Europe,0.022,0.43,13000000,0.086,Natural gas
+OBL479,US Shale Oil,Energy - Oil & Gas,North America,0.031,0.47,14000000,0.092,Shale oil production
+OBL480,US Shale Gas,Energy - Oil & Gas,North America,0.029,0.46,12000000,0.090,Shale gas
+OBL481,Canadian LNG,Energy - Oil & Gas,North America,0.024,0.44,16000000,0.087,LNG export project
+OBL482,Mexican Offshore Oil,Energy - Oil & Gas,Latin America,0.028,0.45,13000000,0.089,Deepwater oil
+OBL483,Brazilian Presalt Oil,Energy - Oil & Gas,Latin America,0.025,0.44,17000000,0.088,Ultra-deepwater oil
+OBL484,Colombian Oil,Energy - Oil & Gas,Latin America,0.029,0.46,11000000,0.090,Oil production
+OBL485,Argentinean Shale,Energy - Oil & Gas,Latin America,0.030,0.47,10000000,0.091,Vaca Muerta shale
+OBL486,Russian Arctic Oil,Energy - Oil & Gas,Europe,0.032,0.48,18000000,0.092,Arctic offshore
+OBL487,Kazakh Oil,Energy - Oil & Gas,Asia-Pacific (emerging),0.028,0.45,15000000,0.089,Onshore oil fields
+OBL488,Azerbaijan Oil,Energy - Oil & Gas,Asia-Pacific (emerging),0.030,0.46,13000000,0.090,Caspian Sea oil
+OBL489,Malaysian Oil,Energy - Oil & Gas,Asia-Pacific (emerging),0.026,0.44,14000000,0.088,Offshore oil and gas
+OBL490,Thai Gas,Energy - Oil & Gas,Asia-Pacific (emerging),0.025,0.44,12000000,0.087,Natural gas production
+OBL491,Indonesian LNG,Energy - Oil & Gas,Asia-Pacific (emerging),0.027,0.45,15000000,0.088,LNG export
+OBL492,Australian Coal Seam Gas,Energy - Oil & Gas,Asia-Pacific (developed),0.024,0.43,13000000,0.087,Coal seam gas to LNG
+OBL493,Nigerian Oil,Energy - Oil & Gas,Middle East & Africa,0.037,0.52,12000000,0.095,Oil production
+OBL494,Angolan Oil,Energy - Oil & Gas,Middle East & Africa,0.035,0.50,13000000,0.093,Offshore oil
+OBL495,Algerian Gas,Energy - Oil & Gas,Middle East & Africa,0.029,0.46,14000000,0.089,Natural gas export
+OBL496,Egyptian Gas,Energy - Oil & Gas,Middle East & Africa,0.027,0.45,13000000,0.088,Gas production
+OBL497,Iraqi Oil,Energy - Oil & Gas,Middle East & Africa,0.039,0.54,15000000,0.097,Oil fields
+OBL498,Iranian Oil,Energy - Oil & Gas,Middle East & Africa,0.041,0.55,16000000,0.099,Oil production
+OBL499,UAE Abu Dhabi Oil,Energy - Oil & Gas,Middle East & Africa,0.018,0.41,22000000,0.083,Oil production
+OBL500,Saudi Oil,Energy - Oil & Gas,Middle East & Africa,0.017,0.40,25000000,0.082,Oil production

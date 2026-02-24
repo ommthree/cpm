@@ -1,0 +1,61 @@
+# Environment and credentials
+env/
+.env
+.env.*
+*.pem
+api-keys.env
+
+# Build directories
+build/
+build-*/
+dist/
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+package-lock.json
+
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Coverage and profiling
+*.gcov
+*.gcda
+*.gcno
+coverage/
+
+# Dependencies
+external/*/
+!external/.gitkeep

@@ -1,0 +1,55 @@
+Driver,Lambda,Notes,CalibrationRationale
+CarbonPrice,0.8,Scale parameter for carbon price sensitivity,Calibrated so max exposed cell moves ~2σ under strong transition
+EnergyPrice,0.7,Scale parameter for energy price sensitivity,Moderate impact; correlated with carbon price
+GDPDeviation,1.0,Scale parameter for GDP/macro sensitivity,Full weight; macro shocks are well-understood
+FloodSeverity,0.6,Scale parameter for flood hazard sensitivity,Regional variation; not all exposures equally hit
+StormSeverity,0.5,Scale parameter for storm/cyclone sensitivity,Episodic events; lower systematic component
+HeatDroughtSeverity,0.7,Scale parameter for heat/drought sensitivity,Chronic stress; increasing over time
+
+# CSV Template: Lambda Scale Parameters (λ vector)
+#
+# Column Definitions:
+# - Driver: Name of the climate/economic driver (string, must match scenario drivers)
+# - Lambda: Scale parameter value (numeric, typically 0.3-1.5)
+# - Notes: Description of what this parameter controls (string)
+# - CalibrationRationale: Explanation of how this value was chosen (string)
+#
+# Purpose of Lambda Parameters:
+# - Lambda (λ_k) controls the overall magnitude of the credit system's response to driver k
+# - The relative weights w̃ (from sector × region scores) determine which cells are most exposed
+# - Final factor impact: F_{s,r} = Σ_k λ_k · w̃_{s,r,k} · φ_k(C)
+#
+# Calibration Approach:
+# 1. Start with λ_k = 1.0 for all drivers
+# 2. Run scenarios and check factor magnitudes:
+#    - Most exposed cells should move by ~2σ under severe scenarios
+#    - Moderate scenarios should produce ~0.5-1σ moves
+# 3. Adjust λ_k up or down to hit these targets
+# 4. Use portfolio-level anchors:
+#    - EL uplift under severe scenario should be plausible (e.g., 2-5x baseline)
+#    - Brown sectors should dominate transition scenario losses
+#    - Physical-exposed sectors should dominate physical scenario losses
+#
+# Typical Lambda Ranges:
+# - 0.3-0.5: Low confidence or weak transmission (e.g., new/uncertain drivers)
+# - 0.6-0.8: Moderate confidence, established relationships
+# - 0.9-1.2: High confidence, well-understood transmission
+# - >1.2: Use cautiously; implies amplification beyond linear response
+#
+# Sensitivity Analysis:
+# - Vary each λ_k by ±30% and observe impact on EL, VaR, Sharpe ratio
+# - Report results as ranges rather than point estimates
+# - Document parameter uncertainty in model validation
+#
+# Example Calibration Workflow:
+# 1. Set all λ = 1.0 (initial guess)
+# 2. Run "Net Zero 2050" scenario
+# 3. Check: Does F_coal,global reach ~2σ? If F = 3σ, reduce λ_carbon to 0.67
+# 4. Check: Is EL uplift plausible? If too high, reduce all λ proportionally
+# 5. Iterate until targets are met
+# 6. Document final values and rationale
+#
+# Governance:
+# - Lambda parameters should be reviewed annually or when portfolio composition changes
+# - Changes require documentation of rationale and impact analysis
+# - Sensitivity analysis should accompany all scenario reporting

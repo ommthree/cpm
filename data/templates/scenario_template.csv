@@ -1,0 +1,48 @@
+ScenarioName,Year,Driver,Region,Value,StandardizedValue,Notes
+Net Zero 2050,2030,CarbonPrice,Global,100,1.5,Sample scenario data
+Net Zero 2050,2030,EnergyPrice,Global,1.2,0.8,Sample scenario data
+Net Zero 2050,2030,GDPDeviation,Global,-0.02,-0.5,Sample scenario data
+
+# CSV Template: Climate Scenario Data
+#
+# Column Definitions:
+# - ScenarioName: Name of the climate scenario (string, e.g., "Net Zero 2050", "Delayed Transition")
+# - Year: Year for which the driver value applies (integer, e.g., 2030, 2040, 2050)
+# - Driver: Name of the climate/economic driver (string, must match defined drivers)
+# - Region: Geographic region for the driver (string, use "Global" for worldwide drivers or specific region)
+# - Value: Raw value of the driver in scenario units (numeric)
+# - StandardizedValue: Standardized value (φ) in sigma units (numeric, typically -3 to +3)
+# - Notes: Optional notes about the data source or assumptions (string)
+#
+# Valid Drivers (recommended 5-7):
+#
+# Transition Drivers:
+# - CarbonPrice: Carbon price ($/tonne CO2)
+# - EnergyPrice: Energy price index (relative to baseline)
+# - GDPDeviation: GDP growth deviation from baseline (percentage points)
+#
+# Physical Drivers:
+# - FloodSeverity: Flood hazard severity index (0-1 scale or standard deviations)
+# - StormSeverity: Storm/cyclone severity index (0-1 scale or standard deviations)
+# - HeatDroughtSeverity: Combined heat stress and drought index (0-1 scale or standard deviations)
+#
+# Optional Additional Drivers:
+# - PolicyStringency: Climate policy stringency score
+# - TechnologyCost: Cost of low-carbon technology (index)
+#
+# Standardization:
+# - StandardizedValue = (Value - Baseline) / Sigma
+# - Where Sigma is chosen as cross-scenario dispersion or a defined "typical move"
+# - Interpretation: StandardizedValue = 1.5 means "1.5 sigma above baseline"
+#
+# Scenario Sources:
+# - NGFS scenarios: https://www.ngfs.net/ngfs-scenarios-portal/
+# - IIASA NGFS Scenario Explorer: https://data.ece.iiasa.ac.at/ngfs/
+#
+# Common NGFS Scenarios:
+# - Current Policies (high physical risk, low transition risk)
+# - Net Zero 2050 (orderly transition)
+# - Delayed Transition (disorderly transition)
+# - Divergent Net Zero
+# - NDCs (Nationally Determined Contributions)
+# - Below 2°C

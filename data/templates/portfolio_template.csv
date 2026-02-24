@@ -1,0 +1,50 @@
+ObligorID,Name,Sector,Region,PD,LGD,EAD,ExpectedReturn,Notes
+OBL001,Example Corporation,Energy - Oil & Gas,North America,0.02,0.45,1000000,0.08,Sample obligor for template
+OBL002,Sample Industries,Manufacturing - Heavy,Europe,0.015,0.40,500000,0.06,Sample obligor for template
+
+# CSV Template: Portfolio Data
+#
+# Column Definitions:
+# - ObligorID: Unique identifier for the obligor (string)
+# - Name: Legal name of the obligor (string)
+# - Sector: Sector classification - must match one of the 15 defined sectors (string)
+# - Region: Geographic region - must match one of the 7 defined regions (string)
+# - PD: Probability of Default (decimal, 0-1, e.g., 0.02 = 2%)
+# - LGD: Loss Given Default (decimal, 0-1, e.g., 0.45 = 45%)
+# - EAD: Exposure at Default (numeric, in currency units)
+# - ExpectedReturn: Expected annual return on exposure (decimal, e.g., 0.08 = 8%)
+# - Notes: Optional notes/comments (string)
+#
+# Valid Sectors (15):
+# 1. Energy - Oil & Gas
+# 2. Energy - Coal
+# 3. Energy - Renewables
+# 4. Utilities
+# 5. Transportation
+# 6. Manufacturing - Heavy Industry
+# 7. Manufacturing - Light Industry
+# 8. Agriculture
+# 9. Real Estate & Construction
+# 10. Financial Services
+# 11. Technology & Services
+# 12. Consumer Goods
+# 13. Healthcare
+# 14. Mining & Metals
+# 15. Other
+#
+# Valid Regions (7):
+# 1. North America
+# 2. Europe
+# 3. Asia-Pacific (developed)
+# 4. Asia-Pacific (emerging)
+# 5. Latin America
+# 6. Middle East & Africa
+# 7. Global
+#
+# Data Validation Rules:
+# - ObligorID must be unique
+# - PD must be between 0 and 1
+# - LGD must be between 0 and 1
+# - EAD must be positive
+# - ExpectedReturn can be negative (for hedges) but typically 0-0.15
+# - Sector and Region must exactly match the defined lists (case-sensitive)

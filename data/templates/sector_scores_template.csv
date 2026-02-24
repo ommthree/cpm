@@ -1,0 +1,51 @@
+Sector,CarbonPrice,EnergyPrice,GDPDeviation,FloodSeverity,StormSeverity,HeatDroughtSeverity,Notes
+Energy - Oil & Gas,1.0,1.0,0.6,0.3,0.4,0.3,Highest carbon and energy exposure
+Energy - Coal,1.0,0.9,0.5,0.2,0.3,0.2,Highest stranded asset risk
+Energy - Renewables,0.2,0.8,0.5,0.3,0.4,0.3,Benefits from transition
+Utilities,0.7,0.9,0.4,0.4,0.5,0.4,Mixed energy sources
+Transportation,0.8,1.0,0.8,0.3,0.4,0.3,High fuel dependency
+Manufacturing - Heavy Industry,0.8,0.9,0.9,0.5,0.6,0.5,Energy-intensive production
+Manufacturing - Light Industry,0.4,0.6,0.8,0.4,0.5,0.4,Lower energy intensity
+Agriculture,0.3,0.5,0.7,0.7,0.6,0.9,High physical risk exposure
+Real Estate & Construction,0.5,0.5,0.9,0.9,0.8,0.6,Fixed asset exposure to hazards
+Financial Services,0.2,0.3,0.8,0.3,0.3,0.2,Indirect exposure via portfolios
+Technology & Services,0.2,0.4,0.7,0.2,0.3,0.2,Low direct climate exposure
+Consumer Goods,0.4,0.6,0.9,0.3,0.4,0.3,Moderate energy use
+Healthcare,0.3,0.5,0.5,0.3,0.4,0.3,Essential services
+Mining & Metals,0.7,0.8,0.8,0.5,0.5,0.5,Energy-intensive extraction
+Other,0.5,0.5,0.6,0.4,0.4,0.4,Default moderate exposure
+
+# CSV Template: Sector Sensitivity Scores (S matrix)
+#
+# Column Definitions:
+# - Sector: Sector name (string, must match portfolio sector taxonomy exactly)
+# - CarbonPrice: Sensitivity to carbon price changes (0-1 scale)
+# - EnergyPrice: Sensitivity to energy price changes (0-1 scale)
+# - GDPDeviation: Sensitivity to GDP/macro shocks (0-1 scale)
+# - FloodSeverity: Sensitivity to flood hazards (0-1 scale)
+# - StormSeverity: Sensitivity to storm/cyclone hazards (0-1 scale)
+# - HeatDroughtSeverity: Sensitivity to heat stress and drought (0-1 scale)
+# - Notes: Explanation of scoring rationale (string)
+#
+# Scoring Guidance:
+# - 1.0 = Maximum exposure/sensitivity
+# - 0.5 = Moderate exposure
+# - 0.0 = No exposure
+#
+# Transition Risk Scoring (CarbonPrice, EnergyPrice, GDPDeviation):
+# - Consider: emissions intensity, energy intensity, abatement cost, pricing power, cyclicality
+# - High scores (0.8-1.0): Fossil fuel sectors, energy-intensive manufacturing
+# - Medium scores (0.4-0.7): Utilities, transport, general manufacturing
+# - Low scores (0.0-0.3): Services, technology, healthcare
+#
+# Physical Risk Scoring (FloodSeverity, StormSeverity, HeatDroughtSeverity):
+# - Consider: fixed asset exposure, supply chain fragility, business interruption sensitivity
+# - High scores (0.8-1.0): Real estate, agriculture, infrastructure-dependent sectors
+# - Medium scores (0.4-0.7): Manufacturing, heavy industry
+# - Low scores (0.0-0.3): Services, financial, technology
+#
+# Data Sources for Calibration:
+# - Emissions intensity: CDP, company disclosures, OECD sector data
+# - Energy intensity: IEA sector statistics, national accounts
+# - Abatement costs: McKinsey abatement cost curves
+# - Physical exposure: Industry studies, climate risk assessments
