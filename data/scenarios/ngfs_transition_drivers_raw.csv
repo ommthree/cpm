@@ -1,0 +1,337 @@
+ScenarioName,Year,Driver,Region,Value,Unit,SourceVariable
+Net Zero 2050,2025,CarbonPrice,North America,14.59436727190909,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2030,CarbonPrice,North America,136.9115449666363,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2040,CarbonPrice,North America,395.10078949333604,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2050,CarbonPrice,North America,1444.5895703133651,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2025,CarbonPrice,Europe,19.392222619554534,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2030,CarbonPrice,Europe,92.41707403145439,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2040,CarbonPrice,Europe,379.0647077082543,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2050,CarbonPrice,Europe,1408.4364535390666,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2025,CarbonPrice,Asia-Pacific (developed),9.542874794399976,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2030,CarbonPrice,Asia-Pacific (developed),117.32326174145469,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2040,CarbonPrice,Asia-Pacific (developed),421.20372276130894,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2050,CarbonPrice,Asia-Pacific (developed),1496.2368908187834,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2025,CarbonPrice,Asia-Pacific (emerging),55.309002522065924,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2030,CarbonPrice,Asia-Pacific (emerging),152.62541790986938,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2040,CarbonPrice,Asia-Pacific (emerging),325.11803902674353,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2050,CarbonPrice,Asia-Pacific (emerging),886.6646096703391,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2025,CarbonPrice,Latin America,62.94342373035922,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2030,CarbonPrice,Latin America,180.57229357566774,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2040,CarbonPrice,Latin America,418.9081136269065,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2050,CarbonPrice,Latin America,1280.2986030783827,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2025,CarbonPrice,Middle East & Africa,15.686350566300002,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2030,CarbonPrice,Middle East & Africa,115.41543646254499,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2040,CarbonPrice,Middle East & Africa,374.599261010945,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2050,CarbonPrice,Middle East & Africa,1062.45732788812,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2025,CarbonPrice,Global,109.11919425004625,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2030,CarbonPrice,Global,221.6642927222418,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2040,CarbonPrice,Global,381.10909047243354,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2050,CarbonPrice,Global,751.7223841493895,US$2010/t CO2,Price|Carbon
+Net Zero 2050,2025,CoalPrice,North America,1.899319817484,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2030,CoalPrice,North America,1.673179076768,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2040,CoalPrice,North America,1.928421545016,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2050,CoalPrice,North America,2.9847095185479997,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2025,CoalPrice,Europe,1.9218501351279997,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2030,CoalPrice,Europe,2.02011143308,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2040,CoalPrice,Europe,2.6702000984,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2050,CoalPrice,Europe,4.11694310832,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2025,CoalPrice,Asia-Pacific (developed),2.288332113096,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2030,CoalPrice,Asia-Pacific (developed),2.1695776560826663,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2040,CoalPrice,Asia-Pacific (developed),2.3693138736853334,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2050,CoalPrice,Asia-Pacific (developed),3.6091865764533337,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2025,CoalPrice,Asia-Pacific (emerging),2.3287939738857935,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2030,CoalPrice,Asia-Pacific (emerging),1.8828800573889115,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2040,CoalPrice,Asia-Pacific (emerging),1.8250261345194714,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2050,CoalPrice,Asia-Pacific (emerging),3.0232025432455294,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2025,CoalPrice,Latin America,2.416478721614856,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2030,CoalPrice,Latin America,1.96095941137777,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2040,CoalPrice,Latin America,2.1373384052907287,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2050,CoalPrice,Latin America,3.4247518724638963,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2025,CoalPrice,Middle East & Africa,2.3462741319119997,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2030,CoalPrice,Middle East & Africa,2.3678965234256,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2040,CoalPrice,Middle East & Africa,2.6494478700032,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2050,CoalPrice,Middle East & Africa,3.907096946592,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2025,CoalPrice,Global,2.4874353274333423,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2030,CoalPrice,Global,1.6736657415865694,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2040,CoalPrice,Global,1.3142228253617274,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2050,CoalPrice,Global,1.9541261769491354,US$2010/GJ,Price|Primary Energy|Coal
+Net Zero 2050,2025,OilPrice,North America,15.67329672408,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2030,OilPrice,North America,16.03874263988,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2040,OilPrice,North America,15.08445192056,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2050,OilPrice,North America,15.61245631328,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2025,OilPrice,Europe,15.35770121384,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2030,OilPrice,Europe,15.862025722533332,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2040,OilPrice,Europe,16.02013547976,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2050,OilPrice,Europe,18.47491426154667,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2025,OilPrice,Asia-Pacific (developed),15.681839126586667,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2030,OilPrice,Asia-Pacific (developed),16.17504990506667,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2040,OilPrice,Asia-Pacific (developed),16.22477658565333,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2050,OilPrice,Asia-Pacific (developed),18.75758817018667,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2025,OilPrice,Asia-Pacific (emerging),13.511635688917966,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2030,OilPrice,Asia-Pacific (emerging),13.725467274025553,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2040,OilPrice,Asia-Pacific (emerging),13.800475326325635,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2050,OilPrice,Asia-Pacific (emerging),15.864927812211542,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2025,OilPrice,Latin America,13.38855253157008,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2030,OilPrice,Latin America,13.40844413874714,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2040,OilPrice,Latin America,13.267684144565376,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2050,OilPrice,Latin America,16.683415828080307,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2025,OilPrice,Middle East & Africa,14.568331580495999,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2030,OilPrice,Middle East & Africa,14.85164455552,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2040,OilPrice,Middle East & Africa,14.920831560608002,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2050,OilPrice,Middle East & Africa,18.256790361168,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2025,OilPrice,Global,11.152624626776506,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2030,OilPrice,Global,11.05978333664624,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2040,OilPrice,Global,11.147529211147422,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2050,OilPrice,Global,13.049870946026818,US$2010/GJ,Price|Primary Energy|Oil
+Net Zero 2050,2025,GasPrice,North America,5.80054413132,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2030,GasPrice,North America,5.58056650808,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2040,GasPrice,North America,5.809097292520001,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2050,GasPrice,North America,7.89621386768,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2025,GasPrice,Europe,6.558348834293334,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2030,GasPrice,Europe,7.1119373997599995,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2040,GasPrice,Europe,7.9836174923200005,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2050,GasPrice,Europe,9.814305991226666,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2025,GasPrice,Asia-Pacific (developed),6.351878750533333,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2030,GasPrice,Asia-Pacific (developed),6.786411615573333,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2040,GasPrice,Asia-Pacific (developed),7.6499366185866675,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2050,GasPrice,Asia-Pacific (developed),9.347905876533334,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2025,GasPrice,Asia-Pacific (emerging),5.806876717844487,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2030,GasPrice,Asia-Pacific (emerging),6.0955048091816,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2040,GasPrice,Asia-Pacific (emerging),6.968877740379586,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2050,GasPrice,Asia-Pacific (emerging),8.454411567252812,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2025,GasPrice,Latin America,5.597587243540404,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2030,GasPrice,Latin America,6.14960445572763,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2040,GasPrice,Latin America,7.161307634582277,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2050,GasPrice,Latin America,8.65864219497633,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2025,GasPrice,Middle East & Africa,6.115135855472,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2030,GasPrice,Middle East & Africa,6.876418844,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2040,GasPrice,Middle East & Africa,8.332805946624,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2050,GasPrice,Middle East & Africa,10.74351281704,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2025,GasPrice,Global,5.092397090072775,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2030,GasPrice,Global,5.137171495711648,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2040,GasPrice,Global,5.659382157517991,US$2010/GJ,Price|Primary Energy|Gas
+Net Zero 2050,2050,GasPrice,Global,5.977646764819152,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2025,CarbonPrice,North America,0.0,US$2010/t CO2,Price|Carbon
+Delayed transition,2030,CarbonPrice,North America,0.0,US$2010/t CO2,Price|Carbon
+Delayed transition,2040,CarbonPrice,North America,212.6685113225185,US$2010/t CO2,Price|Carbon
+Delayed transition,2050,CarbonPrice,North America,964.7606257710955,US$2010/t CO2,Price|Carbon
+Delayed transition,2025,CarbonPrice,Europe,0.0,US$2010/t CO2,Price|Carbon
+Delayed transition,2030,CarbonPrice,Europe,0.0,US$2010/t CO2,Price|Carbon
+Delayed transition,2040,CarbonPrice,Europe,176.29818717943635,US$2010/t CO2,Price|Carbon
+Delayed transition,2050,CarbonPrice,Europe,724.3730489367003,US$2010/t CO2,Price|Carbon
+Delayed transition,2025,CarbonPrice,Asia-Pacific (developed),0.0,US$2010/t CO2,Price|Carbon
+Delayed transition,2030,CarbonPrice,Asia-Pacific (developed),0.0,US$2010/t CO2,Price|Carbon
+Delayed transition,2040,CarbonPrice,Asia-Pacific (developed),211.727428684036,US$2010/t CO2,Price|Carbon
+Delayed transition,2050,CarbonPrice,Asia-Pacific (developed),1063.933384358783,US$2010/t CO2,Price|Carbon
+Delayed transition,2025,CarbonPrice,Asia-Pacific (emerging),1.1995776575735762,US$2010/t CO2,Price|Carbon
+Delayed transition,2030,CarbonPrice,Asia-Pacific (emerging),1.593420101716136,US$2010/t CO2,Price|Carbon
+Delayed transition,2040,CarbonPrice,Asia-Pacific (emerging),153.81936580976725,US$2010/t CO2,Price|Carbon
+Delayed transition,2050,CarbonPrice,Asia-Pacific (emerging),313.4315366509136,US$2010/t CO2,Price|Carbon
+Delayed transition,2025,CarbonPrice,Latin America,2.816408812,US$2010/t CO2,Price|Carbon
+Delayed transition,2030,CarbonPrice,Latin America,4.434125543783165,US$2010/t CO2,Price|Carbon
+Delayed transition,2040,CarbonPrice,Latin America,214.58671682892816,US$2010/t CO2,Price|Carbon
+Delayed transition,2050,CarbonPrice,Latin America,619.0770474096961,US$2010/t CO2,Price|Carbon
+Delayed transition,2025,CarbonPrice,Middle East & Africa,0.0,US$2010/t CO2,Price|Carbon
+Delayed transition,2030,CarbonPrice,Middle East & Africa,0.0,US$2010/t CO2,Price|Carbon
+Delayed transition,2040,CarbonPrice,Middle East & Africa,150.093399413945,US$2010/t CO2,Price|Carbon
+Delayed transition,2050,CarbonPrice,Middle East & Africa,313.974364373755,US$2010/t CO2,Price|Carbon
+Delayed transition,2025,CarbonPrice,Global,5.347469036,US$2010/t CO2,Price|Carbon
+Delayed transition,2030,CarbonPrice,Global,5.75342875304908,US$2010/t CO2,Price|Carbon
+Delayed transition,2040,CarbonPrice,Global,209.8751806193752,US$2010/t CO2,Price|Carbon
+Delayed transition,2050,CarbonPrice,Global,377.78999614883725,US$2010/t CO2,Price|Carbon
+Delayed transition,2025,CoalPrice,North America,1.802318900456,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2030,CoalPrice,North America,1.805549736064,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2040,CoalPrice,North America,1.81299582772,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2050,CoalPrice,North America,2.48629099456,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2025,CoalPrice,Europe,1.5978219610533333,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2030,CoalPrice,Europe,1.5677341992773333,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2040,CoalPrice,Europe,2.222076851941333,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2050,CoalPrice,Europe,3.2071083857226665,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2025,CoalPrice,Asia-Pacific (developed),2.130272921728,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2030,CoalPrice,Asia-Pacific (developed),2.173071003808,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2040,CoalPrice,Asia-Pacific (developed),2.280459977184,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2050,CoalPrice,Asia-Pacific (developed),2.9820010175013336,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2025,CoalPrice,Asia-Pacific (emerging),2.096586645582148,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2030,CoalPrice,Asia-Pacific (emerging),2.0362982488755748,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2040,CoalPrice,Asia-Pacific (emerging),1.83273428594593,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2050,CoalPrice,Asia-Pacific (emerging),2.2694095925372704,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2025,CoalPrice,Latin America,2.170938018693039,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2030,CoalPrice,Latin America,2.1260714438954533,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2040,CoalPrice,Latin America,1.9796514153089566,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2050,CoalPrice,Latin America,2.535448616495063,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2025,CoalPrice,Middle East & Africa,2.184099740344,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2030,CoalPrice,Middle East & Africa,2.2100296974944,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2040,CoalPrice,Middle East & Africa,2.4612428199152,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2050,CoalPrice,Middle East & Africa,3.1241212046960003,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2025,CoalPrice,Global,2.1226961576097922,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2030,CoalPrice,Global,1.9154505151625625,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2040,CoalPrice,Global,1.491440018079509,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2050,CoalPrice,Global,1.6280404697907431,US$2010/GJ,Price|Primary Energy|Coal
+Delayed transition,2025,OilPrice,North America,15.424512699440001,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2030,OilPrice,North America,15.36278469644,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2040,OilPrice,North America,15.2005812564,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2050,OilPrice,North America,13.73343976392,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2025,OilPrice,Europe,15.012002879653332,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2030,OilPrice,Europe,14.935013670159998,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2040,OilPrice,Europe,15.559415955146667,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2050,OilPrice,Europe,14.69759082568,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2025,OilPrice,Asia-Pacific (developed),15.441672815306665,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2030,OilPrice,Asia-Pacific (developed),15.384554912399999,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2040,OilPrice,Asia-Pacific (developed),15.804617334906666,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2050,OilPrice,Asia-Pacific (developed),14.84660948704,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2025,OilPrice,Asia-Pacific (emerging),13.526052965006988,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2030,OilPrice,Asia-Pacific (emerging),13.820348721610234,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2040,OilPrice,Asia-Pacific (emerging),13.962809633830336,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2050,OilPrice,Asia-Pacific (emerging),13.97000099092556,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2025,OilPrice,Latin America,13.448005622882263,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2030,OilPrice,Latin America,13.714497456387647,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2040,OilPrice,Latin America,13.78775517693226,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2050,OilPrice,Latin America,14.102328507297692,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2025,OilPrice,Middle East & Africa,14.417750756864,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2030,OilPrice,Middle East & Africa,14.580577125248002,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2040,OilPrice,Middle East & Africa,15.234709983392,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2050,OilPrice,Middle East & Africa,15.122298851968,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2025,OilPrice,Global,11.425886692828257,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2030,OilPrice,Global,11.990050813281535,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2040,OilPrice,Global,11.97979121701805,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2050,OilPrice,Global,12.925245394821093,US$2010/GJ,Price|Primary Energy|Oil
+Delayed transition,2025,GasPrice,North America,5.63224051216,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2030,GasPrice,North America,5.42010597636,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2040,GasPrice,North America,5.67366686084,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2050,GasPrice,North America,6.86886624128,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2025,GasPrice,Europe,6.330221500853334,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2030,GasPrice,Europe,6.17283257608,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2040,GasPrice,Europe,7.043910181813334,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2050,GasPrice,Europe,7.924853509333334,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2025,GasPrice,Asia-Pacific (developed),6.150777254746667,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2030,GasPrice,Asia-Pacific (developed),6.005018477466667,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2040,GasPrice,Asia-Pacific (developed),6.8680270632000004,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2050,GasPrice,Asia-Pacific (developed),7.742859452906667,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2025,GasPrice,Asia-Pacific (emerging),5.465340529724983,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2030,GasPrice,Asia-Pacific (emerging),5.392755718866697,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2040,GasPrice,Asia-Pacific (emerging),6.286092057275511,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2050,GasPrice,Asia-Pacific (emerging),6.701791076060213,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2025,GasPrice,Latin America,5.264509662349023,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2030,GasPrice,Latin America,5.207433701881305,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2040,GasPrice,Latin America,6.235902346438046,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2050,GasPrice,Latin America,7.029571374200609,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2025,GasPrice,Middle East & Africa,5.925313773776001,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2030,GasPrice,Middle East & Africa,5.987432317344,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2040,GasPrice,Middle East & Africa,7.20834605072,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2050,GasPrice,Middle East & Africa,8.152828069328,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2025,GasPrice,Global,4.605849973544091,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2030,GasPrice,Global,4.584713207285326,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2040,GasPrice,Global,5.428423703763373,US$2010/GJ,Price|Primary Energy|Gas
+Delayed transition,2050,GasPrice,Global,5.386436210262668,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2025,CarbonPrice,North America,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2030,CarbonPrice,North America,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2040,CarbonPrice,North America,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2050,CarbonPrice,North America,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2025,CarbonPrice,Europe,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2030,CarbonPrice,Europe,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2040,CarbonPrice,Europe,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2050,CarbonPrice,Europe,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2025,CarbonPrice,Asia-Pacific (developed),0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2030,CarbonPrice,Asia-Pacific (developed),0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2040,CarbonPrice,Asia-Pacific (developed),0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2050,CarbonPrice,Asia-Pacific (developed),0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2025,CarbonPrice,Asia-Pacific (emerging),1.1995776575735762,US$2010/t CO2,Price|Carbon
+Current Policies,2030,CarbonPrice,Asia-Pacific (emerging),1.593420101716136,US$2010/t CO2,Price|Carbon
+Current Policies,2040,CarbonPrice,Asia-Pacific (emerging),1.910867177462341,US$2010/t CO2,Price|Carbon
+Current Policies,2050,CarbonPrice,Asia-Pacific (emerging),2.431911626716431,US$2010/t CO2,Price|Carbon
+Current Policies,2025,CarbonPrice,Latin America,2.816408812,US$2010/t CO2,Price|Carbon
+Current Policies,2030,CarbonPrice,Latin America,4.434125543783165,US$2010/t CO2,Price|Carbon
+Current Policies,2040,CarbonPrice,Latin America,4.541800519086869,US$2010/t CO2,Price|Carbon
+Current Policies,2050,CarbonPrice,Latin America,4.780725634390572,US$2010/t CO2,Price|Carbon
+Current Policies,2025,CarbonPrice,Middle East & Africa,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2030,CarbonPrice,Middle East & Africa,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2040,CarbonPrice,Middle East & Africa,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2050,CarbonPrice,Middle East & Africa,0.0,US$2010/t CO2,Price|Carbon
+Current Policies,2025,CarbonPrice,Global,5.347469036,US$2010/t CO2,Price|Carbon
+Current Policies,2030,CarbonPrice,Global,5.75342875304908,US$2010/t CO2,Price|Carbon
+Current Policies,2040,CarbonPrice,Global,5.933240087052267,US$2010/t CO2,Price|Carbon
+Current Policies,2050,CarbonPrice,Global,6.608196401780729,US$2010/t CO2,Price|Carbon
+Current Policies,2025,CoalPrice,North America,1.802315672848,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2030,CoalPrice,North America,1.8055110047679999,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2040,CoalPrice,North America,1.806245285588,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2050,CoalPrice,North America,1.7963881707559999,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2025,CoalPrice,Europe,1.5978208851840001,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2030,CoalPrice,Europe,1.567652433208,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2040,CoalPrice,Europe,1.7181869944586667,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2050,CoalPrice,Europe,1.830108605336,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2025,CoalPrice,Asia-Pacific (developed),2.1302707699893335,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2030,CoalPrice,Asia-Pacific (developed),2.172987086,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2040,CoalPrice,Asia-Pacific (developed),2.2379480763466666,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2050,CoalPrice,Asia-Pacific (developed),2.2473102912853338,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2025,CoalPrice,Asia-Pacific (emerging),2.0965866000033992,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2030,CoalPrice,Asia-Pacific (emerging),2.1542339618194433,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2040,CoalPrice,Asia-Pacific (emerging),2.2643109516078237,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2050,CoalPrice,Asia-Pacific (emerging),2.3947351968685164,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2025,CoalPrice,Latin America,2.1709426156981277,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2030,CoalPrice,Latin America,2.186904239256047,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2040,CoalPrice,Latin America,2.279413343655662,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2050,CoalPrice,Latin America,2.4190668433743334,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2025,CoalPrice,Middle East & Africa,2.1840990948223995,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2030,CoalPrice,Middle East & Africa,2.2099651453344,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2040,CoalPrice,Middle East & Africa,2.2799687352464,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2050,CoalPrice,Middle East & Africa,2.3404334524752004,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2025,CoalPrice,Global,2.1226959558842924,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2030,CoalPrice,Global,2.1493677761076055,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2040,CoalPrice,Global,2.2791973613781265,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2050,CoalPrice,Global,2.4622151948293824,US$2010/GJ,Price|Primary Energy|Coal
+Current Policies,2025,OilPrice,North America,15.424512699440001,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2030,OilPrice,North America,15.36265559212,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2040,OilPrice,North America,15.30239615076,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2050,OilPrice,North America,14.685051568599999,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2025,OilPrice,Europe,15.012002879653332,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2030,OilPrice,Europe,14.93488456584,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2040,OilPrice,Europe,15.217483163626667,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2050,OilPrice,Europe,15.091186862586667,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2025,OilPrice,Asia-Pacific (developed),15.441672815306665,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2030,OilPrice,Asia-Pacific (developed),15.384425808080001,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2040,OilPrice,Asia-Pacific (developed),15.53731759904,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2050,OilPrice,Asia-Pacific (developed),15.336603416213334,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2025,OilPrice,Asia-Pacific (emerging),13.526052269390096,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2030,OilPrice,Asia-Pacific (emerging),13.818621126511974,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2040,OilPrice,Asia-Pacific (emerging),14.342872883337025,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2050,OilPrice,Asia-Pacific (emerging),14.927376396586272,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2025,OilPrice,Latin America,13.44801081443224,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2030,OilPrice,Latin America,13.711414386359834,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2040,OilPrice,Latin America,14.41072726363824,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2050,OilPrice,Latin America,15.117367048038124,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2025,OilPrice,Middle East & Africa,14.417750756864,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2030,OilPrice,Middle East & Africa,14.580519028304,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2040,OilPrice,Middle East & Africa,15.383489801760001,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2050,OilPrice,Middle East & Africa,15.787412032528001,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2025,OilPrice,Global,11.425886692828257,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2030,OilPrice,Global,12.010020662324713,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2040,OilPrice,Global,13.048309058660237,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2050,OilPrice,Global,14.608885910693797,US$2010/GJ,Price|Primary Energy|Oil
+Current Policies,2025,GasPrice,North America,5.63224051216,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2030,GasPrice,North America,5.4201221144,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2040,GasPrice,North America,5.48343164532,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2050,GasPrice,North America,5.90895948404,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2025,GasPrice,Europe,6.330221500853334,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2030,GasPrice,Europe,6.172843334773333,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2040,GasPrice,Europe,6.332007443946666,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2050,GasPrice,Europe,6.440681005306668,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2025,GasPrice,Asia-Pacific (developed),6.150777254746667,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2030,GasPrice,Asia-Pacific (developed),6.005018477466667,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2040,GasPrice,Asia-Pacific (developed),6.286659551546666,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2050,GasPrice,Asia-Pacific (developed),6.44162777032,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2025,GasPrice,Asia-Pacific (emerging),5.465342326009274,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2030,GasPrice,Asia-Pacific (emerging),5.389195223944908,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2040,GasPrice,Asia-Pacific (emerging),5.873171150368419,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2050,GasPrice,Asia-Pacific (emerging),6.224769846984421,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2025,GasPrice,Latin America,5.264512159106308,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2030,GasPrice,Latin America,5.207446257186169,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2040,GasPrice,Latin America,5.608645907857585,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2050,GasPrice,Latin America,5.906473835702316,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2025,GasPrice,Middle East & Africa,5.925313773776001,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2030,GasPrice,Middle East & Africa,5.987445227776,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2040,GasPrice,Middle East & Africa,6.531361727936,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2050,GasPrice,Middle East & Africa,6.7425376641599994,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2025,GasPrice,Global,4.605849973544091,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2030,GasPrice,Global,4.588689560995225,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2040,GasPrice,Global,5.225799755466633,US$2010/GJ,Price|Primary Energy|Gas
+Current Policies,2050,GasPrice,Global,5.696551130809974,US$2010/GJ,Price|Primary Energy|Gas

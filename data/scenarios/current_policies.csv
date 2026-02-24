@@ -1,0 +1,183 @@
+ScenarioName,Year,Driver,Region,Value,StandardizedValue,Notes,Baseline,Sigma
+Current Policies,2025,CarbonPrice,Asia-Pacific (developed),0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CarbonPrice,Asia-Pacific (emerging),1.1995776575735762,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CarbonPrice,Europe,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CarbonPrice,Global,5.347469036,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CarbonPrice,Latin America,2.816408812,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CarbonPrice,Middle East & Africa,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CarbonPrice,North America,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CoalPrice,Asia-Pacific (developed),2.1302707699893335,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CoalPrice,Asia-Pacific (emerging),2.0965866000033992,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CoalPrice,Europe,1.597820885184,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CoalPrice,Global,2.1226959558842924,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CoalPrice,Latin America,2.1709426156981277,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CoalPrice,Middle East & Africa,2.1840990948223995,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,CoalPrice,North America,1.802315672848,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GDP,Asia-Pacific (developed),2928.213386177717,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GDP,Asia-Pacific (emerging),31973.76485009565,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GDP,Europe,8015.385380070914,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GDP,Global,138636.65019239936,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GDP,Latin America,5046.517596000601,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GDP,Middle East & Africa,2444.3646073334157,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GDP,North America,10836.39658386797,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GasPrice,Asia-Pacific (developed),6.150777254746667,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GasPrice,Asia-Pacific (emerging),5.465342326009274,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GasPrice,Europe,6.330221500853334,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GasPrice,Global,4.605849973544091,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GasPrice,Latin America,5.264512159106308,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GasPrice,Middle East & Africa,5.925313773776001,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,GasPrice,North America,5.63224051216,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,OilPrice,Asia-Pacific (developed),15.441672815306664,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,OilPrice,Asia-Pacific (emerging),13.526052269390096,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,OilPrice,Europe,15.012002879653332,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,OilPrice,Global,11.425886692828255,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,OilPrice,Latin America,13.44801081443224,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,OilPrice,Middle East & Africa,14.417750756864,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2025,OilPrice,North America,15.42451269944,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CarbonPrice,Asia-Pacific (developed),0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CarbonPrice,Asia-Pacific (emerging),1.593420101716136,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CarbonPrice,Europe,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CarbonPrice,Global,5.75342875304908,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CarbonPrice,Latin America,4.434125543783165,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CarbonPrice,Middle East & Africa,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CarbonPrice,North America,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CoalPrice,Asia-Pacific (developed),2.172987086,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CoalPrice,Asia-Pacific (emerging),2.1542339618194433,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CoalPrice,Europe,1.567652433208,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CoalPrice,Global,2.1493677761076055,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CoalPrice,Latin America,2.186904239256047,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CoalPrice,Middle East & Africa,2.2099651453344,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,CoalPrice,North America,1.805511004768,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,DroughtRisk,Asia-Pacific (developed),-1.3524092034761266,0.0,World Bank CCKP ssp585 (2020-2039),-1.3524092034761266,0.06957278857311586
+Current Policies,2030,DroughtRisk,Asia-Pacific (emerging),-1.243016515371523,0.0,World Bank CCKP ssp585 (2020-2039),-1.243016515371523,0.22756841100819242
+Current Policies,2030,DroughtRisk,Europe,-1.2701378278921545,0.0,World Bank CCKP ssp585 (2020-2039),-1.2701378278921545,0.10158881013094655
+Current Policies,2030,DroughtRisk,Global,-1.288644521893751,0.0,World Bank CCKP ssp585 (2020-2039),-1.288644521893751,0.1138940331256823
+Current Policies,2030,DroughtRisk,Latin America,-1.3873006261522387,0.0,World Bank CCKP ssp585 (2020-2039),-1.3873006261522387,0.1695106078965845
+Current Policies,2030,DroughtRisk,Middle East & Africa,-1.4019526643844054,0.0,World Bank CCKP ssp585 (2020-2039),-1.4019526643844054,0.09041007745039246
+Current Policies,2030,DroughtRisk,North America,-1.3636821607331788,0.0,World Bank CCKP ssp585 (2020-2039),-1.3636821607331788,0.14765686399786052
+Current Policies,2030,FloodRisk,Asia-Pacific (developed),-2.6804046871508485,0.0,World Bank CCKP ssp585 (2020-2039),-2.6804046871508485,1.9061742942756161
+Current Policies,2030,FloodRisk,Asia-Pacific (emerging),-2.6179937071479316,0.0,World Bank CCKP ssp585 (2020-2039),-2.6179937071479316,1.7473322675288567
+Current Policies,2030,FloodRisk,Europe,-2.584505221443918,0.0,World Bank CCKP ssp585 (2020-2039),-2.584505221443918,1.7246730082897623
+Current Policies,2030,FloodRisk,Global,-2.786509625662463,0.0,World Bank CCKP ssp585 (2020-2039),-2.786509625662463,1.8538141301739834
+Current Policies,2030,FloodRisk,Latin America,-2.67218012962746,0.0,World Bank CCKP ssp585 (2020-2039),-2.67218012962746,1.8163239921330512
+Current Policies,2030,FloodRisk,Middle East & Africa,-2.6435647388953534,0.0,World Bank CCKP ssp585 (2020-2039),-2.6435647388953534,1.843537564138245
+Current Policies,2030,FloodRisk,North America,-2.9026141329016584,0.0,World Bank CCKP ssp585 (2020-2039),-2.9026141329016584,1.9535917042617454
+Current Policies,2030,GDP,Asia-Pacific (developed),3138.1002722715434,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GDP,Asia-Pacific (emerging),39530.10577208256,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GDP,Europe,8824.512643359545,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GDP,Global,161557.5107829543,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GDP,Latin America,5688.0735880163875,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GDP,Middle East & Africa,3012.2309116210126,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GDP,North America,11896.220855575244,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GasPrice,Asia-Pacific (developed),6.005018477466667,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GasPrice,Asia-Pacific (emerging),5.389195223944908,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GasPrice,Europe,6.172843334773333,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GasPrice,Global,4.588689560995225,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GasPrice,Latin America,5.207446257186169,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GasPrice,Middle East & Africa,5.987445227776,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,GasPrice,North America,5.4201221144,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,HeatIndex,Asia-Pacific (developed),4.573813438415527,0.0,World Bank CCKP ssp585 (2020-2039),4.573813438415527,0.5863677377755698
+Current Policies,2030,HeatIndex,Asia-Pacific (emerging),4.578715801239014,0.0,World Bank CCKP ssp585 (2020-2039),4.578715801239014,0.29142174038609897
+Current Policies,2030,HeatIndex,Europe,4.557107448577881,0.0,World Bank CCKP ssp585 (2020-2039),4.557107448577881,0.5606436830390826
+Current Policies,2030,HeatIndex,Global,4.1878662109375,0.0,World Bank CCKP ssp585 (2020-2039),4.1878662109375,0.26416288592604453
+Current Policies,2030,HeatIndex,Latin America,4.333482265472412,0.0,World Bank CCKP ssp585 (2020-2039),4.333482265472412,0.4432828188279708
+Current Policies,2030,HeatIndex,Middle East & Africa,3.946784734725952,0.0,World Bank CCKP ssp585 (2020-2039),3.946784734725952,0.20360816859101277
+Current Policies,2030,HeatIndex,North America,4.529787540435791,0.0,World Bank CCKP ssp585 (2020-2039),4.529787540435791,0.5249906165992242
+Current Policies,2030,OilPrice,Asia-Pacific (developed),15.38442580808,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,OilPrice,Asia-Pacific (emerging),13.818621126511974,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,OilPrice,Europe,14.93488456584,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,OilPrice,Global,12.010020662324711,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,OilPrice,Latin America,13.711414386359834,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,OilPrice,Middle East & Africa,14.580519028304,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2030,OilPrice,North America,15.36265559212,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CarbonPrice,Asia-Pacific (developed),0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CarbonPrice,Asia-Pacific (emerging),1.910867177462341,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CarbonPrice,Europe,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CarbonPrice,Global,5.933240087052267,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CarbonPrice,Latin America,4.541800519086869,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CarbonPrice,Middle East & Africa,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CarbonPrice,North America,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CoalPrice,Asia-Pacific (developed),2.2379480763466666,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CoalPrice,Asia-Pacific (emerging),2.2643109516078237,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CoalPrice,Europe,1.7181869944586667,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CoalPrice,Global,2.2791973613781265,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CoalPrice,Latin America,2.279413343655662,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CoalPrice,Middle East & Africa,2.2799687352464,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,CoalPrice,North America,1.806245285588,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GDP,Asia-Pacific (developed),3519.1376926509965,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GDP,Asia-Pacific (emerging),54275.29070592823,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GDP,Europe,10409.90074962998,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GDP,Global,210068.1696783565,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GDP,Latin America,7511.683961585472,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GDP,Middle East & Africa,4540.8765305147945,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GDP,North America,13802.914205636484,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GasPrice,Asia-Pacific (developed),6.286659551546666,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GasPrice,Asia-Pacific (emerging),5.873171150368419,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GasPrice,Europe,6.332007443946666,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GasPrice,Global,5.225799755466633,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GasPrice,Latin America,5.608645907857585,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GasPrice,Middle East & Africa,6.531361727936,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,GasPrice,North America,5.48343164532,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,OilPrice,Asia-Pacific (developed),15.53731759904,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,OilPrice,Asia-Pacific (emerging),14.342872883337025,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,OilPrice,Europe,15.217483163626667,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,OilPrice,Global,13.048309058660235,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,OilPrice,Latin America,14.41072726363824,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,OilPrice,Middle East & Africa,15.38348980176,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2040,OilPrice,North America,15.30239615076,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CarbonPrice,Asia-Pacific (developed),0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CarbonPrice,Asia-Pacific (emerging),2.431911626716431,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CarbonPrice,Europe,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CarbonPrice,Global,6.608196401780729,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CarbonPrice,Latin America,4.780725634390572,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CarbonPrice,Middle East & Africa,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CarbonPrice,North America,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CoalPrice,Asia-Pacific (developed),2.2473102912853338,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CoalPrice,Asia-Pacific (emerging),2.3947351968685164,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CoalPrice,Europe,1.830108605336,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CoalPrice,Global,2.4622151948293824,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CoalPrice,Latin America,2.4190668433743334,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CoalPrice,Middle East & Africa,2.3404334524752004,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,CoalPrice,North America,1.796388170756,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,DroughtRisk,Asia-Pacific (developed),-1.8766396779824948,0.0,World Bank CCKP ssp585 (2040-2059),-1.8766396779824948,0.29305906724921815
+Current Policies,2050,DroughtRisk,Asia-Pacific (emerging),-1.94601815162767,0.0,World Bank CCKP ssp585 (2040-2059),-1.94601815162767,0.1498658629003642
+Current Policies,2050,DroughtRisk,Europe,-1.8045803954401567,0.0,World Bank CCKP ssp585 (2040-2059),-1.8045803954401567,0.13413754302795303
+Current Policies,2050,DroughtRisk,Global,-1.929936337119888,0.0,World Bank CCKP ssp585 (2040-2059),-1.929936337119888,0.15671618729295259
+Current Policies,2050,DroughtRisk,Latin America,-1.9160779718445773,0.0,World Bank CCKP ssp585 (2040-2059),-1.9160779718445773,0.16124214939104328
+Current Policies,2050,DroughtRisk,Middle East & Africa,-1.7524360748268553,0.0,World Bank CCKP ssp585 (2040-2059),-1.7524360748268553,0.34204105562492343
+Current Policies,2050,DroughtRisk,North America,-1.8613222237825928,0.0,World Bank CCKP ssp585 (2040-2059),-1.8613222237825928,0.3067024567520579
+Current Policies,2050,FloodRisk,Asia-Pacific (developed),-1.2824228657736088,0.0,World Bank CCKP ssp585 (2040-2059),-1.2824228657736088,2.760281516740362
+Current Policies,2050,FloodRisk,Asia-Pacific (emerging),-1.1154523510996501,0.0,World Bank CCKP ssp585 (2040-2059),-1.1154523510996501,2.715681752406065
+Current Policies,2050,FloodRisk,Europe,-1.0892412001316767,0.0,World Bank CCKP ssp585 (2040-2059),-1.0892412001316767,2.6924977511284216
+Current Policies,2050,FloodRisk,Global,-1.2062059625810433,0.0,World Bank CCKP ssp585 (2040-2059),-1.2062059625810433,2.7031978532307646
+Current Policies,2050,FloodRisk,Latin America,-1.1909089611309167,0.0,World Bank CCKP ssp585 (2040-2059),-1.1909089611309167,2.7230863447823035
+Current Policies,2050,FloodRisk,Middle East & Africa,-1.2411450801895716,0.0,World Bank CCKP ssp585 (2040-2059),-1.2411450801895716,2.527549795652113
+Current Policies,2050,FloodRisk,North America,-1.2096010305280238,0.0,World Bank CCKP ssp585 (2040-2059),-1.2096010305280238,2.681770562167828
+Current Policies,2050,GDP,Asia-Pacific (developed),3870.26737768938,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GDP,Asia-Pacific (emerging),68984.16889679701,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GDP,Europe,11969.78146520874,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GDP,Global,262428.37182708835,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GDP,Latin America,9923.385637037713,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GDP,Middle East & Africa,6624.73260148665,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GDP,North America,15626.22859334638,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GasPrice,Asia-Pacific (developed),6.44162777032,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GasPrice,Asia-Pacific (emerging),6.224769846984421,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GasPrice,Europe,6.440681005306668,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GasPrice,Global,5.696551130809974,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GasPrice,Latin America,5.906473835702316,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GasPrice,Middle East & Africa,6.7425376641599994,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,GasPrice,North America,5.90895948404,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,HeatIndex,Asia-Pacific (developed),21.62999725341797,0.0,World Bank CCKP ssp585 (2040-2059),21.62999725341797,6.261827703514874
+Current Policies,2050,HeatIndex,Asia-Pacific (emerging),21.802610397338867,0.0,World Bank CCKP ssp585 (2040-2059),21.802610397338867,6.0416762532072505
+Current Policies,2050,HeatIndex,Europe,18.92599868774414,0.0,World Bank CCKP ssp585 (2040-2059),18.92599868774414,4.081386650964661
+Current Policies,2050,HeatIndex,Global,20.229795455932617,0.0,World Bank CCKP ssp585 (2040-2059),20.229795455932617,5.11758384990875
+Current Policies,2050,HeatIndex,Latin America,19.475317001342773,0.0,World Bank CCKP ssp585 (2040-2059),19.475317001342773,4.860039035995688
+Current Policies,2050,HeatIndex,Middle East & Africa,19.71399688720703,0.0,World Bank CCKP ssp585 (2040-2059),19.71399688720703,4.462588301127061
+Current Policies,2050,HeatIndex,North America,20.296804428100586,0.0,World Bank CCKP ssp585 (2040-2059),20.296804428100586,5.1206920332469466
+Current Policies,2050,OilPrice,Asia-Pacific (developed),15.336603416213334,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,OilPrice,Asia-Pacific (emerging),14.927376396586272,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,OilPrice,Europe,15.091186862586667,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,OilPrice,Global,14.608885910693797,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,OilPrice,Latin America,15.117367048038124,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,OilPrice,Middle East & Africa,15.787412032528,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Current Policies,2050,OilPrice,North America,14.6850515686,0.0,Source: NGFS Phase V - IAM_data.xlsx,,

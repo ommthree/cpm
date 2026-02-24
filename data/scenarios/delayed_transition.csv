@@ -1,0 +1,183 @@
+ScenarioName,Year,Driver,Region,Value,StandardizedValue,Notes,Baseline,Sigma
+Delayed transition,2025,CarbonPrice,Asia-Pacific (developed),0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CarbonPrice,Asia-Pacific (emerging),1.1995776575735762,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CarbonPrice,Europe,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CarbonPrice,Global,5.347469036,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CarbonPrice,Latin America,2.816408812,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CarbonPrice,Middle East & Africa,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CarbonPrice,North America,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CoalPrice,Asia-Pacific (developed),2.130272921728,2.357911168708916e-05,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CoalPrice,Asia-Pacific (emerging),2.096586645582148,3.399750621694874e-07,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CoalPrice,Europe,1.5978219610533333,5.75091119489513e-06,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CoalPrice,Global,2.122696157609792,9.579413104655106e-07,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CoalPrice,Latin America,2.170938018693039,-3.242770268006686e-05,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CoalPrice,Middle East & Africa,2.184099740344,6.894269641684055e-06,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,CoalPrice,North America,1.802318900456,5.763129057157451e-05,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GDP,Asia-Pacific (developed),2928.213386177717,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GDP,Asia-Pacific (emerging),31973.76485009565,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GDP,Europe,8015.385380070914,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GDP,Global,138636.65019239936,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GDP,Latin America,5046.517596000601,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GDP,Middle East & Africa,2444.3646073334157,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GDP,North America,10836.39658386797,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GasPrice,Asia-Pacific (developed),6.150777254746667,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GasPrice,Asia-Pacific (emerging),5.465340529724983,-9.109616921806284e-06,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GasPrice,Europe,6.330221500853334,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GasPrice,Global,4.605849973544091,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GasPrice,Latin America,5.264509662349023,-1.2983541747946527e-05,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GasPrice,Middle East & Africa,5.925313773776001,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,GasPrice,North America,5.63224051216,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,OilPrice,Asia-Pacific (developed),15.441672815306664,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,OilPrice,Asia-Pacific (emerging),13.526052965006988,8.357146371262576e-05,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,OilPrice,Europe,15.012002879653332,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,OilPrice,Global,11.425886692828255,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,OilPrice,Latin America,13.448005622882263,-0.0001512391622371,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,OilPrice,Middle East & Africa,14.417750756864,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2025,OilPrice,North America,15.42451269944,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CarbonPrice,Asia-Pacific (developed),0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CarbonPrice,Asia-Pacific (emerging),1.593420101716136,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CarbonPrice,Europe,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CarbonPrice,Global,5.75342875304908,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CarbonPrice,Latin America,4.434125543783165,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CarbonPrice,Middle East & Africa,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CarbonPrice,North America,0.0,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CoalPrice,Asia-Pacific (developed),2.173071003808,0.0421041216476921,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CoalPrice,Asia-Pacific (emerging),2.0362982488755748,-0.8667725455293692,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CoalPrice,Europe,1.5677341992773333,0.0003130356177506,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CoalPrice,Global,1.9154505151625625,-0.9834164279484634,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CoalPrice,Latin America,2.1260714438954533,-0.5203196836108729,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CoalPrice,Middle East & Africa,2.2100296974944,0.0007080953116685,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,CoalPrice,North America,1.805549736064,0.0005068675077657,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed Transition,2030,DroughtRisk,Asia-Pacific (developed),-1.4414278470588382,-1.2795037457663436,World Bank CCKP ssp245 (2020-2039),-1.3524092034761266,0.06957278857311586
+Delayed Transition,2030,DroughtRisk,Asia-Pacific (emerging),-1.5258758750994215,-1.2429640760541043,World Bank CCKP ssp245 (2020-2039),-1.243016515371523,0.22756841100819242
+Delayed Transition,2030,DroughtRisk,Europe,-1.294788352266328,-0.24264999602219278,World Bank CCKP ssp245 (2020-2039),-1.2701378278921545,0.10158881013094655
+Delayed Transition,2030,DroughtRisk,Global,-1.4165879526230665,-1.1233549925142226,World Bank CCKP ssp245 (2020-2039),-1.288644521893751,0.1138940331256823
+Delayed Transition,2030,DroughtRisk,Latin America,-1.5320221171021164,-0.8537606746013785,World Bank CCKP ssp245 (2020-2039),-1.3873006261522387,0.1695106078965845
+Delayed Transition,2030,DroughtRisk,Middle East & Africa,-1.345064622963659,0.629222350262454,World Bank CCKP ssp245 (2020-2039),-1.4019526643844054,0.09041007745039246
+Delayed Transition,2030,DroughtRisk,North America,-1.2800927698923066,0.5661056897570533,World Bank CCKP ssp245 (2020-2039),-1.3636821607331788,0.14765686399786052
+Delayed Transition,2030,FloodRisk,Asia-Pacific (developed),-3.0367980814106272,-0.18696789445228318,World Bank CCKP ssp245 (2020-2039),-2.6804046871508485,1.9061742942756161
+Delayed Transition,2030,FloodRisk,Asia-Pacific (emerging),-2.5724561512459165,0.02606118867501712,World Bank CCKP ssp245 (2020-2039),-2.6179937071479316,1.7473322675288567
+Delayed Transition,2030,FloodRisk,Europe,-2.522325526862666,0.03605303398521399,World Bank CCKP ssp245 (2020-2039),-2.584505221443918,1.7246730082897623
+Delayed Transition,2030,FloodRisk,Global,-2.7754988885982645,0.005939504335941668,World Bank CCKP ssp245 (2020-2039),-2.786509625662463,1.8538141301739834
+Delayed Transition,2030,FloodRisk,Latin America,-2.6891025695730852,-0.009316861979977494,World Bank CCKP ssp245 (2020-2039),-2.67218012962746,1.8163239921330512
+Delayed Transition,2030,FloodRisk,Middle East & Africa,-2.8800336874810584,-0.12826912409362354,World Bank CCKP ssp245 (2020-2039),-2.6435647388953534,1.843537564138245
+Delayed Transition,2030,FloodRisk,North America,-2.942691584691591,-0.02051475326318394,World Bank CCKP ssp245 (2020-2039),-2.9026141329016584,1.9535917042617454
+Delayed transition,2030,GDP,Asia-Pacific (developed),3138.1002722715434,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GDP,Asia-Pacific (emerging),39530.10577208256,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GDP,Europe,8824.512643359545,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GDP,Global,161557.5107829543,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GDP,Latin America,5688.0735880163875,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GDP,Middle East & Africa,3012.2309116210126,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GDP,North America,11896.220855575244,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GasPrice,Asia-Pacific (developed),6.005018477466667,0.0,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GasPrice,Asia-Pacific (emerging),5.392755718866697,0.0087532182274722,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GasPrice,Europe,6.17283257608,-1.9843056650455363e-05,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GasPrice,Global,4.584713207285326,-0.0125113275868619,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GasPrice,Latin America,5.207433701881305,-2.3081347766091035e-05,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GasPrice,Middle East & Africa,5.987432317344,-2.515413437055087e-05,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,GasPrice,North America,5.42010597636,-0.0001742067690157,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed Transition,2030,HeatIndex,Asia-Pacific (developed),3.466461181640625,-1.8884945153628787,World Bank CCKP ssp245 (2020-2039),4.573813438415527,0.5863677377755698
+Delayed Transition,2030,HeatIndex,Asia-Pacific (emerging),4.005955696105957,-1.9653993705967783,World Bank CCKP ssp245 (2020-2039),4.578715801239014,0.29142174038609897
+Delayed Transition,2030,HeatIndex,Europe,3.4365854263305664,-1.9986348836988548,World Bank CCKP ssp245 (2020-2039),4.557107448577881,0.5606436830390826
+Delayed Transition,2030,HeatIndex,Global,3.660074234008789,-1.9979792962909726,World Bank CCKP ssp245 (2020-2039),4.1878662109375,0.26416288592604453
+Delayed Transition,2030,HeatIndex,Latin America,3.4549171924591064,-1.9819515571034554,World Bank CCKP ssp245 (2020-2039),4.333482265472412,0.4432828188279708
+Delayed Transition,2030,HeatIndex,Middle East & Africa,3.8915603160858154,-0.27122889529577704,World Bank CCKP ssp245 (2020-2039),3.946784734725952,0.20360816859101277
+Delayed Transition,2030,HeatIndex,North America,3.54123592376709,-1.8829891152575735,World Bank CCKP ssp245 (2020-2039),4.529787540435791,0.5249906165992242
+Delayed transition,2030,OilPrice,Asia-Pacific (developed),15.3845549124,0.0002828569219598,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,OilPrice,Asia-Pacific (emerging),13.820348721610234,0.0318227872983721,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,OilPrice,Europe,14.935013670159998,0.0002412047062728,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,OilPrice,Global,11.990050813281536,-0.036780489622869,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,OilPrice,Latin America,13.714497456387647,0.017535704606507,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,OilPrice,Middle East & Africa,14.580577125248002,0.0003711846701573,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2030,OilPrice,North America,15.36278469644,0.0003307807656035,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CarbonPrice,Asia-Pacific (developed),211.727428684036,1.0053397407822016,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CarbonPrice,Asia-Pacific (emerging),153.81936580976725,0.9394436130718912,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CarbonPrice,Europe,176.29818717943635,0.9294196932292416,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CarbonPrice,Global,209.8751806193752,1.085805968431078,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CarbonPrice,Latin America,214.58671682892816,1.0137804685252525,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CarbonPrice,Middle East & Africa,150.093399413945,0.796135668504663,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CarbonPrice,North America,212.6685113225185,1.0754786501816975,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CoalPrice,Asia-Pacific (developed),2.280459977184,0.6342087819667458,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CoalPrice,Asia-Pacific (emerging),1.83273428594593,-1.7165184097905557,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CoalPrice,Europe,2.222076851941333,1.057972697060838,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CoalPrice,Global,1.491440018079509,-1.5335853645109043,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CoalPrice,Latin America,1.9796514153089568,-1.9990964517015648,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CoalPrice,Middle East & Africa,2.4612428199152,0.981183710323162,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,CoalPrice,North America,1.81299582772,0.0983001142137137,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GDP,Asia-Pacific (developed),3465.493172787337,-0.9473363416210416,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GDP,Asia-Pacific (emerging),53470.19401737087,-0.8348031089801249,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GDP,Europe,10355.903024175012,-1.034667605014396,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GDP,Global,207073.28727511372,-0.9013168864502394,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GDP,Latin America,7439.588603119301,-0.7672401996622024,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GDP,Middle East & Africa,4355.0910850461605,-0.9858800200470944,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GDP,North America,13729.187904945757,-1.1315357492072704,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GasPrice,Asia-Pacific (developed),6.8680270632,0.8498376048206779,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GasPrice,Asia-Pacific (emerging),6.286092057275511,0.7462007197658234,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GasPrice,Europe,7.043910181813334,0.859350752837996,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GasPrice,Global,5.428423703763373,0.9339856989816352,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GasPrice,Latin America,6.235902346438046,0.803055504073377,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GasPrice,Middle East & Africa,7.20834605072,0.7439897961152024,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,GasPrice,North America,5.67366686084,1.1628098631959116,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,OilPrice,Asia-Pacific (developed),15.804617334906666,0.7713157651621915,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,OilPrice,Asia-Pacific (emerging),13.962809633830336,-1.3652339375671712,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,OilPrice,Europe,15.559415955146669,0.8489140741672513,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,OilPrice,Global,11.97979121701805,-1.1214104164023628,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,OilPrice,Latin America,13.78775517693226,-1.0885544397618565,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,OilPrice,Middle East & Africa,15.234709983392,-0.6299219869049026,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2040,OilPrice,North America,15.2005812564,-0.9336496031850996,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CarbonPrice,Asia-Pacific (developed),1063.933384358783,1.381699547275664,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CarbonPrice,Asia-Pacific (emerging),313.4315366509136,0.6933438786351868,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CarbonPrice,Europe,724.3730489367003,1.028479739913527,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CarbonPrice,Global,377.7899961488373,0.9963062382318868,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CarbonPrice,Latin America,619.0770474096961,0.962993636365955,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CarbonPrice,Middle East & Africa,313.974364373755,0.5752173046562798,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CarbonPrice,North America,964.7606257710956,1.3112878056899775,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CoalPrice,Asia-Pacific (developed),2.9820010175013336,1.0778202095229064,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CoalPrice,Asia-Pacific (emerging),2.2694095925372704,-0.3102775594244804,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CoalPrice,Europe,3.2071083857226665,1.195994742786182,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CoalPrice,Global,1.6280404697907431,-1.984318343697738,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CoalPrice,Latin America,2.535448616495063,0.2115561752685032,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CoalPrice,Middle East & Africa,3.1241212046960003,1.0004544411554106,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,CoalPrice,North America,2.48629099456,1.156145923875012,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed Transition,2050,DroughtRisk,Asia-Pacific (developed),-2.454010649123128,-1.9701522172990318,World Bank CCKP ssp245 (2040-2059),-1.8766396779824948,0.29305906724921815
+Delayed Transition,2050,DroughtRisk,Asia-Pacific (emerging),-2.147130843262495,-1.3419513139462025,World Bank CCKP ssp245 (2040-2059),-1.94601815162767,0.1498658629003642
+Delayed Transition,2050,DroughtRisk,Europe,-2.049672776780111,-1.8271721384435928,World Bank CCKP ssp245 (2040-2059),-1.8045803954401567,0.13413754302795303
+Delayed Transition,2050,DroughtRisk,Global,-2.24325204064639,-1.9992555264301743,World Bank CCKP ssp245 (2040-2059),-1.929936337119888,0.15671618729295259
+Delayed Transition,2050,DroughtRisk,Latin America,-2.1645684976260515,-1.5411015464625,World Bank CCKP ssp245 (2040-2059),-1.9160779718445773,0.16124214939104328
+Delayed Transition,2050,DroughtRisk,Middle East & Africa,-2.4181496203084496,-1.9462971901583792,World Bank CCKP ssp245 (2040-2059),-1.7524360748268553,0.34204105562492343
+Delayed Transition,2050,DroughtRisk,North America,-2.456902032304676,-1.9418814404983966,World Bank CCKP ssp245 (2040-2059),-1.8613222237825928,0.3067024567520579
+Delayed Transition,2050,FloodRisk,Asia-Pacific (developed),-2.6791534266222277,-0.5060101849676655,World Bank CCKP ssp245 (2040-2059),-1.2824228657736088,2.760281516740362
+Delayed Transition,2050,FloodRisk,Asia-Pacific (emerging),-2.742683920413937,-0.599198182140664,World Bank CCKP ssp245 (2040-2059),-1.1154523510996501,2.715681752406065
+Delayed Transition,2050,FloodRisk,Europe,-2.7624147561808936,-0.6214205955596407,World Bank CCKP ssp245 (2040-2059),-1.0892412001316767,2.6924977511284216
+Delayed Transition,2050,FloodRisk,Global,-2.7749037365535187,-0.5803118599319781,World Bank CCKP ssp245 (2040-2059),-1.2062059625810433,2.7031978532307646
+Delayed Transition,2050,FloodRisk,Latin America,-3.0108164573831906,-0.6683252992470813,World Bank CCKP ssp245 (2040-2059),-1.1909089611309167,2.7230863447823035
+Delayed Transition,2050,FloodRisk,Middle East & Africa,-2.616474532817885,-0.5441354528382202,World Bank CCKP ssp245 (2040-2059),-1.2411450801895716,2.527549795652113
+Delayed Transition,2050,FloodRisk,North America,-2.5862694483917745,-0.5133431014884849,World Bank CCKP ssp245 (2040-2059),-1.2096010305280238,2.681770562167828
+Delayed transition,2050,GDP,Asia-Pacific (developed),3699.1565439939873,-1.73046712054318,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GDP,Asia-Pacific (emerging),66921.26756306688,-1.1023349703720076,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GDP,Europe,11835.08575595438,-1.0458793642968949,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GDP,Global,255663.61410100633,-1.247784891997087,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GDP,Latin America,9589.311534787132,-1.424067840691766,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GDP,Middle East & Africa,6062.97468301705,-1.5736623529189022,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GDP,North America,15458.179764617606,-1.2202692251276612,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GasPrice,Asia-Pacific (developed),7.742859452906667,0.8938361018756569,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GasPrice,Asia-Pacific (emerging),6.701791076060213,0.4062998486469212,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GasPrice,Europe,7.924853509333334,0.8777593773662543,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GasPrice,Global,5.386436210262668,-1.0486635158183646,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GasPrice,Latin America,7.029571374200609,0.8115956142851175,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GasPrice,Middle East & Africa,8.152828069328,0.6949637310299358,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,GasPrice,North America,6.86886624128,0.9658779108133778,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed Transition,2050,HeatIndex,Asia-Pacific (developed),14.952191352844238,-1.0664307957284358,World Bank CCKP ssp245 (2040-2059),21.62999725341797,6.261827703514874
+Delayed Transition,2050,HeatIndex,Asia-Pacific (emerging),13.706267356872559,-1.3400822389594824,World Bank CCKP ssp245 (2040-2059),21.802610397338867,6.0416762532072505
+Delayed Transition,2050,HeatIndex,Europe,13.791626930236816,-1.2579969007086804,World Bank CCKP ssp245 (2040-2059),18.92599868774414,4.081386650964661
+Delayed Transition,2050,HeatIndex,Global,14.067740440368652,-1.2040945876585565,World Bank CCKP ssp245 (2040-2059),20.229795455932617,5.11758384990875
+Delayed Transition,2050,HeatIndex,Latin America,14.449784278869629,-1.034051925355277,World Bank CCKP ssp245 (2040-2059),19.475317001342773,4.860039035995688
+Delayed Transition,2050,HeatIndex,Middle East & Africa,15.276182174682617,-0.9944486053987122,World Bank CCKP ssp245 (2040-2059),19.71399688720703,4.462588301127061
+Delayed Transition,2050,HeatIndex,North America,12.692115783691406,-1.4850900220193817,World Bank CCKP ssp245 (2040-2059),20.296804428100586,5.1206920332469466
+Delayed transition,2050,OilPrice,Asia-Pacific (developed),14.84660948704,-0.2299698300540087,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,OilPrice,Asia-Pacific (emerging),13.97000099092556,-1.0104431812412906,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,OilPrice,Europe,14.69759082568,-0.1895419982481514,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,OilPrice,Global,12.925245394821092,-1.794647083523802,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,OilPrice,Latin America,14.102328507297692,-0.7806132237795665,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,OilPrice,Middle East & Africa,15.122298851968,-0.4027262749159861,Source: NGFS Phase V - IAM_data.xlsx,,
+Delayed transition,2050,OilPrice,North America,13.73343976392,-1.012854818478811,Source: NGFS Phase V - IAM_data.xlsx,,
