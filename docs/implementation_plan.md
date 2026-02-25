@@ -201,114 +201,142 @@ Extract, transform, and standardize NGFS climate scenarios into model-ready driv
 ## Phase 3: Sensitivity Calibration (Weeks 5-8)
 
 ### Objectives
-Calibrate the factor loading matrix A (22×8) and residual factor covariance Σ_F|C (22×22) for the revised factor structure with separate sector and region factors.
+Calibrate the hybrid sensitivity parameters (S, R, λ) and residual variance decomposition (σ_a, σ_b, σ_ξ) for the cell-level factor model with climate overlay.
 
 ### Prerequisites
 - Completed Phase 1 (portfolio data with sector/region mappings)
-- Completed Phase 2 (standardized climate drivers φ(C))
-- Updated model documentation (revised factor structure)
+- Completed Phase 2 (standardized climate drivers φ(X))
+- Updated model documentation (cell-level factors with residual decomposition)
 
 ### Tasks
 
-#### 3.1 Factor Loading Matrix A - Sector Sensitivities (15 rows × 8 columns)
-- [ ] For each sector factor s (15 sectors) and each driver k (8 drivers), assign A_{s,k}:
+#### 3.1 Sector Exposure Scores S (15 × 8)
+- [ ] For each sector s (15 sectors) and driver k (8 drivers), assign S_{s,k} ∈ [0,1]:
 
   **Transition drivers** (CarbonPrice, CoalPrice, OilPrice, GasPrice, GDP):
-  - Coal sector: A_{coal,carbon} ~ -2.0 (severe stress from carbon price)
-  - Oil & Gas: A_{oil,carbon} ~ -1.5 (high stress from carbon price)
-  - Renewables: A_{renewables,carbon} ~ +1.0 (benefit from carbon price)
-  - Heavy Industry: A_{heavy_ind,carbon} ~ -0.8 (moderate stress)
-  - All sectors: A_{s,GDP} > 0 (pro-cyclical, positive GDP loading)
+  - Coal: S_{coal,carbon} = 1.0 (max carbon exposure), S_{coal,GDP} = 0.7 (cyclical)
+  - Oil & Gas: S_{oil,carbon} = 0.9, S_{oil,oil} = 1.0
+  - Renewables: S_{renewables,carbon} = 0.2 (benefit from carbon price, inverted)
+  - Heavy Manufacturing: S_{heavy,carbon} = 0.8, S_{heavy,GDP} = 0.9
+  - Agriculture: S_{agri,carbon} = 0.3, S_{agri,GDP} = 0.6
 
   **Physical drivers** (HeatIndex, FloodRisk, DroughtRisk):
-  - Agriculture: A_{agri,drought} ~ -1.2 (very sensitive to drought)
-  - Real Estate: A_{real_estate,flood} ~ -0.8 (sensitive to flooding)
-  - Transportation: A_{transport,storm} ~ -0.6 (sensitive to disruption)
+  - Agriculture: S_{agri,drought} = 0.9, S_{agri,flood} = 0.7, S_{agri,heat} = 0.8
+  - Real Estate: S_{real_estate,flood} = 0.8, S_{real_estate,heat} = 0.5
+  - Transportation: S_{transport,flood} = 0.6, S_{transport,heat} = 0.4
+  - Tech/Services: S_{tech,physical} ≈ 0.1-0.2 (low physical exposure)
 
-- [ ] Document rationale for each entry (economic logic, historical analogues)
-- [ ] Create heatmap visualization of A matrix
+- [ ] Document rationale for each score (emissions intensity, asset type, supply chain)
+- [ ] Create sector-driver heatmap visualization
+- [ ] Validate against available data (CDP disclosures, sector reports)
 
-**Calibration approach:**
-- Expert judgment based on sector characteristics
-- Historical regression where possible (sector CDS spreads on energy prices, GDP)
-- Anchor to reasonableness: severe scenario should move most-exposed factors by ~2σ
+**Data sources:**
+- Transition: Emissions intensity, energy intensity, abatement cost curves
+- Physical: Asset heaviness, fixed-site dependence, business interruption sensitivity
 
-#### 3.2 Factor Loading Matrix A - Region Sensitivities (7 rows × 8 columns)
-- [ ] For each region factor r (7 regions) and each driver k (8 drivers), assign A_{r,k}:
+#### 3.2 Region Exposure Scores R (7 × 8)
+- [ ] For each region r (7 regions) and driver k (8 drivers), assign R_{r,k} ∈ [0,1]:
 
   **Transition drivers**:
-  - All regions: A_{r,GDP} ~ 1.2-1.8 (regional GDP loading, higher for emerging)
-  - Fossil-dependent regions: Negative loading on energy prices
-  - Europe/NA: A_{r,carbon} ~ -0.5 (transition costs)
+  - Europe: R_{europe,carbon} = 0.9 (high policy stringency), R_{europe,GDP} = 0.8
+  - North America: R_{NA,carbon} = 0.7, R_{NA,GDP} = 0.8
+  - Asia-Pacific (emerging): R_{asia_em,GDP} = 1.0 (most cyclical)
+  - Middle East & Africa: R_{MEA,oil} = 1.0 (oil-dependent economies)
 
-  **Physical drivers**:
-  - Asia-Pacific (emerging): A_{r,heat} ~ -1.2, A_{r,flood} ~ -0.8 (high physical exposure)
-  - Middle East & Africa: A_{r,heat} ~ -1.0, A_{r,drought} ~ -0.8
-  - Europe: A_{r,heat} ~ -0.6 (moderate exposure)
-  - North America: A_{r,storm} ~ -0.5 (hurricane/tornado exposure)
+  **Physical drivers** (use World Bank CCKP data for validation):
+  - Asia-Pacific (emerging): R_{asia_em,heat} = 1.0, R_{asia_em,flood} = 0.9
+  - Middle East & Africa: R_{MEA,heat} = 0.95, R_{MEA,drought} = 1.0
+  - Europe: R_{europe,heat} = 0.6, R_{europe,flood} = 0.5
+  - North America: R_{NA,flood} = 0.7 (hurricanes, flooding)
 
-- [ ] Document regional climate exposure, economic structure
-- [ ] Validate against World Bank physical risk data
+- [ ] Document rationale (climate zones, historical hazards, policy stance)
+- [ ] Validate against World Bank physical risk data (actual φ values from Phase 2)
+- [ ] Create region-driver heatmap visualization
 
-#### 3.3 Residual Factor Covariance Σ_F|C (22 × 22)
-- [ ] Choose covariance structure:
+**Data sources:**
+- Physical: World Bank CCKP, EM-DAT historical disasters, coastal exposure
+- Transition: OECD policy tracker, energy mix, GDP structure
 
-  **Option 1 - Diagonal (recommended start)**:
-  - Σ_F|C = σ² · I, where σ = 0.8
-  - Factors independent conditional on climate
-  - 1 parameter (σ)
+#### 3.3 Global Scale Parameters λ (8 values)
+- [ ] Initialize all λ_k = 1.0 as starting point
+- [ ] Define anchor targets for calibration:
 
-  **Option 2 - Block diagonal**:
-  - Within-sector block: Corr(F_coal, F_oil | C) = 0.5
-  - Within-region block: Corr(F_europe, F_asia | C) = 0.3
-  - ~10-20 parameters
+  **Factor magnitude targets**:
+  - Max exposed cell under severe scenario: |m_{s,r}| ≈ 2σ
+  - Median cell under moderate scenario: |m_{s,r}| ≈ 0.5-1σ
 
-  **Option 3 - Full covariance**:
-  - Estimate from historical factor analysis
-  - Use equity sector indices, regional GDP correlations
-  - ~200+ parameters
+  **Portfolio-level targets** (to be defined based on expert judgment):
+  - EL uplift under Net Zero 2050: 2x-5x baseline EL
+  - VaR₉₉ uplift: <20% of portfolio EAD
+  - Coal + Oil&Gas contribution to Net Zero loss: >50%
 
-- [ ] Implement chosen structure in calibration CSV template
-- [ ] Document rationale for structure choice
+- [ ] Iterative calibration process:
+  1. Compute m_{s,r}(X) = Σ_k λ_k · S_{s,k} · R_{r,k} · φ_k(X) for each scenario
+  2. Check max |m_{s,r}| against targets
+  3. If max too high/low: scale λ_k proportionally
+  4. Check which cells contribute most (should match intuition)
+  5. Adjust individual λ_k if needed
 
-#### 3.4 Define Anchor Targets
-- [ ] Define factor magnitude targets:
-  - "Max factor movement under severe scenario should be ~2σ"
-  - "Median factor movement under moderate scenario ~0.5-1σ"
-- [ ] Define portfolio targets:
-  - "EL uplift under Net Zero 2050 should be 2-5x baseline EL"
-  - "99th percentile loss uplift should be <20% of portfolio EAD"
-- [ ] Specify sector contribution targets:
-  - "Coal + Oil&Gas should contribute >50% of Net Zero transition loss"
-  - "Agriculture + Real Estate should contribute >40% of Current Policies physical loss"
-- [ ] Document rationale for each target
+- [ ] Document final λ values with rationale
+- [ ] Perform sensitivity analysis: vary each λ_k by ±30%, measure impact on:
+  - Max/median factor values
+  - Portfolio EL/VaR
+  - Sector contributions
 
-#### 3.5 Calibrate and Validate
-- [ ] Create calibration CSV templates:
-  - `factor_loadings_A.csv` (22 factors × 8 drivers)
-  - `residual_covariance_sigma.csv` (22 × 22 or simplified representation)
-- [ ] Implement A matrix in simulation code
-- [ ] Run test simulations for all 3 scenarios
-- [ ] Check factor realizations: μ(C) = A · φ(C)
-  - Net Zero 2050: F_coal ~ -3.6σ? (coal sector crash)
-  - Current Policies: F_asia_em ~ -2.0σ? (physical stress)
-- [ ] Iterate on A entries if targets not met
-- [ ] Perform sensitivity analysis: vary A entries ± 30%, observe impact
-- [ ] Document calibration process and final values
+**Expected ranges:** λ_k ∈ [0.5, 1.2] (most drivers), with adjustments based on validation
+
+#### 3.4 Residual Variance Parameters (σ_a, σ_b, σ_ξ)
+- [ ] Target correlation structure from equity markets:
+  - Within-sector correlation: ρ_s ≈ 0.40
+  - Within-region correlation: ρ_r ≈ 0.25
+  - Total residual volatility: σ_total ≈ 0.8
+
+- [ ] Solve for variance decomposition:
+  ```
+  σ_a² / (σ_a² + σ_b² + σ_ξ²) = 0.40
+  σ_b² / (σ_a² + σ_b² + σ_ξ²) = 0.25
+  σ_a² + σ_b² + σ_ξ² = 0.64
+  ```
+
+  **Solution:**
+  - σ_a = 0.50 (sector std dev)
+  - σ_b = 0.40 (region std dev)
+  - σ_ξ = 0.47 (cell std dev)
+
+- [ ] (Optional) Validate against historical data:
+  - Download MSCI sector indices (10 years monthly returns)
+  - Residualize against market factor and macro variables
+  - Compute average pairwise correlation → compare to 0.40
+  - Download MSCI regional indices
+  - Compute regional correlations → compare to 0.25
+
+- [ ] Document calibration and validation
+
+- [ ] Perform sensitivity analysis: vary σ_a, σ_b, σ_ξ by ±30%
+  - Check impact on portfolio loss distribution
+  - Check impact on tail correlations
 
 ### Deliverables
-✅ Factor loading matrix A (22 × 8) with documented rationale
-✅ Residual covariance structure Σ_F|C with parameters
-✅ Calibration CSV templates (factor_loadings_A.csv, residual_covariance_sigma.csv)
-✅ Calibration target specification document
-✅ Validation report (factor realizations, portfolio losses, decompositions)
-✅ Sensitivity analysis report (impact of A uncertainty)
+✅ Sector exposure score matrix S (15 × 8) with documented rationale
+✅ Region exposure score matrix R (7 × 8) with documented rationale
+✅ Global scale parameters λ (8 values) with calibration report
+✅ Residual variance parameters (σ_a, σ_b, σ_ξ) with correlation validation
+✅ Calibration CSV templates:
+  - `sector_scores.csv` (15 sectors × 8 drivers)
+  - `region_scores.csv` (7 regions × 8 drivers)
+  - `lambda_parameters.csv` (8 scale parameters)
+  - `residual_variance.csv` (3 variance components)
+✅ Anchor target specification document
+✅ Validation report (factor magnitudes, portfolio losses, sector decompositions)
+✅ Sensitivity analysis report (impact of λ, σ uncertainty)
+✅ (Optional) Empirical correlation validation using MSCI data
 
 ### Success Criteria
-- All A entries have documented economic rationale
-- Test simulations meet anchor targets within tolerance
-- Sensitivity analysis shows reasonable stability (±30% → <50% change in key metrics)
-- Factor realizations make intuitive sense (coal stressed under Net Zero, etc.)
+- All S and R scores have documented economic/physical rationale
+- λ calibration meets anchor targets (max cell ~2σ, portfolio EL 2x-5x baseline)
+- Residual correlations match equity market targets (0.40 sector, 0.25 region ± 0.10)
+- Sensitivity analysis shows stability (±30% parameter changes → <50% metric changes)
+- Factor magnitudes make intuitive sense across scenarios
 
 ---
 
