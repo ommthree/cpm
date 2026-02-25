@@ -374,21 +374,42 @@ Define **membership matrices**:
 - **B ∈ ℝ^(M×R)**: Maps each cell to its region
   - B_{j,r} = 1 if cell j belongs to region r, else 0
 
-**Step 4**: Construct residual covariance
+**Step 4**: Mix sector and region components with ω
 
+Define **sector-vs-region mix parameter ω ∈ [0,1]**:
+- ω controls whether residual co-movement is primarily sector-cycle or region-cycle driven
+- High ω (→ 1): Sector cycles dominate (e.g., energy sector co-moves globally)
+- Low ω (→ 0): Regional cycles dominate (e.g., geographic macro conditions matter more)
+- Typical starting point: ω = 0.5 (equal weight)
+
+Construct the structured covariance component:
 ```
-Σ_u = A Σ_S A^T + B Σ_R B^T + σ_ξ² I_M
+Σ_structured = ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)
 ```
 
-Where:
-- **A Σ_S A^T**: Sector-driven co-movement across cells
-- **B Σ_R B^T**: Region-driven co-movement across cells
-- **σ_ξ² I_M**: Cell-specific residual variance
+**Step 5**: Mix structured vs cell-specific with η
+
+Define **structured-vs-cell share parameter η ∈ [0,1]**:
+- η controls how much of residual variance is structured (via Σ_structured) vs cell-specific
+- High η (→ 1): Strong systematic clustering, less diversification benefit
+- Low η (→ 0): More cell-specific noise, greater diversification benefit
+- Typical starting point: η = 0.7 (moderately systemic)
+
+Construct final residual covariance:
+```
+Σ_u = η · Σ_structured + (1-η) · I_M
+```
+
+Expanding:
+```
+Σ_u = η · [ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)] + (1-η) · I_M
+```
 
 **Knobs**:
 - **Corr_S, Corr_R**: Estimated from data (MSCI sector/regional indices, 5-year rolling correlations)
-- **D_S, D_R**: Volatility scales (can be set to identity or estimated)
-- **σ_ξ²**: Cell-specific residual variance (controls local noise vs systematic co-movement)
+- **D_S, D_R**: Volatility scales (typically set to I for unit volatility)
+- **ω**: Sector-vs-region mix (0 = all region, 1 = all sector, 0.5 = equal)
+- **η**: Structured-vs-cell share (0 = all cell-specific, 1 = all structured)
 
 ### 6.3 What these components do
 
@@ -403,56 +424,93 @@ Where:
 - Estimated from MSCI Regional Indices or regional GDP growth correlations
 
 **D_S, D_R** (volatility scales):
-- Controls overall strength of sector/region components in residual systematic risk
-- Start with D_S = D_R = I (unit volatility), adjust if needed
+- Controls overall strength of sector/region components
+- Typically set to I (unit volatility) for simplicity
+- Alternative: Use empirical std devs if sector/region-specific volatilities are desired
 
-**σ_ξ²** (cell-specific variance):
-- How much residual is "local noise" that doesn't co-move strongly
-- Higher σ_ξ² ⇒ more diversification benefit across cells
-- Lower σ_ξ² ⇒ stronger systematic co-movement via sectors and regions
+**ω** (sector-vs-region mix):
+- Controls whether residual co-movement is driven by sector cycles or regional cycles
+- ω = 1: Pure sector co-movement (coal in Europe and coal in Asia move together)
+- ω = 0: Pure regional co-movement (coal in Europe and oil in Europe move together)
+- ω = 0.5: Balanced mix of both
+- **Calibration**: Start with 0.5, adjust based on portfolio composition and risk decomposition
+- **Sensitivity**: Test ω ∈ {0.3, 0.5, 0.7} to understand sector vs region dominance
+
+**η** (structured-vs-cell share):
+- Controls how much residual variance is systematic vs cell-specific
+- η = 1: All residual variance is structured (maximum clustering, minimum diversification)
+- η = 0: All residual variance is cell-specific (maximum diversification, no clustering)
+- η = 0.7: 70% structured, 30% cell-specific (moderately systemic)
+- **Calibration**: Start with 0.7, adjust to match observed tail thickness and diversification
+- **Sensitivity**: Test η ∈ {0.5, 0.7, 0.9} to understand impact on VaR and ES
+- **Economic interpretation**: η is like an "intra-cell correlation" - higher η means cells are more correlated beyond sector/region patterns
 
 ### 6.4 Induced correlation structure
 
-The construction Σ_u = A Σ_S A^T + B Σ_R B^T + σ_ξ² I induces:
+The construction Σ_u = η · [ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)] + (1-η) · I induces:
 
 **Within-sector correlation** (same sector, different regions):
 ```
-Corr(u_{s,r}, u_{s,r'}) = (Sector variance component) / (Total variance)
+Corr(u_{s,r}, u_{s,r'}) = (η · ω · Sector variance component) / (Total variance)
 ```
+- Controlled by η (strength of structure) and ω (sector vs region weight)
+- Higher η and ω → stronger within-sector correlation
 
 **Within-region correlation** (different sectors, same region):
 ```
-Corr(u_{s,r}, u_{s',r}) = (Region variance component) / (Total variance)
+Corr(u_{s,r}, u_{s',r}) = (η · (1-ω) · Region variance component) / (Total variance)
 ```
+- Controlled by η and (1-ω)
+- Higher η and lower ω → stronger within-region correlation
 
 **Cross-sector-region correlation** (different sector AND region):
 ```
-Corr(u_{s,r}, u_{s',r'}) = 0  (by construction in this simplified form)
+Corr(u_{s,r}, u_{s',r'}) ≈ 0  (by construction, no direct linkage)
 ```
+
+**Diagonal variance** (variance of each cell):
+```
+Var(u_{s,r}) = η · [ω · (A Σ_S A^T)_{s,r} + (1-ω) · (B Σ_R B^T)_{s,r}] + (1-η)
+```
+- With D_S = D_R = I, the diagonal is approximately η + (1-η) = 1 (unit variance cells)
 
 **Key advantages**:
 - **Observable data**: Corr_S and Corr_R estimated from equity/credit market indices
-- **Parsimonious**: ~100-200 correlation parameters instead of 5,460
-- **Interpretable**: Sector shocks and region shocks have clear meaning
-- **Stable simulation**: No Cholesky decomposition issues, well-conditioned by construction
+- **Parsimonious**: Only 4 key knobs (ω, η, plus Corr_S and Corr_R structures)
+- **Interpretable**: ω controls sector vs region, η controls clustering strength
+- **Separable**: Can tune sector-region balance (ω) independently from overall clustering (η)
+- **Stable simulation**: Well-conditioned by construction, positive definite
 
 ---
 
-## 7. The three correlation levers (intuitive summary)
+## 7. The correlation levers (intuitive summary)
 
-There are three distinct "correlation levers" and they do different jobs:
+There are five distinct "correlation levers" and they do different jobs:
 
-**Lever 1: Σ_u (pattern of co-movement across sector×region cells)**
-- "Which parts of the economy move together in residual credit conditions?"
-- Calibrated from market data (MSCI sector/regional indices)
-- Controls diversification benefits across sectors and regions
+**Lever 1: Corr_S and Corr_R (correlation patterns)**
+- "Which sectors co-move? Which regions co-move?"
+- Estimated from market data (MSCI sector/regional indices)
+- Provides the underlying correlation structure
 
-**Lever 2: ρ (strength of systematic dependence at obligor level)**
-- "How much do obligors care about systematic conditions versus idiosyncratic noise?"
-- Higher ρ ⇒ stronger default clustering, fatter tails, less diversification
+**Lever 2: ω (sector-vs-region mix)**
+- "Is residual co-movement driven by sector cycles or regional cycles?"
+- ω = 1: Sector dominates (e.g., global energy sector cycle)
+- ω = 0: Region dominates (e.g., regional macro conditions)
+- Typical starting point: ω = 0.5 (balanced)
+
+**Lever 3: η (structured-vs-cell share)**
+- "How much residual variance is systematic vs cell-specific?"
+- Higher η ⇒ stronger clustering, less diversification, fatter tails
+- Lower η ⇒ more cell-specific noise, more diversification
+- Typical starting point: η = 0.7 (moderately systemic)
+
+**Lever 4: ρ (asset correlation at obligor level)**
+- "How strongly do obligors respond to systematic conditions vs idiosyncratic noise?"
+- Higher ρ ⇒ stronger default clustering, fatter tails
+- Lower ρ ⇒ more idiosyncratic behavior, thinner tails
 - Typical range: ρ ∈ [0.15, 0.25]
 
-**Lever 3: β_i (who is exposed to which cells)**
+**Lever 5: β_i (who is exposed to which cells)**
 - "Which obligors are linked to which sector×region conditions?"
 - From portfolio data (sector/region assignments, revenue splits)
 
@@ -460,7 +518,7 @@ There are three distinct "correlation levers" and they do different jobs:
 
 That keeps the model auditable:
 - Climate scenario assumptions are fully visible in X, σ_k, and W
-- Correlation assumptions are fully visible in Corr_S, Corr_R, σ_ξ², and ρ
+- Correlation assumptions are fully visible in Corr_S, Corr_R, ω, η, and ρ
 
 ---
 
@@ -516,10 +574,25 @@ Think of knobs in four groups.
 - **Effect**: Overall strength of sector/region components in residual systematic risk
 - **Start**: D_S = D_R = I (unit volatility)
 
-**(C4) Cell-specific residual variance σ_ξ²**
-- **Knob**: σ_ξ² (scalar)
-- **Effect**: How much residual is "local noise" vs systematic co-movement
-- **Typical range**: σ_ξ ∈ [0.4, 0.6]
+**(C4) Sector-vs-region mix ω**
+- **Knob**: ω ∈ [0,1]
+- **Effect**: Controls whether residual co-movement is sector-driven or region-driven
+- **Interpretation**:
+  - ω = 1: Pure sector co-movement
+  - ω = 0: Pure regional co-movement
+  - ω = 0.5: Balanced
+- **Typical range**: ω ∈ [0.3, 0.7]
+- **Calibration**: Start with 0.5, adjust based on portfolio sector vs geographic concentration
+
+**(C5) Structured-vs-cell share η**
+- **Knob**: η ∈ [0,1]
+- **Effect**: Controls how much residual variance is structured vs cell-specific
+- **Interpretation**:
+  - η = 1: All variance is structured (maximum clustering)
+  - η = 0: All variance is cell-specific (maximum diversification)
+  - η = 0.7: Moderately systemic (70% structured, 30% cell-specific)
+- **Typical range**: η ∈ [0.5, 0.9]
+- **Calibration**: Start with 0.7, adjust to match portfolio tail thickness and diversification behavior
 
 ### D) Obligor-level "systematic strength" knob
 
@@ -565,24 +638,27 @@ We use a **sector-region cell matrix** F ∈ ℝ^(S×R):
 
 **Stochastic residual u ~ N(0, Σ_u)**: Random, captures non-climate systematic risk
 - Constructed from market-observable sector/region correlations
-- Σ_u = A Σ_S A^T + B Σ_R B^T + σ_ξ² I
+- Σ_u = η · [ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)] + (1-η) · I
 - Grounded in equity market data, not climate-credit speculation
+- Two intuitive knobs: ω (sector vs region) and η (structured vs cell-specific)
 
 This separation makes uncertainty quantification clean: scenario risk (deterministic X) vs. conditional risk (random u).
 
-### Choice 3: Market-calibrated Σ_u (not climate-credit correlations)
+### Choice 3: Market-calibrated Σ_u with intuitive mixing parameters
 
 **Key innovation**: We **cannot estimate climate-credit correlations** from historical data.
 
 Instead:
 - Estimate Corr_S and Corr_R from **observable equity/credit market data** (MSCI indices)
-- Construct Σ_u from sector and region components
-- Only 3 knobs: Corr_S, Corr_R, σ_ξ² (instead of 5,460 covariance parameters)
+- Mix sector and region components with ω (sector-vs-region balance)
+- Mix structured vs cell-specific with η (clustering strength)
+- Only 4 key knobs: Corr_S, Corr_R, ω, η (instead of 5,460 covariance parameters)
 
 **Benefits**:
 - **Empirically grounded**: Uses 20+ years of equity market data
-- **Stable**: Well-conditioned, no Cholesky issues
-- **Interpretable**: Sector shocks and region shocks have clear meaning
+- **Intuitive knobs**: ω and η have clear economic interpretations
+- **Separable**: Can tune sector/region balance independently from clustering strength
+- **Stable**: Well-conditioned by construction, positive definite
 - **Governance-friendly**: Easy to explain and validate
 
 ### Choice 4: Single ρ parameter (asset correlation)
@@ -632,10 +708,12 @@ This is appropriate for portfolio-level stress testing where obligor-specific cl
 - **Compute Corr_S** (15×15 sector correlation matrix)
 - **Download MSCI regional indices** (7 regions, 5-year rolling returns)
 - **Compute Corr_R** (7×7 region correlation matrix)
-- Apply shrinkage if needed for stability
-- Set D_S = D_R = I (unit volatility, adjust if needed)
-- Choose σ_ξ² (start with 0.5²)
-- Construct Σ_u = A Σ_S A^T + B Σ_R B^T + σ_ξ² I
+- Apply shrinkage if needed for stability (e.g., Ledoit-Wolf)
+- Set D_S = D_R = I (unit volatility)
+- **Choose ω** (sector-vs-region mix, start with 0.5)
+- **Choose η** (structured-vs-cell share, start with 0.7)
+- Construct membership matrices A (M×S) and B (M×R)
+- Construct Σ_u = η · [ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)] + (1-η) · I
 
 ### Step 5: Choose ρ
 - Pick a single global ρ (start with 0.20)
@@ -644,7 +722,7 @@ This is appropriate for portfolio-level stress testing where obligor-specific cl
 ### Step 6: Run Monte Carlo and report
 - Baseline and scenario loss distributions
 - Contributions by sector and region
-- Sensitivities to ρ, σ_ξ, and λ_k
+- Sensitivities to ρ, ω, η, and λ_k
 
 ---
 
@@ -706,7 +784,8 @@ We take climate scenarios as deterministic narratives expressed through a small 
 | Corr_R | Region correlation matrix (R×R), estimated from MSCI regional indices |
 | A | Membership matrix (M×S), maps cells to sectors |
 | B | Membership matrix (M×R), maps cells to regions |
-| σ_ξ² | Cell-specific residual variance |
+| ω | Sector-vs-region mix parameter ∈ [0,1] (ω=1: all sector, ω=0: all region) |
+| η | Structured-vs-cell share parameter ∈ [0,1] (η=1: all structured, η=0: all cell-specific) |
 | ρ | Asset correlation (fraction of variance that is systematic) |
 | Z_i | Latent creditworthiness index for obligor i |
 | S_i | Systematic score for obligor i: β_i^T f |

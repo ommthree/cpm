@@ -331,33 +331,56 @@ Calibrate the climate-to-credit transmission parameters (S, R, λ) and residual 
 - [ ] Construct B ∈ ℝ^(M×R):
   - B_{j,r} = 1 if cell j belongs to region r, else 0
 
-**Step 4**: Choose cell-specific residual variance σ_ξ²
-- [ ] Start with σ_ξ² = 0.25 (σ_ξ = 0.5)
-- [ ] Rationale: Balance between systematic (A Σ_S A^T + B Σ_R B^T) and idiosyncratic (σ_ξ² I) components
-- [ ] Perform sensitivity analysis: vary σ_ξ ∈ [0.3, 0.7]
+**Step 4**: Choose sector-vs-region mix ω
+- [ ] Define ω ∈ [0,1]: controls whether residual co-movement is sector-driven or region-driven
+  - ω = 1: Pure sector co-movement (e.g., global energy sector cycle)
+  - ω = 0: Pure regional co-movement (e.g., regional macro conditions)
+  - ω = 0.5: Balanced (typical starting point)
+- [ ] **Start with ω = 0.5** (equal weight to sector and region)
+- [ ] Rationale: Most portfolios have both sector-specific and region-specific concentrations
+- [ ] Consider portfolio composition:
+  - If concentrated in few sectors: higher ω (e.g., 0.6-0.7)
+  - If geographically concentrated: lower ω (e.g., 0.3-0.4)
+- [ ] Perform sensitivity analysis: ω ∈ {0.3, 0.5, 0.7}
 
-**Step 5**: Construct full residual covariance
-- [ ] Compute Σ_u = A Σ_S A^T + B Σ_R B^T + σ_ξ² I_M
+**Step 5**: Choose structured-vs-cell share η
+- [ ] Define η ∈ [0,1]: controls how much residual variance is structured vs cell-specific
+  - η = 1: All variance is structured (maximum clustering, minimum diversification)
+  - η = 0: All variance is cell-specific (maximum diversification, no clustering)
+  - η = 0.7: Moderately systemic (typical starting point)
+- [ ] **Start with η = 0.7** (70% structured, 30% cell-specific)
+- [ ] Rationale: Credit markets exhibit moderate clustering (not perfectly diversifiable, not perfectly clustered)
+- [ ] Economic interpretation: η is like "intra-cell correlation" - higher η means less diversification benefit
+- [ ] Perform sensitivity analysis: η ∈ {0.5, 0.7, 0.9}
+  - Check impact on VaR, ES (tail risk increases with η)
+  - Check diversification benefit (decreases with η)
+
+**Step 6**: Construct full residual covariance
+- [ ] Compute structured component:
+  - Σ_structured = ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)
+- [ ] Compute full covariance:
+  - Σ_u = η · Σ_structured + (1-η) · I_M
 - [ ] Verify Σ_u is positive definite (should be by construction)
 - [ ] Compute induced correlations:
-  - Within-sector correlation: Corr(u_{s,r}, u_{s,r'})
-  - Within-region correlation: Corr(u_{s,r}, u_{s',r})
-  - Check these are reasonable (e.g., within-sector ≈ 0.3-0.5)
+  - Within-sector correlation: η · ω · (component from Corr_S)
+  - Within-region correlation: η · (1-ω) · (component from Corr_R)
+  - Check these are reasonable given ω and η choices
+- [ ] Check total variance: Tr(Σ_u)/M should be close to 1 (unit variance cells)
 
-**Step 6**: Validate correlation structure
+**Step 7**: Validate correlation structure
 - [ ] Compare induced correlations to empirical targets:
-  - Within-sector: Should reflect Σ_S structure
-  - Within-region: Should reflect Σ_R structure
-- [ ] Check total variance: Tr(Σ_u)/M ≈ 0.6-0.8
+  - Within-sector correlations should reflect Corr_S structure scaled by η · ω
+  - Within-region correlations should reflect Corr_R structure scaled by η · (1-ω)
 - [ ] Perform eigenvalue analysis: All eigenvalues > 0, no excessive concentration
-- [ ] Document any shrinkage or adjustments made
+- [ ] Document chosen ω and η with rationale
+- [ ] Document sensitivity analysis results
 
 **Data sources:**
 - MSCI indices (preferred): https://www.msci.com/end-of-day-data-search
 - Alternative: S&P sector indices, FTSE sector indices
 - Alternative: Credit sector sub-indices (iTraxx, CDX) if equity data unavailable
 
-#### 3.5 Asset Correlation Parameter ρ
+#### 3.8 Asset Correlation Parameter ρ
 - [ ] Choose global asset correlation ρ ∈ (0,1):
   - **Start with ρ = 0.20** (20% of variance is systematic)
   - Typical range in credit models: ρ ∈ [0.15, 0.25]
@@ -379,27 +402,32 @@ Calibrate the climate-to-credit transmission parameters (S, R, λ) and residual 
   - Sector correlation matrix Corr_S (15×15)
   - Region correlation matrix Corr_R (7×7)
   - Membership matrices A (M×S) and B (M×R)
-  - Cell-specific residual variance σ_ξ²
+  - Sector-vs-region mix ω (chosen value and rationale)
+  - Structured-vs-cell share η (chosen value and rationale)
   - Full residual covariance matrix Σ_u (M×M)
 - [ ] Asset correlation parameter ρ with sensitivity analysis
 ✅ Calibration CSV templates:
   - `sector_scores.csv` (15 sectors × 8 drivers)
   - `region_scores.csv` (7 regions × 8 drivers)
   - `lambda_parameters.csv` (8 scale parameters)
-- [ ] `residual_covariance.csv` (Corr_S, Corr_R, D_S, D_R, σ_ξ²)
+- [ ] `residual_covariance.csv` (Corr_S, Corr_R, D_S, D_R, ω, η)
 - [ ] `asset_correlation.csv` (ρ parameter with sensitivity ranges)
 - [ ] Anchor target specification document
 - [ ] Validation report (factor magnitudes, portfolio losses, sector decompositions)
-- [ ] Sensitivity analysis report (impact of λ, σ_ξ, ρ uncertainty)
-- [ ] Correlation validation report (within-sector, within-region co-movement)
+- [ ] Sensitivity analysis report (impact of λ, ω, η, ρ uncertainty)
+- [ ] Correlation validation report (within-sector, within-region co-movement with ω and η)
 
 ### Success Criteria
 - All S and R scores have documented economic/physical rationale
 - λ calibration meets anchor targets (max cell ~2σ, portfolio EL 2x-5x baseline)
 - Corr_S and Corr_R successfully estimated from MSCI data (or equivalent)
-- Induced correlations are reasonable (within-sector ≈ 0.3-0.5, within-region ≈ 0.2-0.4)
+- ω and η chosen with clear rationale based on portfolio characteristics
+- Induced correlations are reasonable given ω and η choices
 - Σ_u is positive definite with no numerical issues
-- ρ sensitivity analysis shows impact on tail risk (VaR, ES)
+- Sensitivity analysis shows:
+  - ω impact on sector vs region concentration
+  - η impact on tail risk (VaR, ES) and diversification benefit
+  - ρ impact on default clustering
 - Factor magnitudes make intuitive sense across scenarios
 
 ---
@@ -455,7 +483,9 @@ Build the core C++ simulation engine with REST API, computing both risk metrics 
   - W matrix (M × K): sensitivity matrix (or S, R, λ for hybrid structure)
   - Σ_u (M × M): residual covariance matrix
   - ρ: asset correlation parameter
-  - Corr_S, Corr_R, D_S, D_R, σ_ξ² (for Σ_u construction)
+  - Corr_S, Corr_R, D_S, D_R (for Σ_u construction)
+  - ω: sector-vs-region mix parameter
+  - η: structured-vs-cell share parameter
   - Membership matrices A (M × S) and B (M × R)
 - [ ] Define `FactorRealization` class:
   - Factor vector f (M × 1)
