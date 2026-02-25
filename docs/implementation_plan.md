@@ -1,4 +1,6 @@
-# Credit Portfolio Model - Implementation Plan
+# Midas - Implementation Plan
+
+**Product Name**: Midas (Model for Integrated Default Analysis with Scenarios)
 
 ## Overview
 

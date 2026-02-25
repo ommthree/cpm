@@ -1,6 +1,8 @@
-# Credit Portfolio Model With Climate Overlay
+# Midas: Credit Portfolio Model With Climate Overlay
 
-A factor-based framework with deterministic climate/scenario drivers and systematic credit factors with market-calibrated correlation structure.
+**Midas** is a factor-based framework with deterministic climate/scenario drivers and systematic credit factors with market-calibrated correlation structure.
+
+**About Midas**: The name stands for **M**odel for **I**ntegrated **D**efault **A**nalysis with **S**cenarios. Midas transforms climate scenario data into actionable credit risk insights through a transparent, governance-friendly factor model that preserves familiar portfolio modeling behavior while incorporating climate drivers.
 
 **Related Documentation**:
 - **Implementation Plan**: `/docs/implementation_plan.md`
@@ -773,7 +775,7 @@ Repeat (3)–(6) to obtain the loss distribution under the scenario.
 
 ## 13. One-paragraph "model story" (for stakeholders)
 
-We take climate scenarios as deterministic narratives expressed through a small set of global driver variables X. These drivers shift the mean systematic credit conditions for each sector–region cell via a transparent mapping m(X). Around that scenario-implied mean, we add a stochastic residual systematic credit environment u whose correlations across sectors and regions are calibrated using observable market co-movement (sector and macro-region indices). Obligors load on the sector–region surface via exposure weights β_i, and a single parameter ρ controls how strongly obligors co-move with systematic conditions versus idiosyncratic noise. This produces coherent loss distributions under scenarios without claiming to estimate causal climate–default relationships from limited historical data.
+Midas takes climate scenarios as deterministic narratives expressed through a small set of global driver variables X. These drivers shift the mean systematic credit conditions for each sector–region cell via a transparent mapping m(X). Around that scenario-implied mean, we add a stochastic residual systematic credit environment u whose correlations across sectors and regions are calibrated using observable market co-movement (sector and macro-region indices). Obligors load on the sector–region surface via exposure weights β_i, and a single parameter ρ controls how strongly obligors co-move with systematic conditions versus idiosyncratic noise. This produces coherent loss distributions under scenarios without claiming to estimate causal climate–default relationships from limited historical data.
 
 ---
 

@@ -1,10 +1,10 @@
-# Credit Portfolio Model (CPM)
+# Midas: Model for Integrated Default Analysis with Scenarios
 
 A climate-aware credit portfolio risk model with C++ engine and React dashboard for scenario analysis and risk-return optimization.
 
 ## Overview
 
-This model implements a factor-based credit portfolio framework with deterministic climate scenario overlays. It computes portfolio loss distributions, risk metrics (VaR, CVaR), return analytics (expected return, Sharpe ratio), and efficient frontier visualization under multiple climate scenarios (NGFS pathways).
+**Midas** implements a factor-based credit portfolio framework with deterministic climate scenario overlays. It computes portfolio loss distributions, risk metrics (VaR, CVaR), return analytics (expected return, Sharpe ratio), and efficient frontier visualization under multiple climate scenarios (NGFS pathways).
 
 **Key Features:**
 - Climate scenario integration (transition & physical risk)
@@ -24,7 +24,7 @@ This model implements a factor-based credit portfolio framework with determinist
 ## Project Structure
 
 ```
-cpm/
+midas/
 ├── README.md                    # This file
 ├── docs/                        # Documentation
 │   ├── credit_portfolio_model_climate_overlay.md  # Model methodology
@@ -94,7 +94,7 @@ cpm/
 ### Build (Coming Soon)
 ```bash
 # Clone with submodules
-git clone --recursive https://github.com/ommthree/cpm.git
+git clone --recursive https://github.com/ommthree/midas.git
 
 # Build C++ engine
 cd engine && mkdir build && cd build
