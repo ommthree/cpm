@@ -1,0 +1,539 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tocloft}
+\usepackage{fancyhdr}
+
+% Headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\lhead{\leftmark}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Title formatting
+\title{\textbf{Credit Portfolio Model With Climate Overlay}\\
+\large A factor-based framework with deterministic climate/scenario drivers\\and systematic credit factors with market-calibrated correlation structure}
+\author{}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Purpose and scope}
+
+\subsection{What we are trying to achieve}
+
+We want a credit portfolio model that produces a distribution of defaults and losses under a chosen deterministic climate scenario, while preserving familiar factor-model behaviour (correlated outcomes, portfolio tails) using a structured, calibratable correlation layer.
+
+The model should:
+
+\begin{enumerate}
+    \item Behave like a standard credit factor model (familiar to risk practitioners and governance).
+    \item Translate climate scenario variables into systematic credit stress in a transparent, auditable way.
+    \item Support scenario analysis and stress testing rather than claim to ``predict'' climate-driven defaults from first principles.
+    \item Be implementable even when we lack clean historical observables to statistically estimate climate-credit parameters.
+\end{enumerate}
+
+\subsection{Key simplification we adopt}
+
+We keep one main factor object that drives correlated credit outcomes:
+\begin{itemize}
+    \item \textbf{F}: a sector--region factor matrix, representing systematic ``credit conditions'' for each sector and region cell.
+\end{itemize}
+
+Climate enters through:
+\begin{itemize}
+    \item \textbf{X}: a deterministic vector of climate/scenario variables (e.g., carbon price path, energy prices, hazard intensities), which drives $F$ via a mapping $F = m(X) + u$.
+\end{itemize}
+
+So the model is:
+\begin{itemize}
+    \item Credit outcomes depend on $F$
+    \item $F = m(X) + u$ where $m(X)$ is deterministic scenario mean, $u$ is stochastic residual
+    \item Idiosyncratic noise provides name-level randomness.
+\end{itemize}
+
+\section{Conceptual overview}
+
+\subsection{Three layers of the system}
+
+\begin{enumerate}
+    \item \textbf{Scenario layer (deterministic)}: A climate scenario gives a set of driver values $X$ (e.g., carbon price change, energy price shock, physical hazard indices). These are \textbf{not random} in the model.
+
+    \item \textbf{Systematic credit layer (stochastic)}: The scenario shifts the mean systematic credit conditions for each sector $\times$ region cell. Around that mean, there is a stochastic residual credit environment that creates correlation and tail risk.
+
+    \item \textbf{Obligor layer (stochastic)}: Each obligor loads on the sector $\times$ region systematic credit conditions via weights $\beta_i$ and has an idiosyncratic shock. A single ``asset-correlation'' knob $\rho$ controls how strongly obligors co-move with systematic conditions overall.
+\end{enumerate}
+
+\subsection{Why a sector-region cell structure?}
+
+The cell-level factor matrix $F_{s,r}$ provides:
+\begin{itemize}
+    \item \textbf{Natural interpretation}: $F_{\text{coal,europe}}$ directly represents ``coal sector in Europe''
+    \item \textbf{Flexible exposures}: Obligors can load on multiple cells (diversified portfolios)
+    \item \textbf{Climate overlay}: Deterministic scenario $X$ drives systematic mean $m_{s,r}(X)$
+    \item \textbf{Residual correlation}: Stochastic $u$ captures non-climate systematic uncertainty via market-calibrated covariance $\Sigma_u$
+\end{itemize}
+
+\section{Underlying theory: credit portfolio factor models}
+
+\subsection{The classic structure}
+
+Most portfolio credit models start by constructing a latent creditworthiness variable for each obligor $i$:
+\begin{equation}
+Z_i = \text{systematic part} + \text{idiosyncratic part}
+\end{equation}
+
+The systematic part is shared across obligors (causing correlated outcomes). The idiosyncratic part is independent.
+
+A common, governance-friendly form is:
+\begin{equation}
+Z_i = \sqrt{\rho} \cdot (\text{systematic score}) + \sqrt{1-\rho} \cdot \varepsilon_i
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $\rho \in (0,1)$: fraction of variance that is systematic (``asset correlation'')
+    \item $\varepsilon_i$: idiosyncratic noise (standard normal)
+\end{itemize}
+
+A default event is triggered by a threshold:
+\begin{equation}
+\text{Default if } Z_i < \tau_i
+\end{equation}
+
+The threshold $\tau_i$ is set to reproduce the obligor's unconditional probability of default (PD), typically via:
+\begin{equation}
+\tau_i = \Phi^{-1}(\text{PD}_i)
+\end{equation}
+
+where $\Phi$ is the standard normal CDF.
+
+\subsection{Why this works}
+
+\begin{itemize}
+    \item The model reproduces marginal PDs by construction.
+    \item It generates default correlation through shared systematic component.
+    \item It can be simulated efficiently (Monte Carlo) and decomposed by risk drivers.
+    \item The single parameter $\rho$ controls tail thickness and diversification benefits.
+\end{itemize}
+
+\section{Our model specification}
+
+\subsection{Index sets and dimensions}
+
+\begin{itemize}
+    \item \textbf{Sectors}: $s = 1,\ldots,S$ (e.g., $S=15$)
+    \item \textbf{Regions}: $r = 1,\ldots,R$ (e.g., $R=7$)
+    \item \textbf{Obligors}: $i = 1,\ldots,N$
+    \item \textbf{Climate drivers}: $k = 1,\ldots,K$ ($K=8$ in our implementation)
+\end{itemize}
+
+\textbf{Number of sector--region cells}:
+\begin{equation}
+M := S \times R \quad \text{(e.g., } M = 105 \text{ for 15 sectors } \times \text{ 7 regions)}
+\end{equation}
+
+\textbf{Indexing convention}: Sector-major (regions vary fastest within sector)
+\begin{equation}
+j = \text{idx}(s,r) := (s-1)R + r
+\end{equation}
+
+So $j=1$ is $(s=1, r=1)$, $j=2$ is $(s=1, r=2)$, \ldots, $j=R$ is $(s=1, r=R)$, $j=R+1$ is $(s=2, r=1)$, etc.
+
+\subsection{Factor surface definition}
+
+Define the systematic factor matrix:
+\begin{equation}
+F \in \mathbb{R}^{S \times R}
+\end{equation}
+
+Where $F_{s,r}$ represents the systematic credit condition for sector $s$ in region $r$.
+
+\textbf{Vector form}:
+\begin{equation}
+\mathbf{f} := \text{vec}(F) \in \mathbb{R}^M
+\end{equation}
+
+\textbf{Interpretation}:
+\begin{itemize}
+    \item $F_{\text{coal,europe}}$ represents systematic credit stress for coal companies in Europe
+    \item $F_{\text{agriculture,asia}}$ represents systematic credit stress for agriculture in Asia
+    \item These are \textbf{latent random variables} conditional on climate scenario
+\end{itemize}
+
+\subsection{Factor decomposition: Scenario mean + residual}
+
+Each cell factor is decomposed as:
+\begin{equation}
+\mathbf{f} = m(X) + \mathbf{u}
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $m(X) \in \mathbb{R}^M$: Deterministic scenario-driven mean (climate overlay)
+    \item $\mathbf{u} \in \mathbb{R}^M$: Stochastic residual $\sim \mathcal{N}(0, \Sigma_u)$ (non-climate systematic uncertainty)
+\end{itemize}
+
+\textbf{Key insight}: Climate fixes the mean; $\Sigma_u$ controls correlated randomness around that mean.
+
+\subsection{Obligor exposure weights (must sum to 1)}
+
+Each obligor $i$ has exposure weights:
+\begin{equation}
+\beta_i \in \mathbb{R}^M
+\end{equation}
+
+With the constraint:
+\begin{equation}
+\beta_{i,j} \geq 0 \text{ for all } j, \quad \sum_j \beta_{i,j} = 1
+\end{equation}
+
+So $\beta_i$ is a \textbf{convex combination} across sector--region cells.
+
+\textbf{Single-cell assignment} (special case):
+\begin{itemize}
+    \item If obligor $i$ belongs purely to cell $(s(i), r(i))$, then $\beta_i$ has a 1 in position $\text{idx}(s(i),r(i))$ and 0 elsewhere.
+\end{itemize}
+
+\textbf{Multi-cell assignment} (diversified exposure):
+\begin{itemize}
+    \item If obligor $i$ has 60\% revenue from coal in Europe, 40\% from oil in North America:
+    \begin{itemize}
+        \item $\beta_{\text{idx(coal,europe)}} = 0.6$, $\beta_{\text{idx(oil,NA)}} = 0.4$, all others $= 0$
+    \end{itemize}
+\end{itemize}
+
+\subsection{Obligor latent variable with asset correlation $\rho$}
+
+We define the obligor's systematic score:
+\begin{equation}
+S_i := \beta_i^T \cdot \mathbf{f}
+\end{equation}
+
+Since different $\beta_i$ imply different systematic variance, we \textbf{standardize}:
+\begin{equation}
+\text{Var}(S_i) = \beta_i^T \Sigma_u \beta_i
+\end{equation}
+
+\begin{equation}
+\tilde{S}_i := \frac{S_i}{\sqrt{\beta_i^T \Sigma_u \beta_i}}
+\end{equation}
+
+Now $\tilde{S}_i$ has unit variance.
+
+Then we introduce a single global systematic share $\rho \in (0,1)$:
+\begin{equation}
+Z_i = \sqrt{\rho} \cdot \tilde{S}_i + \sqrt{1-\rho} \cdot \varepsilon_i, \quad \varepsilon_i \sim \mathcal{N}(0,1)
+\end{equation}
+
+\textbf{Interpretation of $\rho$}:
+\begin{itemize}
+    \item $\rho$ is the fraction of variance in $Z_i$ that is systematic for every obligor.
+    \item Higher $\rho$ $\Rightarrow$ stronger default clustering and fatter portfolio tails.
+    \item Typical range: $\rho \in [0.15, 0.25]$ calibrated to match portfolio tail behavior.
+\end{itemize}
+
+\subsection{Default and loss}
+
+Default threshold matches baseline PD:
+\begin{equation}
+\text{Default}_i = \mathbb{1}\{Z_i < \Phi^{-1}(\text{PD}_i)\}
+\end{equation}
+
+Loss:
+\begin{equation}
+L_i = \text{Default}_i \cdot \text{EAD}_i \cdot \text{LGD}_i
+\end{equation}
+
+\begin{equation}
+L = \sum_i L_i
+\end{equation}
+
+\section{Climate overlay: deterministic scenario drivers $X$}
+
+\subsection{Scenario driver vector $X$}
+
+$X$ is a vector of scenario variables:
+\begin{equation}
+X \in \mathbb{R}^K \quad (K = 8 \text{ in our implementation})
+\end{equation}
+
+It is \textbf{deterministic} for a chosen scenario and horizon. For NGFS ``Net Zero 2050'' year 2050, $X$ is fixed.
+
+\textbf{Deterministic scenario assumption}:
+\begin{equation}
+X = \mu^{(\text{scenario})}
+\end{equation}
+
+No randomness is introduced at the climate-driver level.
+
+\subsection{Climate feature transformation $\phi(X)$}
+
+The raw scenario variables are transformed into standardized features:
+\begin{equation}
+\phi(X) \in \mathbb{R}^K
+\end{equation}
+
+\textbf{Standardization approach}:
+\begin{equation}
+\phi_k(X) = \frac{X_k - \mu_k^{(\text{baseline})}}{\sigma_k^{(\text{baseline})}}
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $\mu_k^{(\text{baseline})}$: Mean of driver $k$ under Current Policies scenario
+    \item $\sigma_k^{(\text{baseline})}$: Std dev of driver $k$ across scenarios and time horizons
+\end{itemize}
+
+This ensures $\phi(X)$ represents ``standard deviations away from business-as-usual''.
+
+\subsection{Cell-level mean systematic factor}
+
+The deterministic scenario-driven mean for each cell is:
+\begin{equation}
+m(X) = \alpha + W \cdot \phi(X)
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $\alpha \in \mathbb{R}^M$: Baseline mean (typically zero vector after centering)
+    \item $W \in \mathbb{R}^{M \times K}$: Sensitivity matrix (``climate-to-credit weights'')
+    \item $W_{j,k}$: How sensitive cell $j$ is to standardized driver $k$
+\end{itemize}
+
+\subsection{Hybrid parameterization of $W$ (governance-friendly)}
+
+Instead of calibrating all $M \times K = 840$ weights independently, we use a structured approach:
+
+\begin{equation}
+W_{j,k} = \lambda_k \cdot S_{s(j),k} \cdot R_{r(j),k}
+\end{equation}
+
+Where:
+\begin{itemize}
+    \item $\lambda_k \in \mathbb{R}$: Global magnitude parameter for driver $k$ (8 parameters)
+    \item $S_{s,k} \in [0,1]$: Sector $s$ sensitivity to driver $k$ (15 $\times$ 8 = 120 parameters)
+    \item $R_{r,k} \in [0,1]$: Region $r$ sensitivity to driver $k$ (7 $\times$ 8 = 56 parameters)
+\end{itemize}
+
+Total parameters: $8 + 120 + 56 = 184$ (vs 840 independent weights)
+
+This factorization allows us to say:
+\begin{itemize}
+    \item ``Coal sector is maximally exposed to carbon price'' ($S_{\text{coal,carbon}} = 1.0$)
+    \item ``Europe has strong carbon policy exposure'' ($R_{\text{europe,carbon}} = 0.9$)
+    \item ``Carbon price transmission is moderately strong'' ($\lambda_{\text{carbon}} = 0.8$)
+\end{itemize}
+
+\section{Residual systematic uncertainty: $\Sigma_u$ and correlation structure}
+
+\subsection{The residual covariance matrix}
+
+The stochastic residual captures non-climate systematic uncertainty:
+\begin{equation}
+\mathbf{u} \sim \mathcal{N}(0, \Sigma_u)
+\end{equation}
+
+Where $\Sigma_u \in \mathbb{R}^{M \times M}$ is the residual covariance matrix that encodes:
+\begin{itemize}
+    \item Inter-sector co-movement
+    \item Inter-region co-movement
+    \item Portfolio tail thickness (together with $\rho$)
+    \item Diversification benefits
+\end{itemize}
+
+\textbf{Key design principle}: We \textbf{cannot estimate climate-credit correlations robustly} from historical data. Instead, we:
+\begin{itemize}
+    \item Keep climate deterministic (no correlation parameters needed)
+    \item Put stochastic correlations into $\Sigma_u$
+    \item \textbf{Calibrate $\Sigma_u$ from observable market data} (equity sector/region indices)
+\end{itemize}
+
+\subsection{Practical construction of $\Sigma_u$ from market data}
+
+Instead of a full free $M \times M$ matrix (5,460 parameters), build it from sector and region correlation blocks:
+
+\textbf{Step 1}: Estimate sector and region correlations from market data
+\begin{itemize}
+    \item $\text{Corr}_S$: Sector correlation matrix ($S \times S$) estimated from sector index returns (e.g., MSCI sector indices)
+    \item $\text{Corr}_R$: Region correlation matrix ($R \times R$) estimated from regional index returns (e.g., MSCI regional indices)
+\end{itemize}
+
+\textbf{Step 2}: Convert to covariances with chosen volatility scales
+\begin{equation}
+\Sigma_S = D_S \cdot \text{Corr}_S \cdot D_S
+\end{equation}
+\begin{equation}
+\Sigma_R = D_R \cdot \text{Corr}_R \cdot D_R
+\end{equation}
+
+Where $D_S$ and $D_R$ are diagonal matrices with sector/region volatilities (often start with $D_S = D_R = I$ for simplicity).
+
+\textbf{Step 3}: Embed into cell space using membership matrices
+
+Define \textbf{membership matrices}:
+\begin{itemize}
+    \item $A \in \mathbb{R}^{M \times S}$: Maps each cell to its sector
+    \begin{itemize}
+        \item $A_{j,s} = 1$ if cell $j$ belongs to sector $s$, else 0
+    \end{itemize}
+    \item $B \in \mathbb{R}^{M \times R}$: Maps each cell to its region
+    \begin{itemize}
+        \item $B_{j,r} = 1$ if cell $j$ belongs to region $r$, else 0
+    \end{itemize}
+\end{itemize}
+
+\textbf{Step 4}: Mix sector and region components with $\omega$
+
+Define \textbf{sector-vs-region mix parameter $\omega \in [0,1]$}:
+\begin{itemize}
+    \item $\omega$ controls whether residual co-movement is primarily sector-cycle or region-cycle driven
+    \item High $\omega$ ($\to 1$): Sector cycles dominate (e.g., energy sector co-moves globally)
+    \item Low $\omega$ ($\to 0$): Regional cycles dominate (e.g., geographic macro conditions matter more)
+    \item Typical starting point: $\omega = 0.5$ (equal weight)
+\end{itemize}
+
+Construct the structured covariance component:
+\begin{equation}
+\Sigma_{\text{structured}} = \omega \cdot (A \Sigma_S A^T) + (1-\omega) \cdot (B \Sigma_R B^T)
+\end{equation}
+
+\textbf{Step 5}: Mix structured vs cell-specific with $\eta$
+
+Define \textbf{structured-vs-cell share parameter $\eta \in [0,1]$}:
+\begin{itemize}
+    \item $\eta$ controls how much of residual variance is structured (via $\Sigma_{\text{structured}}$) vs cell-specific
+    \item High $\eta$ ($\to 1$): Strong systematic clustering, less diversification benefit
+    \item Low $\eta$ ($\to 0$): More cell-specific noise, greater diversification benefit
+    \item Typical starting point: $\eta = 0.7$ (moderately systemic)
+\end{itemize}
+
+Construct final residual covariance:
+\begin{equation}
+\Sigma_u = \eta \cdot \Sigma_{\text{structured}} + (1-\eta) \cdot I_M
+\end{equation}
+
+Expanding:
+\begin{equation}
+\boxed{\Sigma_u = \eta \cdot [\omega \cdot (A \Sigma_S A^T) + (1-\omega) \cdot (B \Sigma_R B^T)] + (1-\eta) \cdot I_M}
+\end{equation}
+
+\subsection{Calibration knobs}
+
+\begin{itemize}
+    \item $\text{Corr}_S$, $\text{Corr}_R$: Estimated from data (MSCI sector/regional indices, 5-year rolling correlations)
+    \item $D_S$, $D_R$: Volatility scales (typically set to $I$ for unit volatility)
+    \item $\omega$: Sector-vs-region mix ($0$ = all region, $1$ = all sector, $0.5$ = equal)
+    \item $\eta$: Structured-vs-cell share ($0$ = all cell-specific, $1$ = all structured)
+\end{itemize}
+
+\subsection{Induced correlation structure}
+
+The construction induces:
+
+\textbf{Within-sector correlation} (same sector, different regions):
+\begin{equation}
+\text{Corr}(u_{s,r}, u_{s,r'}) = \frac{\eta \cdot \omega \cdot \text{Sector variance component}}{\text{Total variance}}
+\end{equation}
+
+Controlled by $\eta$ (strength of structure) and $\omega$ (sector vs region weight).
+
+\textbf{Within-region correlation} (different sectors, same region):
+\begin{equation}
+\text{Corr}(u_{s,r}, u_{s',r}) = \frac{\eta \cdot (1-\omega) \cdot \text{Region variance component}}{\text{Total variance}}
+\end{equation}
+
+Controlled by $\eta$ and $(1-\omega)$.
+
+\textbf{Diagonal variance} (variance of each cell):
+\begin{equation}
+\text{Var}(u_{s,r}) = \eta \cdot [\omega \cdot (A \Sigma_S A^T)_{s,r} + (1-\omega) \cdot (B \Sigma_R B^T)_{s,r}] + (1-\eta)
+\end{equation}
+
+With $D_S = D_R = I$, the diagonal is approximately $\eta + (1-\eta) = 1$ (unit variance cells).
+
+\section{The calibration knobs: what you must choose/estimate}
+
+\subsection{8 key parameters}
+
+The model has 8 main calibration ``knobs'':
+
+\begin{enumerate}
+    \item \textbf{S matrix} ($15 \times 8 = 120$ parameters): Sector sensitivity scores $S_{s,k} \in [0,1]$
+    \item \textbf{R matrix} ($7 \times 8 = 56$ parameters): Region sensitivity scores $R_{r,k} \in [0,1]$
+    \item \textbf{$\lambda$ vector} (8 parameters): Global magnitude parameters $\lambda_k$
+    \item \textbf{$\text{Corr}_S$} ($15 \times 15$ matrix): Sector correlation (estimated from MSCI sector indices)
+    \item \textbf{$\text{Corr}_R$} ($7 \times 7$ matrix): Region correlation (estimated from MSCI regional indices)
+    \item \textbf{$\omega$} (1 parameter): Sector-vs-region mix $\in [0,1]$
+    \item \textbf{$\eta$} (1 parameter): Structured-vs-cell share $\in [0,1]$
+    \item \textbf{$\rho$} (1 parameter): Asset correlation $\in [0,1]$
+\end{enumerate}
+
+\section{Simulation algorithm (single horizon)}
+
+Given scenario $X = \mu^{(\text{scenario})}$:
+
+\begin{enumerate}
+    \item Compute features $\phi(X)$
+    \item Compute deterministic mean $m(X) = \alpha + W \cdot \phi(X)$
+    \item Draw residual systematic factor $\mathbf{u} \sim \mathcal{N}(0, \Sigma_u)$
+    \item Form $\mathbf{f} = m(X) + \mathbf{u}$
+    \item For each obligor $i$:
+    \begin{enumerate}
+        \item Compute systematic score $S_i = \beta_i^T \mathbf{f}$
+        \item Standardize $\tilde{S}_i = S_i / \sqrt{\beta_i^T \Sigma_u \beta_i}$
+        \item Draw $\varepsilon_i \sim \mathcal{N}(0,1)$
+        \item Compute $Z_i = \sqrt{\rho} \tilde{S}_i + \sqrt{1-\rho} \varepsilon_i$
+        \item Set $\text{Default}_i = \mathbb{1}\{Z_i < \Phi^{-1}(\text{PD}_i)\}$
+        \item Compute $L_i = \text{Default}_i \cdot \text{EAD}_i \cdot \text{LGD}_i$
+    \end{enumerate}
+    \item Aggregate $L = \sum_i L_i$
+\end{enumerate}
+
+Repeat steps (3)--(6) to obtain the loss distribution under the scenario.
+
+\section{Notation Reference}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Symbol} & \textbf{Description} \\
+\midrule
+$X$ & Deterministic climate/scenario variable vector \\
+$\phi(X)$ & Standardized climate features \\
+$F, \mathbf{f}$ & Sector--region factor matrix (and vectorized form) \\
+$m(X)$ & Scenario-driven mean systematic factor \\
+$\mathbf{u}$ & Stochastic residual systematic factor \\
+$\Sigma_u$ & Residual covariance matrix \\
+$W$ & Climate-to-credit sensitivity matrix ($M \times K$) \\
+$S$ & Sector sensitivity matrix ($15 \times 8$) \\
+$R$ & Region sensitivity matrix ($7 \times 8$) \\
+$\lambda$ & Global magnitude vector (8 scalars) \\
+$\text{Corr}_S$ & Sector correlation matrix ($15 \times 15$) \\
+$\text{Corr}_R$ & Region correlation matrix ($7 \times 7$) \\
+$\omega$ & Sector-vs-region mix parameter $\in [0,1]$ \\
+$\eta$ & Structured-vs-cell share parameter $\in [0,1]$ \\
+$\rho$ & Asset correlation parameter $\in [0,1]$ \\
+$\beta_i$ & Obligor $i$ exposure weights (convex combination over cells) \\
+$Z_i$ & Obligor $i$ latent variable \\
+$\text{PD}_i$ & Obligor $i$ probability of default \\
+$\text{EAD}_i$ & Obligor $i$ exposure at default \\
+$\text{LGD}_i$ & Obligor $i$ loss given default \\
+$L$ & Portfolio loss \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

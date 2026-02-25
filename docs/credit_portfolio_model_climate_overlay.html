@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>credit_portfolio_model_climate_overlay</title>
+  <style>
+
+html {
+color: #1a1a1a;
+background-color: #fdfdfd;
+}
+body {
+margin: 0 auto;
+max-width: 36em;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+padding-bottom: 50px;
+hyphens: auto;
+overflow-wrap: break-word;
+text-rendering: optimizeLegibility;
+font-kerning: normal;
+}
+@media (max-width: 600px) {
+body {
+font-size: 0.9em;
+padding: 12px;
+}
+h1 {
+font-size: 1.8em;
+}
+}
+@media print {
+html {
+background-color: white;
+}
+body {
+background-color: transparent;
+color: black;
+font-size: 12pt;
+}
+p, h2, h3 {
+orphans: 3;
+widows: 3;
+}
+h2, h3, h4 {
+page-break-after: avoid;
+}
+}
+p {
+margin: 1em 0;
+}
+a {
+color: #1a1a1a;
+}
+a:visited {
+color: #1a1a1a;
+}
+img {
+max-width: 100%;
+}
+svg {
+height: auto;
+max-width: 100%;
+}
+h1, h2, h3, h4, h5, h6 {
+margin-top: 1.4em;
+}
+h5, h6 {
+font-size: 1em;
+font-style: italic;
+}
+h6 {
+font-weight: normal;
+}
+ol, ul {
+padding-left: 1.7em;
+margin-top: 1em;
+}
+li > ol, li > ul {
+margin-top: 0;
+}
+blockquote {
+margin: 1em 0 1em 1.7em;
+padding-left: 1em;
+border-left: 2px solid #e6e6e6;
+color: #606060;
+}
+code {
+font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+font-size: 85%;
+margin: 0;
+hyphens: manual;
+}
+pre {
+margin: 1em 0;
+overflow: auto;
+}
+pre code {
+padding: 0;
+overflow: visible;
+overflow-wrap: normal;
+}
+.sourceCode {
+background-color: transparent;
+overflow: visible;
+}
+hr {
+border: none;
+border-top: 1px solid #1a1a1a;
+height: 1px;
+margin: 1em 0;
+}
+table {
+margin: 1em 0;
+border-collapse: collapse;
+width: 100%;
+overflow-x: auto;
+display: block;
+font-variant-numeric: lining-nums tabular-nums;
+}
+table caption {
+margin-bottom: 0.75em;
+}
+tbody {
+margin-top: 0.5em;
+border-top: 1px solid #1a1a1a;
+border-bottom: 1px solid #1a1a1a;
+}
+th {
+border-top: 1px solid #1a1a1a;
+padding: 0.25em 0.5em 0.25em 0.5em;
+}
+td {
+padding: 0.125em 0.5em 0.25em 0.5em;
+}
+header {
+margin-bottom: 4em;
+text-align: center;
+}
+#TOC li {
+list-style: none;
+}
+#TOC ul {
+padding-left: 1.3em;
+}
+#TOC > ul {
+padding-left: 0;
+}
+#TOC a:not(:hover) {
+text-decoration: none;
+}
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+</style>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#credit-portfolio-model-with-climate-overlay" id="toc-credit-portfolio-model-with-climate-overlay">Credit Portfolio
+Model With Climate Overlay</a>
+<ul>
+<li><a href="#purpose-and-scope" id="toc-purpose-and-scope">1. Purpose
+and scope</a>
+<ul>
+<li><a href="#what-we-are-trying-to-achieve" id="toc-what-we-are-trying-to-achieve">What we are trying to
+achieve</a></li>
+<li><a href="#key-simplification-we-adopt" id="toc-key-simplification-we-adopt">Key simplification we
+adopt</a></li>
+</ul></li>
+<li><a href="#conceptual-overview" id="toc-conceptual-overview">2.
+Conceptual overview</a>
+<ul>
+<li><a href="#three-layers-of-the-system" id="toc-three-layers-of-the-system">Three layers of the system</a></li>
+<li><a href="#why-a-sector-region-cell-structure" id="toc-why-a-sector-region-cell-structure">Why a sector-region cell
+structure?</a></li>
+</ul></li>
+<li><a href="#underlying-theory-credit-portfolio-factor-models-in-plain-terms" id="toc-underlying-theory-credit-portfolio-factor-models-in-plain-terms">3.
+Underlying theory: credit portfolio factor models (in plain terms)</a>
+<ul>
+<li><a href="#the-classic-structure" id="toc-the-classic-structure">The
+classic structure</a></li>
+<li><a href="#why-this-works" id="toc-why-this-works">Why this
+works</a></li>
+</ul></li>
+<li><a href="#our-model-specification" id="toc-our-model-specification">4. Our model specification</a>
+<ul>
+<li><a href="#index-sets-and-dimensions" id="toc-index-sets-and-dimensions">4.1 Index sets and
+dimensions</a></li>
+<li><a href="#factor-surface-definition" id="toc-factor-surface-definition">4.2 Factor surface
+definition</a></li>
+<li><a href="#factor-decomposition-scenario-mean-residual" id="toc-factor-decomposition-scenario-mean-residual">4.3 Factor
+decomposition: Scenario mean + residual</a></li>
+<li><a href="#obligor-exposure-weights-must-sum-to-1" id="toc-obligor-exposure-weights-must-sum-to-1">4.4 Obligor exposure
+weights (must sum to 1)</a></li>
+<li><a href="#obligor-latent-variable-with-asset-correlation-ρ" id="toc-obligor-latent-variable-with-asset-correlation-ρ">4.5 Obligor
+latent variable with asset correlation ρ</a></li>
+<li><a href="#default-and-loss" id="toc-default-and-loss">4.6 Default
+and loss</a></li>
+</ul></li>
+<li><a href="#climate-overlay-deterministic-scenario-drivers-x" id="toc-climate-overlay-deterministic-scenario-drivers-x">5. Climate
+overlay: deterministic scenario drivers X</a>
+<ul>
+<li><a href="#scenario-driver-vector-x" id="toc-scenario-driver-vector-x">5.1 Scenario driver vector X</a></li>
+<li><a href="#standardization-of-drivers-φx" id="toc-standardization-of-drivers-φx">5.2 Standardization of drivers
+φ(X)</a></li>
+<li><a href="#climate-to-credit-mapping-mx" id="toc-climate-to-credit-mapping-mx">5.3 Climate-to-credit mapping
+m(X)</a></li>
+<li><a href="#optional-hybrid-structured-parameterization-for-w" id="toc-optional-hybrid-structured-parameterization-for-w">5.4 Optional
+“hybrid” structured parameterization for W</a></li>
+</ul></li>
+<li><a href="#residual-systematic-uncertainty-σ_u-and-correlation-structure" id="toc-residual-systematic-uncertainty-σ_u-and-correlation-structure">6.
+Residual systematic uncertainty: Σ_u and correlation structure</a>
+<ul>
+<li><a href="#the-residual-covariance-matrix" id="toc-the-residual-covariance-matrix">6.1 The residual covariance
+matrix</a></li>
+<li><a href="#practical-construction-of-σ_u-from-market-data" id="toc-practical-construction-of-σ_u-from-market-data">6.2 Practical
+construction of Σ_u from market data</a></li>
+<li><a href="#what-these-components-do" id="toc-what-these-components-do">6.3 What these components do</a></li>
+<li><a href="#induced-correlation-structure" id="toc-induced-correlation-structure">6.4 Induced correlation
+structure</a></li>
+</ul></li>
+<li><a href="#the-correlation-levers-intuitive-summary" id="toc-the-correlation-levers-intuitive-summary">7. The correlation
+levers (intuitive summary)</a></li>
+<li><a href="#the-calibration-knobs-what-you-must-chooseestimate" id="toc-the-calibration-knobs-what-you-must-chooseestimate">8. The
+calibration “knobs”: what you must choose/estimate</a>
+<ul>
+<li><a href="#a-scenario-knobs-deterministic" id="toc-a-scenario-knobs-deterministic">A) Scenario knobs
+(deterministic)</a></li>
+<li><a href="#b-climatecredit-transmission-knobs-mean-mapping" id="toc-b-climatecredit-transmission-knobs-mean-mapping">B)
+Climate→credit transmission knobs (mean mapping)</a></li>
+<li><a href="#c-residual-credit-correlation-knobs" id="toc-c-residual-credit-correlation-knobs">C) Residual credit
+correlation knobs</a></li>
+<li><a href="#d-obligor-level-systematic-strength-knob" id="toc-d-obligor-level-systematic-strength-knob">D) Obligor-level
+“systematic strength” knob</a></li>
+<li><a href="#e-credit-inputs-portfolio-primitives" id="toc-e-credit-inputs-portfolio-primitives">E) Credit inputs
+(portfolio primitives)</a></li>
+<li><a href="#f-simulation-and-reporting-knobs" id="toc-f-simulation-and-reporting-knobs">F) Simulation and reporting
+knobs</a></li>
+</ul></li>
+<li><a href="#key-design-choices-we-made-and-why" id="toc-key-design-choices-we-made-and-why">9. Key design choices we
+made (and why)</a>
+<ul>
+<li><a href="#choice-1-cell-level-factors-f_sr" id="toc-choice-1-cell-level-factors-f_sr">Choice 1: Cell-level factors
+F_{s,r}</a></li>
+<li><a href="#choice-2-decomposition-into-climate-mean-residual" id="toc-choice-2-decomposition-into-climate-mean-residual">Choice 2:
+Decomposition into climate mean + residual</a></li>
+<li><a href="#choice-3-market-calibrated-σ_u-with-intuitive-mixing-parameters" id="toc-choice-3-market-calibrated-σ_u-with-intuitive-mixing-parameters">Choice
+3: Market-calibrated Σ_u with intuitive mixing parameters</a></li>
+<li><a href="#choice-4-single-ρ-parameter-asset-correlation" id="toc-choice-4-single-ρ-parameter-asset-correlation">Choice 4: Single
+ρ parameter (asset correlation)</a></li>
+<li><a href="#choice-5-climate-affects-credit-only-through-systematic-factors" id="toc-choice-5-climate-affects-credit-only-through-systematic-factors">Choice
+5: Climate affects credit only through systematic factors</a></li>
+</ul></li>
+<li><a href="#calibration-workflow-practical-start-building-plan" id="toc-calibration-workflow-practical-start-building-plan">10.
+Calibration workflow (practical “start building” plan)</a>
+<ul>
+<li><a href="#step-1-define-taxonomy" id="toc-step-1-define-taxonomy">Step 1: Define taxonomy</a></li>
+<li><a href="#step-2-choose-climate-driver-set-x-and-scaling-σ_k" id="toc-step-2-choose-climate-driver-set-x-and-scaling-σ_k">Step 2:
+Choose climate driver set X and scaling σ_k</a></li>
+<li><a href="#step-3-specify-climate-to-credit-mapping" id="toc-step-3-specify-climate-to-credit-mapping">Step 3: Specify
+climate-to-credit mapping</a></li>
+<li><a href="#step-4-build-residual-covariance-σ_u" id="toc-step-4-build-residual-covariance-σ_u">Step 4: Build residual
+covariance Σ_u</a></li>
+<li><a href="#step-5-choose-ρ" id="toc-step-5-choose-ρ">Step 5: Choose
+ρ</a></li>
+<li><a href="#step-6-run-monte-carlo-and-report" id="toc-step-6-run-monte-carlo-and-report">Step 6: Run Monte Carlo and
+report</a></li>
+</ul></li>
+<li><a href="#simulation-algorithm-single-horizon" id="toc-simulation-algorithm-single-horizon">11. Simulation algorithm
+(single horizon)</a></li>
+<li><a href="#what-this-model-can-and-cannot-claim" id="toc-what-this-model-can-and-cannot-claim">12. What this model can
+and cannot claim</a>
+<ul>
+<li><a href="#what-it-can-do-well" id="toc-what-it-can-do-well">What it
+can do well</a></li>
+<li><a href="#what-it-should-not-claim-without-further-development" id="toc-what-it-should-not-claim-without-further-development">What it
+should not claim (without further development)</a></li>
+</ul></li>
+<li><a href="#one-paragraph-model-story-for-stakeholders" id="toc-one-paragraph-model-story-for-stakeholders">13. One-paragraph
+“model story” (for stakeholders)</a></li>
+<li><a href="#notation-reference" id="toc-notation-reference">14.
+Notation Reference</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="credit-portfolio-model-with-climate-overlay">Credit Portfolio
+Model With Climate Overlay</h1>
+<p>A factor-based framework with deterministic climate/scenario drivers
+and systematic credit factors with market-calibrated correlation
+structure.</p>
+<p><strong>Related Documentation</strong>: - <strong>Implementation
+Plan</strong>: <code>/docs/implementation_plan.md</code> - <strong>Data
+Sources</strong>: <code>/docs/data_sources.md</code> (all external data
+- scenarios, correlations, calibration) - <strong>Calibration
+Parameters</strong>: <code>/data/calibration/README.md</code> -
+<strong>Quick Reference</strong>:
+<code>/docs/correlation_calibration_quick_reference.md</code></p>
+<hr />
+<h2 id="purpose-and-scope">1. Purpose and scope</h2>
+<h3 id="what-we-are-trying-to-achieve">What we are trying to
+achieve</h3>
+<p>We want a credit portfolio model that produces a distribution of
+defaults and losses under a chosen deterministic climate scenario, while
+preserving familiar factor-model behaviour (correlated outcomes,
+portfolio tails) using a structured, calibratable correlation layer.</p>
+<p>The model should:</p>
+<ol type="1">
+<li>Behave like a standard credit factor model (familiar to risk
+practitioners and governance).</li>
+<li>Translate climate scenario variables into systematic credit stress
+in a transparent, auditable way.</li>
+<li>Support scenario analysis and stress testing rather than claim to
+“predict” climate-driven defaults from first principles.</li>
+<li>Be implementable even when we lack clean historical observables to
+statistically estimate climate-credit parameters.</li>
+</ol>
+<h3 id="key-simplification-we-adopt">Key simplification we adopt</h3>
+<p>We keep one main factor object that drives correlated credit
+outcomes: - <strong>F</strong>: a sector–region factor matrix,
+representing systematic “credit conditions” for each sector and region
+cell.</p>
+<p>Climate enters through: - <strong>X</strong>: a deterministic vector
+of climate/scenario variables (e.g., carbon price path, energy prices,
+hazard intensities), which drives F via a mapping F = m(X) + u.</p>
+<p>So the model is: - Credit outcomes depend on F - F = m(X) + u where
+m(X) is deterministic scenario mean, u is stochastic residual -
+Idiosyncratic noise provides name-level randomness.</p>
+<hr />
+<h2 id="conceptual-overview">2. Conceptual overview</h2>
+<h3 id="three-layers-of-the-system">Three layers of the system</h3>
+<ol type="1">
+<li><p><strong>Scenario layer (deterministic)</strong>: A climate
+scenario gives a set of driver values X (e.g., carbon price change,
+energy price shock, physical hazard indices). These are <strong>not
+random</strong> in the model.</p></li>
+<li><p><strong>Systematic credit layer (stochastic)</strong>: The
+scenario shifts the mean systematic credit conditions for each sector ×
+region cell. Around that mean, there is a stochastic residual credit
+environment that creates correlation and tail risk.</p></li>
+<li><p><strong>Obligor layer (stochastic)</strong>: Each obligor loads
+on the sector × region systematic credit conditions via weights β_i and
+has an idiosyncratic shock. A single “asset-correlation” knob ρ controls
+how strongly obligors co-move with systematic conditions
+overall.</p></li>
+</ol>
+<h3 id="why-a-sector-region-cell-structure">Why a sector-region cell
+structure?</h3>
+<p>The cell-level factor matrix F_{s,r} provides: - <strong>Natural
+interpretation</strong>: F_{coal,europe} directly represents “coal
+sector in Europe” - <strong>Flexible exposures</strong>: Obligors can
+load on multiple cells (diversified portfolios) - <strong>Climate
+overlay</strong>: Deterministic scenario X drives systematic mean
+m_{s,r}(X) - <strong>Residual correlation</strong>: Stochastic u
+captures non-climate systematic uncertainty via market-calibrated
+covariance Σ_u</p>
+<hr />
+<h2 id="underlying-theory-credit-portfolio-factor-models-in-plain-terms">3.
+Underlying theory: credit portfolio factor models (in plain terms)</h2>
+<h3 id="the-classic-structure">The classic structure</h3>
+<p>Most portfolio credit models start by constructing a latent
+creditworthiness variable for each obligor i:</p>
+<pre><code>Z_i = systematic part + idiosyncratic part</code></pre>
+<p>The systematic part is shared across obligors (causing correlated
+outcomes). The idiosyncratic part is independent.</p>
+<p>A common, governance-friendly form is:</p>
+<pre><code>Z_i = √ρ · (systematic score) + √(1-ρ) · ε_i</code></pre>
+<ul>
+<li><strong>ρ ∈ (0,1)</strong>: fraction of variance that is systematic
+(“asset correlation”)</li>
+<li><strong>ε_i</strong>: idiosyncratic noise (standard normal)</li>
+</ul>
+<p>A default event is triggered by a threshold:</p>
+<pre><code>Default if Z_i &lt; τ_i</code></pre>
+<p>The threshold τ_i is set to reproduce the obligor’s unconditional
+probability of default (PD), typically via:</p>
+<pre><code>τ_i = Φ^(-1)(PD_i)</code></pre>
+<p>where Φ is the standard normal CDF.</p>
+<h3 id="why-this-works">Why this works</h3>
+<ul>
+<li>The model reproduces marginal PDs by construction.</li>
+<li>It generates default correlation through shared systematic
+component.</li>
+<li>It can be simulated efficiently (Monte Carlo) and decomposed by risk
+drivers.</li>
+<li>The single parameter ρ controls tail thickness and diversification
+benefits.</li>
+</ul>
+<hr />
+<h2 id="our-model-specification">4. Our model specification</h2>
+<h3 id="index-sets-and-dimensions">4.1 Index sets and dimensions</h3>
+<p><strong>Sectors</strong>: s = 1,…,S (e.g., S=15)
+<strong>Regions</strong>: r = 1,…,R (e.g., R=7)
+<strong>Obligors</strong>: i = 1,…,N <strong>Climate drivers</strong>: k
+= 1,…,K (K=8 in our implementation)</p>
+<p><strong>Number of sector–region cells</strong>:</p>
+<pre><code>M := S × R    (e.g., M = 105 for 15 sectors × 7 regions)</code></pre>
+<p><strong>Indexing convention</strong>: Sector-major (regions vary
+fastest within sector)</p>
+<pre><code>j = idx(s,r) := (s-1)R + r</code></pre>
+<p>So j=1 is (s=1, r=1), j=2 is (s=1, r=2), …, j=R is (s=1, r=R), j=R+1
+is (s=2, r=1), etc.</p>
+<h3 id="factor-surface-definition">4.2 Factor surface definition</h3>
+<p>Define the systematic factor matrix:</p>
+<pre><code>F ∈ ℝ^(S×R)</code></pre>
+<p>Where F_{s,r} represents the systematic credit condition for sector s
+in region r.</p>
+<p><strong>Vector form</strong>:</p>
+<pre><code>f := vec(F) ∈ ℝ^M</code></pre>
+<p><strong>Interpretation</strong>: - F_{coal,europe} represents
+systematic credit stress for coal companies in Europe -
+F_{agriculture,asia} represents systematic credit stress for agriculture
+in Asia - These are <strong>latent random variables</strong> conditional
+on climate scenario</p>
+<h3 id="factor-decomposition-scenario-mean-residual">4.3 Factor
+decomposition: Scenario mean + residual</h3>
+<p>Each cell factor is decomposed as:</p>
+<pre><code>f = m(X) + u</code></pre>
+<p>Where: - <strong>m(X) ∈ ℝ^M</strong>: Deterministic scenario-driven
+mean (climate overlay) - <strong>u ∈ ℝ^M</strong>: Stochastic residual ~
+N(0, Σ_u) (non-climate systematic uncertainty)</p>
+<p><strong>Key insight</strong>: Climate fixes the mean; Σ_u controls
+correlated randomness around that mean.</p>
+<h3 id="obligor-exposure-weights-must-sum-to-1">4.4 Obligor exposure
+weights (must sum to 1)</h3>
+<p>Each obligor i has exposure weights:</p>
+<pre><code>β_i ∈ ℝ^M</code></pre>
+<p>With the constraint:</p>
+<pre><code>β_{i,j} ≥ 0  for all j,    Σ_j β_{i,j} = 1</code></pre>
+<p>So β_i is a <strong>convex combination</strong> across sector–region
+cells.</p>
+<p><strong>Single-cell assignment</strong> (special case): - If obligor
+i belongs purely to cell (s(i), r(i)), then β_i has a 1 in position
+idx(s(i),r(i)) and 0 elsewhere.</p>
+<p><strong>Multi-cell assignment</strong> (diversified exposure): - If
+obligor i has 60% revenue from coal in Europe, 40% from oil in North
+America: - β_{idx(coal,europe)} = 0.6, β_{idx(oil,NA)} = 0.4, all others
+= 0</p>
+<p><strong>Data source</strong>: Financial reports, segment disclosures,
+asset locations</p>
+<h3 id="obligor-latent-variable-with-asset-correlation-ρ">4.5 Obligor
+latent variable with asset correlation ρ</h3>
+<p>We define the obligor’s systematic score:</p>
+<pre><code>S_i := β_i^T · f</code></pre>
+<p>Since different β_i imply different systematic variance, we
+<strong>standardize</strong>:</p>
+<pre><code>Var(S_i) = β_i^T Σ_u β_i
+
+S̃_i := S_i / √(β_i^T Σ_u β_i)</code></pre>
+<p>Now S̃_i has unit variance.</p>
+<p>Then we introduce a single global systematic share <strong>ρ ∈
+(0,1)</strong>:</p>
+<pre><code>Z_i = √ρ · S̃_i + √(1-ρ) · ε_i,    ε_i ~ N(0,1)</code></pre>
+<p><strong>Interpretation of ρ</strong>: - ρ is the fraction of variance
+in Z_i that is systematic for every obligor. - Higher ρ ⇒ stronger
+default clustering and fatter portfolio tails. - Typical range: ρ ∈
+[0.15, 0.25] calibrated to match portfolio tail behavior.</p>
+<h3 id="default-and-loss">4.6 Default and loss</h3>
+<p>Default threshold matches baseline PD:</p>
+<pre><code>Default_i = 1{Z_i &lt; Φ^(-1)(PD_i)}</code></pre>
+<p>Loss:</p>
+<pre><code>L_i = Default_i · EAD_i · LGD_i
+
+L = Σ_i L_i</code></pre>
+<hr />
+<h2 id="climate-overlay-deterministic-scenario-drivers-x">5. Climate
+overlay: deterministic scenario drivers X</h2>
+<h3 id="scenario-driver-vector-x">5.1 Scenario driver vector X</h3>
+<p>X is a vector of scenario variables:</p>
+<pre><code>X ∈ ℝ^K    (K = 8 in our implementation)</code></pre>
+<p>It is <strong>deterministic</strong> for a chosen scenario and
+horizon. For NGFS “Net Zero 2050” year 2050, X is fixed.</p>
+<p><strong>Deterministic scenario assumption</strong>:</p>
+<pre><code>X = μ^(scenario)</code></pre>
+<p>No randomness is introduced at the climate-driver level.</p>
+<p><strong>Transition drivers (5)</strong>: 1. CarbonPrice - Carbon
+tax/price (US$2010/t CO2) 2. CoalPrice - Coal price index (US$2010/GJ)
+3. OilPrice - Oil price index (US$2010/GJ) 4. GasPrice - Natural gas
+price (US$2010/GJ) 5. GDP - GDP growth/deviation (billion US$2010/yr,
+PPP)</p>
+<p><strong>Physical drivers (3)</strong>: 6. HeatIndex - Days with heat
+index &gt;35°C 7. FloodRisk - Maximum 1-day precipitation (mm) 8.
+DroughtRisk - Consecutive dry days</p>
+<p><strong>Crucially</strong>: X does not directly appear in the obligor
+equation. It determines the <strong>mean</strong> of systematic factors:
+m(X).</p>
+<h3 id="standardization-of-drivers-φx">5.2 Standardization of drivers
+φ(X)</h3>
+<p>We standardize drivers to unitless “sigma” terms:</p>
+<pre><code>φ_k(X) = ΔX_k / σ_k</code></pre>
+<p>Where: - <strong>ΔX_k</strong>: Scenario change for driver k relative
+to baseline (e.g., Current Policies) - <strong>σ_k</strong>: Scale
+parameter (“typical move” for driver k)</p>
+<p>In our implementation: - <strong>σ_k = cross-scenario standard
+deviation</strong> (computed from Net Zero, Delayed, Current Policies) -
+<strong>φ_k ranges from -2σ to +2σ</strong> across scenarios</p>
+<p><strong>Interpretation</strong>: φ_k = 1 means “a 1-sigma move in
+driver k relative to baseline”</p>
+<h3 id="climate-to-credit-mapping-mx">5.3 Climate-to-credit mapping
+m(X)</h3>
+<p>The deterministic climate mean is a linear function of standardized
+drivers:</p>
+<p><strong>Cellwise</strong>:</p>
+<pre><code>m_{s,r}(X) = α_{s,r} + Σ_k w_{s,r,k} · φ_k(X)</code></pre>
+<p><strong>Vector form</strong>:</p>
+<pre><code>m(X) = α + W · φ(X)</code></pre>
+<p>Where: - <strong>α := vec([α_{s,r}]) ∈ ℝ^M</strong>: Baseline
+intercept (typically 0 if F represents deviations) - <strong>W ∈
+ℝ^(M×K)</strong>: Sensitivity matrix (“how driver k affects cell j”)</p>
+<p><strong>Interpretation</strong>: W φ(X) is the scenario-implied shift
+in credit conditions across sector×region cells.</p>
+<h3 id="optional-hybrid-structured-parameterization-for-w">5.4 Optional
+“hybrid” structured parameterization for W</h3>
+<p>Rather than calibrate M×K = 840 weights independently, you can use
+structured parameterization:</p>
+<p><strong>Step 1</strong>: Define relative exposure scores -
+<strong>S_{s,k} ∈ [0,1]</strong>: How exposed sector s is to driver k -
+<strong>R_{r,k} ∈ [0,1]</strong>: How exposed region r is to driver
+k</p>
+<p><strong>Step 2</strong>: Combine via product</p>
+<pre><code>w_{(s,r),k} = λ_k · S_{s,k} · R_{r,k}</code></pre>
+<p>Where: - <strong>λ_k</strong>: Overall scale for driver k</p>
+<p><strong>Interpretation</strong>: - <strong>S and R</strong> encode
+relative vulnerabilities (which sectors/regions are most exposed) -
+<strong>λ_k</strong> controls overall magnitude (how strongly driver k
+translates to credit stress)</p>
+<p>This reduces calibration from 840 parameters to: - S matrix: 15
+sectors × 8 drivers = 120 scores - R matrix: 7 regions × 8 drivers = 56
+scores - λ vector: 8 scale parameters - <strong>Total: 184
+parameters</strong> (vs 840), with clear economic interpretation</p>
+<p><strong>Note</strong>: This is <strong>optional but
+governance-friendly</strong>. The fundamental object is W; the hybrid
+structure is a convenient parameterization.</p>
+<hr />
+<h2 id="residual-systematic-uncertainty-σ_u-and-correlation-structure">6.
+Residual systematic uncertainty: Σ_u and correlation structure</h2>
+<h3 id="the-residual-covariance-matrix">6.1 The residual covariance
+matrix</h3>
+<p>The stochastic residual captures non-climate systematic
+uncertainty:</p>
+<pre><code>u ~ N(0, Σ_u)</code></pre>
+<p>Where <strong>Σ_u ∈ ℝ^(M×M)</strong> is the residual covariance
+matrix that encodes: - Inter-sector co-movement - Inter-region
+co-movement - Portfolio tail thickness (together with ρ) -
+Diversification benefits</p>
+<p><strong>Key design principle</strong>: We <strong>cannot estimate
+climate-credit correlations robustly</strong> from historical data.
+Instead, we: - Keep climate deterministic (no correlation parameters
+needed) - Put stochastic correlations into Σ_u - <strong>Calibrate Σ_u
+from observable market data</strong> (equity sector/region indices)</p>
+<h3 id="practical-construction-of-σ_u-from-market-data">6.2 Practical
+construction of Σ_u from market data</h3>
+<p>Instead of a full free M×M matrix (5,460 parameters), build it from
+sector and region correlation blocks:</p>
+<p><strong>Step 1</strong>: Estimate sector and region correlations from
+market data</p>
+<ul>
+<li><strong>Corr_S</strong>: Sector correlation matrix (S×S) estimated
+from sector index returns (e.g., MSCI sector indices)</li>
+<li><strong>Corr_R</strong>: Region correlation matrix (R×R) estimated
+from regional index returns (e.g., MSCI regional indices)</li>
+</ul>
+<p><strong>Step 2</strong>: Convert to covariances with chosen
+volatility scales</p>
+<pre><code>Σ_S = D_S · Corr_S · D_S
+Σ_R = D_R · Corr_R · D_R</code></pre>
+<p>Where D_S and D_R are diagonal matrices with sector/region
+volatilities (often start with D_S = D_R = I for simplicity).</p>
+<p><strong>Step 3</strong>: Embed into cell space using membership
+matrices</p>
+<p>Define <strong>membership matrices</strong>: - <strong>A ∈
+ℝ^(M×S)</strong>: Maps each cell to its sector - A_{j,s} = 1 if cell j
+belongs to sector s, else 0 - <strong>B ∈ ℝ^(M×R)</strong>: Maps each
+cell to its region - B_{j,r} = 1 if cell j belongs to region r, else
+0</p>
+<p><strong>Step 4</strong>: Mix sector and region components with ω</p>
+<p>Define <strong>sector-vs-region mix parameter ω ∈ [0,1]</strong>: - ω
+controls whether residual co-movement is primarily sector-cycle or
+region-cycle driven - High ω (→ 1): Sector cycles dominate (e.g., energy
+sector co-moves globally) - Low ω (→ 0): Regional cycles dominate (e.g.,
+geographic macro conditions matter more) - Typical starting point: ω =
+0.5 (equal weight)</p>
+<p>Construct the structured covariance component:</p>
+<pre><code>Σ_structured = ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)</code></pre>
+<p><strong>Step 5</strong>: Mix structured vs cell-specific with η</p>
+<p>Define <strong>structured-vs-cell share parameter η ∈ [0,1]</strong>:
+- η controls how much of residual variance is structured (via
+Σ_structured) vs cell-specific - High η (→ 1): Strong systematic
+clustering, less diversification benefit - Low η (→ 0): More
+cell-specific noise, greater diversification benefit - Typical starting
+point: η = 0.7 (moderately systemic)</p>
+<p>Construct final residual covariance:</p>
+<pre><code>Σ_u = η · Σ_structured + (1-η) · I_M</code></pre>
+<p>Expanding:</p>
+<pre><code>Σ_u = η · [ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)] + (1-η) · I_M</code></pre>
+<p><strong>Knobs</strong>: - <strong>Corr_S, Corr_R</strong>: Estimated
+from data (MSCI sector/regional indices, 5-year rolling correlations) -
+<strong>D_S, D_R</strong>: Volatility scales (typically set to I for
+unit volatility) - <strong>ω</strong>: Sector-vs-region mix (0 = all
+region, 1 = all sector, 0.5 = equal) - <strong>η</strong>:
+Structured-vs-cell share (0 = all cell-specific, 1 = all structured)</p>
+<h3 id="what-these-components-do">6.3 What these components do</h3>
+<p><strong>Corr_S</strong> (sector correlation): - Captures how
+different sectors co-move (e.g., coal and oil&amp;gas move together due
+to energy policy) - Typical values: 0.3-0.5 for related sectors, 0.1-0.2
+for unrelated sectors - Estimated from MSCI Global Sector Indices or
+credit sector sub-indices</p>
+<p><strong>Corr_R</strong> (region correlation): - Captures how
+different regions co-move (e.g., Europe and Asia linked by trade) -
+Typical values: 0.2-0.4 for developed regions, 0.3-0.5 for emerging
+regions - Estimated from MSCI Regional Indices or regional GDP growth
+correlations</p>
+<p><strong>D_S, D_R</strong> (volatility scales): - Controls overall
+strength of sector/region components - Typically set to I (unit
+volatility) for simplicity - Alternative: Use empirical std devs if
+sector/region-specific volatilities are desired</p>
+<p><strong>ω</strong> (sector-vs-region mix): - Controls whether
+residual co-movement is driven by sector cycles or regional cycles - ω =
+1: Pure sector co-movement (coal in Europe and coal in Asia move
+together) - ω = 0: Pure regional co-movement (coal in Europe and oil in
+Europe move together) - ω = 0.5: Balanced mix of both -
+<strong>Calibration</strong>: Start with 0.5, adjust based on portfolio
+composition and risk decomposition - <strong>Sensitivity</strong>: Test
+ω ∈ {0.3, 0.5, 0.7} to understand sector vs region dominance</p>
+<p><strong>η</strong> (structured-vs-cell share): - Controls how much
+residual variance is systematic vs cell-specific - η = 1: All residual
+variance is structured (maximum clustering, minimum diversification) - η
+= 0: All residual variance is cell-specific (maximum diversification, no
+clustering) - η = 0.7: 70% structured, 30% cell-specific (moderately
+systemic) - <strong>Calibration</strong>: Start with 0.7, adjust to
+match observed tail thickness and diversification -
+<strong>Sensitivity</strong>: Test η ∈ {0.5, 0.7, 0.9} to understand
+impact on VaR and ES - <strong>Economic interpretation</strong>: η is
+like an “intra-cell correlation” - higher η means cells are more
+correlated beyond sector/region patterns</p>
+<h3 id="induced-correlation-structure">6.4 Induced correlation
+structure</h3>
+<p>The construction Σ_u = η · [ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)] +
+(1-η) · I induces:</p>
+<p><strong>Within-sector correlation</strong> (same sector, different
+regions):</p>
+<pre><code>Corr(u_{s,r}, u_{s,r&#39;}) = (η · ω · Sector variance component) / (Total variance)</code></pre>
+<ul>
+<li>Controlled by η (strength of structure) and ω (sector vs region
+weight)</li>
+<li>Higher η and ω → stronger within-sector correlation</li>
+</ul>
+<p><strong>Within-region correlation</strong> (different sectors, same
+region):</p>
+<pre><code>Corr(u_{s,r}, u_{s&#39;,r}) = (η · (1-ω) · Region variance component) / (Total variance)</code></pre>
+<ul>
+<li>Controlled by η and (1-ω)</li>
+<li>Higher η and lower ω → stronger within-region correlation</li>
+</ul>
+<p><strong>Cross-sector-region correlation</strong> (different sector
+AND region):</p>
+<pre><code>Corr(u_{s,r}, u_{s&#39;,r&#39;}) ≈ 0  (by construction, no direct linkage)</code></pre>
+<p><strong>Diagonal variance</strong> (variance of each cell):</p>
+<pre><code>Var(u_{s,r}) = η · [ω · (A Σ_S A^T)_{s,r} + (1-ω) · (B Σ_R B^T)_{s,r}] + (1-η)</code></pre>
+<ul>
+<li>With D_S = D_R = I, the diagonal is approximately η + (1-η) = 1
+(unit variance cells)</li>
+</ul>
+<p><strong>Key advantages</strong>: - <strong>Observable data</strong>:
+Corr_S and Corr_R estimated from equity/credit market indices -
+<strong>Parsimonious</strong>: Only 4 key knobs (ω, η, plus Corr_S and
+Corr_R structures) - <strong>Interpretable</strong>: ω controls sector
+vs region, η controls clustering strength - <strong>Separable</strong>:
+Can tune sector-region balance (ω) independently from overall clustering
+(η) - <strong>Stable simulation</strong>: Well-conditioned by
+construction, positive definite</p>
+<hr />
+<h2 id="the-correlation-levers-intuitive-summary">7. The correlation
+levers (intuitive summary)</h2>
+<p>There are five distinct “correlation levers” and they do different
+jobs:</p>
+<p><strong>Lever 1: Corr_S and Corr_R (correlation patterns)</strong> -
+“Which sectors co-move? Which regions co-move?” - Estimated from market
+data (MSCI sector/regional indices) - Provides the underlying
+correlation structure</p>
+<p><strong>Lever 2: ω (sector-vs-region mix)</strong> - “Is residual
+co-movement driven by sector cycles or regional cycles?” - ω = 1: Sector
+dominates (e.g., global energy sector cycle) - ω = 0: Region dominates
+(e.g., regional macro conditions) - Typical starting point: ω = 0.5
+(balanced)</p>
+<p><strong>Lever 3: η (structured-vs-cell share)</strong> - “How much
+residual variance is systematic vs cell-specific?” - Higher η ⇒ stronger
+clustering, less diversification, fatter tails - Lower η ⇒ more
+cell-specific noise, more diversification - Typical starting point: η =
+0.7 (moderately systemic)</p>
+<p><strong>Lever 4: ρ (asset correlation at obligor level)</strong> -
+“How strongly do obligors respond to systematic conditions vs
+idiosyncratic noise?” - Higher ρ ⇒ stronger default clustering, fatter
+tails - Lower ρ ⇒ more idiosyncratic behavior, thinner tails - Typical
+range: ρ ∈ [0.15, 0.25]</p>
+<p><strong>Lever 5: β_i (who is exposed to which cells)</strong> -
+“Which obligors are linked to which sector×region conditions?” - From
+portfolio data (sector/region assignments, revenue splits)</p>
+<p><strong>Climate scenarios do not appear as correlations</strong>;
+they appear as mean shifts m(X).</p>
+<p>That keeps the model auditable: - Climate scenario assumptions are
+fully visible in X, σ_k, and W - Correlation assumptions are fully
+visible in Corr_S, Corr_R, ω, η, and ρ</p>
+<hr />
+<h2 id="the-calibration-knobs-what-you-must-chooseestimate">8. The
+calibration “knobs”: what you must choose/estimate</h2>
+<p>Think of knobs in four groups.</p>
+<h3 id="a-scenario-knobs-deterministic">A) Scenario knobs
+(deterministic)</h3>
+<p><strong>(A1) Scenario selection</strong> - <strong>Knob</strong>:
+Choice of scenario (NGFS pathway, internal pathway) -
+<strong>Effect</strong>: Sets X = μ^(scenario) and therefore the mean
+stress surface m(X)</p>
+<p><strong>(A2) Driver definitions (X_k)</strong> -
+<strong>Knob</strong>: Which drivers you include (carbon price, energy
+price, flood index, etc.) - <strong>Effect</strong>: Determines what
+kinds of climate effects you can express - <strong>Design note</strong>:
+Can start “global” and later add more drivers without changing
+engine</p>
+<p><strong>(A3) Feature scaling σ_k</strong> - <strong>Knob</strong>:
+“Typical move” for each driver - <strong>Effect</strong>: Defines how
+big φ_k(X) is; scales scenario impact for a given W - <strong>Practical
+role</strong>: Interpretability (“1σ carbon shock”) and stability across
+scenarios</p>
+<h3 id="b-climatecredit-transmission-knobs-mean-mapping">B)
+Climate→credit transmission knobs (mean mapping)</h3>
+<p><strong>(B1) Sensitivity matrix W</strong> (or structured scores) -
+<strong>Knob</strong>: W_{(s,r),k} or the score libraries S_{s,k},
+R_{r,k} - <strong>Effect</strong>: Controls where climate stress lands
+(which sectors/regions) and with what sign</p>
+<p><strong>(B2) Driver strength scalars λ_k</strong> (if using
+structured W) - <strong>Knob</strong>: λ_k - <strong>Effect</strong>:
+Overall magnitude of impact of driver k on credit factors -
+<strong>Calibration style</strong>: “Reasonableness targets” (most
+exposed cells move ~1–2σ under severe scenario)</p>
+<p><strong>(B3) Intercept α</strong> - <strong>Knob</strong>: α_{s,r}
+(usually set to 0) - <strong>Effect</strong>: Baseline offset; cleaner
+to set α=0 and let baseline be zero-stress state</p>
+<h3 id="c-residual-credit-correlation-knobs">C) Residual credit
+correlation knobs</h3>
+<p><strong>(C1) Sector correlation Corr_S</strong> -
+<strong>Knob</strong>: (S×S) correlation matrix -
+<strong>Effect</strong>: Controls how different sectors co-move -
+<strong>Calibration</strong>: Estimated from MSCI sector indices (e.g.,
+5-year rolling correlations)</p>
+<p><strong>(C2) Region correlation Corr_R</strong> -
+<strong>Knob</strong>: (R×R) correlation matrix -
+<strong>Effect</strong>: Controls how different regions co-move -
+<strong>Calibration</strong>: Estimated from MSCI regional indices</p>
+<p><strong>(C3) Volatility scales D_S, D_R</strong> -
+<strong>Knob</strong>: Diagonal matrices - <strong>Effect</strong>:
+Overall strength of sector/region components in residual systematic risk
+- <strong>Start</strong>: D_S = D_R = I (unit volatility)</p>
+<p><strong>(C4) Sector-vs-region mix ω</strong> - <strong>Knob</strong>:
+ω ∈ [0,1] - <strong>Effect</strong>: Controls whether residual
+co-movement is sector-driven or region-driven -
+<strong>Interpretation</strong>: - ω = 1: Pure sector co-movement - ω =
+0: Pure regional co-movement - ω = 0.5: Balanced - <strong>Typical
+range</strong>: ω ∈ [0.3, 0.7] - <strong>Calibration</strong>: Start
+with 0.5, adjust based on portfolio sector vs geographic
+concentration</p>
+<p><strong>(C5) Structured-vs-cell share η</strong> -
+<strong>Knob</strong>: η ∈ [0,1] - <strong>Effect</strong>: Controls how
+much residual variance is structured vs cell-specific -
+<strong>Interpretation</strong>: - η = 1: All variance is structured
+(maximum clustering) - η = 0: All variance is cell-specific (maximum
+diversification) - η = 0.7: Moderately systemic (70% structured, 30%
+cell-specific) - <strong>Typical range</strong>: η ∈ [0.5, 0.9] -
+<strong>Calibration</strong>: Start with 0.7, adjust to match portfolio
+tail thickness and diversification behavior</p>
+<h3 id="d-obligor-level-systematic-strength-knob">D) Obligor-level
+“systematic strength” knob</h3>
+<p><strong>(D1) Global ρ</strong> - <strong>Knob</strong>: ρ ∈ (0,1) -
+<strong>Effect</strong>: Determines how much of each obligor’s latent
+credit index is systematic vs idiosyncratic - Higher ρ ⇒ more
+clustering, fatter tails - Lower ρ ⇒ more independence, thinner tails -
+<strong>Typical range</strong>: ρ ∈ [0.15, 0.25] -
+<strong>Extension</strong>: Later, can be sector-specific ρ_s if
+needed</p>
+<h3 id="e-credit-inputs-portfolio-primitives">E) Credit inputs
+(portfolio primitives)</h3>
+<p>These are standard: - <strong>PD_i</strong>: Baseline unconditional
+PD (horizon-specific) - <strong>LGD_i</strong>: Loss given default -
+<strong>EAD_i</strong>: Exposure at default - <strong>β_i</strong>:
+Exposure weights across sector–region cells (sum to 1)</p>
+<h3 id="f-simulation-and-reporting-knobs">F) Simulation and reporting
+knobs</h3>
+<ul>
+<li><strong># simulations</strong>: N_sim (accuracy vs runtime)</li>
+<li><strong>Confidence levels</strong>: VaR/ES percentile (e.g., 99%,
+99.9%)</li>
+<li><strong>Decomposition granularity</strong>: Sector-only vs
+sector×region contributions</li>
+</ul>
+<hr />
+<h2 id="key-design-choices-we-made-and-why">9. Key design choices we
+made (and why)</h2>
+<h3 id="choice-1-cell-level-factors-f_sr">Choice 1: Cell-level factors
+F_{s,r}</h3>
+<p>We use a <strong>sector-region cell matrix</strong> F ∈ ℝ^(S×R): -
+<strong>Natural interpretation</strong>: F_{coal,europe} directly
+represents “coal in Europe” - <strong>Flexible loadings</strong>:
+Obligors can have multi-cell exposures (diversified revenue) -
+<strong>Direct climate mapping</strong>: Each cell responds to climate
+drivers</p>
+<h3 id="choice-2-decomposition-into-climate-mean-residual">Choice 2:
+Decomposition into climate mean + residual</h3>
+<p><strong>Climate mean m(X)</strong>: Deterministic, scenario-driven -
+Selecting “NGFS Net Zero 2050” fixes m(X) completely - Linear mapping:
+m(X) = α + W φ(X) - Matches stress testing convention: scenarios are
+narratives, not forecasts</p>
+<p><strong>Stochastic residual u ~ N(0, Σ_u)</strong>: Random, captures
+non-climate systematic risk - Constructed from market-observable
+sector/region correlations - Σ_u = η · [ω · (A Σ_S A^T) + (1-ω) · (B Σ_R
+B^T)] + (1-η) · I - Grounded in equity market data, not climate-credit
+speculation - Two intuitive knobs: ω (sector vs region) and η
+(structured vs cell-specific)</p>
+<p>This separation makes uncertainty quantification clean: scenario risk
+(deterministic X) vs. conditional risk (random u).</p>
+<h3 id="choice-3-market-calibrated-σ_u-with-intuitive-mixing-parameters">Choice
+3: Market-calibrated Σ_u with intuitive mixing parameters</h3>
+<p><strong>Key innovation</strong>: We <strong>cannot estimate
+climate-credit correlations</strong> from historical data.</p>
+<p>Instead: - Estimate Corr_S and Corr_R from <strong>observable
+equity/credit market data</strong> (MSCI indices) - Mix sector and
+region components with ω (sector-vs-region balance) - Mix structured vs
+cell-specific with η (clustering strength) - Only 4 key knobs: Corr_S,
+Corr_R, ω, η (instead of 5,460 covariance parameters)</p>
+<p><strong>Benefits</strong>: - <strong>Empirically grounded</strong>:
+Uses 20+ years of equity market data - <strong>Intuitive knobs</strong>:
+ω and η have clear economic interpretations -
+<strong>Separable</strong>: Can tune sector/region balance independently
+from clustering strength - <strong>Stable</strong>: Well-conditioned by
+construction, positive definite - <strong>Governance-friendly</strong>:
+Easy to explain and validate</p>
+<h3 id="choice-4-single-ρ-parameter-asset-correlation">Choice 4: Single
+ρ parameter (asset correlation)</h3>
+<p>Rather than let each obligor have different systematic loading
+strength, we: - Standardize systematic scores: S̃_i = S_i / √(β_i^T Σ_u
+β_i) - Apply single global ρ: Z_i = √ρ S̃_i + √(1-ρ) ε_i</p>
+<p><strong>Benefits</strong>: - <strong>Simplicity</strong>: One global
+knob for tail thickness - <strong>Familiarity</strong>: ρ is standard in
+Basel/internal models - <strong>Sensitivity</strong>: Easy to report
+results for ρ ∈ [0.15, 0.25] range</p>
+<h3 id="choice-5-climate-affects-credit-only-through-systematic-factors">Choice
+5: Climate affects credit only through systematic factors</h3>
+<p>No direct climate term in Z_i. All climate impact flows through
+f:</p>
+<pre><code>Z_i = √ρ · (β_i^T f / √(β_i^T Σ_u β_i)) + √(1-ρ) · ε_i
+where f = m(X) + u</code></pre>
+<p><strong>Implications</strong>: - Climate does not create within-cell
+differentiation (unless β differs) - Cross-sectional variation comes
+from sector-region assignments - All climate-driven correlation flows
+through systematic factors</p>
+<p>This is appropriate for portfolio-level stress testing where
+obligor-specific climate data is sparse.</p>
+<hr />
+<h2 id="calibration-workflow-practical-start-building-plan">10.
+Calibration workflow (practical “start building” plan)</h2>
+<h3 id="step-1-define-taxonomy">Step 1: Define taxonomy</h3>
+<ul>
+<li>Choose S sectors and R macro-regions</li>
+<li>Define mapping from obligors to β_i weights (summing to 1)</li>
+</ul>
+<h3 id="step-2-choose-climate-driver-set-x-and-scaling-σ_k">Step 2:
+Choose climate driver set X and scaling σ_k</h3>
+<ul>
+<li>Start with a small global driver set (3–6)</li>
+<li>Define σ_k for each driver (cross-scenario standard deviation)</li>
+</ul>
+<h3 id="step-3-specify-climate-to-credit-mapping">Step 3: Specify
+climate-to-credit mapping</h3>
+<ul>
+<li>Either define W directly or use structured S_{s,k}, R_{r,k} and
+calibrate λ_k</li>
+<li>Set α = 0 (baseline is zero-stress state)</li>
+</ul>
+<h3 id="step-4-build-residual-covariance-σ_u">Step 4: Build residual
+covariance Σ_u</h3>
+<ul>
+<li><strong>Download MSCI sector indices</strong> (15 sectors, 5-year
+rolling returns)</li>
+<li><strong>Compute Corr_S</strong> (15×15 sector correlation
+matrix)</li>
+<li><strong>Download MSCI regional indices</strong> (7 regions, 5-year
+rolling returns)</li>
+<li><strong>Compute Corr_R</strong> (7×7 region correlation matrix)</li>
+<li>Apply shrinkage if needed for stability (e.g., Ledoit-Wolf)</li>
+<li>Set D_S = D_R = I (unit volatility)</li>
+<li><strong>Choose ω</strong> (sector-vs-region mix, start with
+0.5)</li>
+<li><strong>Choose η</strong> (structured-vs-cell share, start with
+0.7)</li>
+<li>Construct membership matrices A (M×S) and B (M×R)</li>
+<li>Construct Σ_u = η · [ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)] + (1-η)
+· I</li>
+</ul>
+<h3 id="step-5-choose-ρ">Step 5: Choose ρ</h3>
+<ul>
+<li>Pick a single global ρ (start with 0.20)</li>
+<li>Run sensitivity bands: ρ ∈ [0.15, 0.25]</li>
+</ul>
+<h3 id="step-6-run-monte-carlo-and-report">Step 6: Run Monte Carlo and
+report</h3>
+<ul>
+<li>Baseline and scenario loss distributions</li>
+<li>Contributions by sector and region</li>
+<li>Sensitivities to ρ, ω, η, and λ_k</li>
+</ul>
+<hr />
+<h2 id="simulation-algorithm-single-horizon">11. Simulation algorithm
+(single horizon)</h2>
+<p>Given scenario X = μ^(scenario):</p>
+<ol type="1">
+<li>Compute features φ(X)</li>
+<li>Compute deterministic mean m(X) = α + W φ(X)</li>
+<li>Draw residual systematic factor u ~ N(0, Σ_u)</li>
+<li>Form f = m(X) + u</li>
+<li>For each obligor i:
+<ul>
+<li>Compute systematic score S_i = β_i^T f</li>
+<li>Standardize S̃_i = S_i / √(β_i^T Σ_u β_i)</li>
+<li>Draw ε_i ~ N(0,1)</li>
+<li>Compute Z_i = √ρ S̃_i + √(1-ρ) ε_i</li>
+<li>Set Default_i = 1{Z_i &lt; Φ^(-1)(PD_i)}</li>
+<li>Compute L_i = Default_i · EAD_i · LGD_i</li>
+</ul></li>
+<li>Aggregate L = Σ_i L_i</li>
+</ol>
+<p>Repeat (3)–(6) to obtain the loss distribution under the
+scenario.</p>
+<hr />
+<h2 id="what-this-model-can-and-cannot-claim">12. What this model can
+and cannot claim</h2>
+<h3 id="what-it-can-do-well">What it can do well</h3>
+<ul>
+<li>Produce coherent loss distributions under climate scenarios.</li>
+<li>Attribute incremental risk to sector and region segments in a
+controlled way.</li>
+<li>Provide transparent, explainable linkage from scenario variables to
+credit stress.</li>
+<li>Support stress testing, risk appetite discussion, and portfolio
+steering.</li>
+<li>Use market-observable data (sector/region correlations) rather than
+speculative climate-credit correlations.</li>
+</ul>
+<h3 id="what-it-should-not-claim-without-further-development">What it
+should not claim (without further development)</h3>
+<ul>
+<li>Precise prediction of obligor defaults driven by climate.</li>
+<li>Fine-grained within-sector differentiation unless β_i includes
+richer exposure splits.</li>
+<li>Causal inference from historical climate to credit outcomes.</li>
+</ul>
+<hr />
+<h2 id="one-paragraph-model-story-for-stakeholders">13. One-paragraph
+“model story” (for stakeholders)</h2>
+<p>We take climate scenarios as deterministic narratives expressed
+through a small set of global driver variables X. These drivers shift
+the mean systematic credit conditions for each sector–region cell via a
+transparent mapping m(X). Around that scenario-implied mean, we add a
+stochastic residual systematic credit environment u whose correlations
+across sectors and regions are calibrated using observable market
+co-movement (sector and macro-region indices). Obligors load on the
+sector–region surface via exposure weights β_i, and a single parameter ρ
+controls how strongly obligors co-move with systematic conditions versus
+idiosyncratic noise. This produces coherent loss distributions under
+scenarios without claiming to estimate causal climate–default
+relationships from limited historical data.</p>
+<hr />
+<h2 id="notation-reference">14. Notation Reference</h2>
+<table>
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X</td>
+<td>Deterministic climate/scenario variable vector</td>
+</tr>
+<tr>
+<td>F</td>
+<td>Sector–region factor matrix (systematic credit conditions)</td>
+</tr>
+<tr>
+<td>m(X)</td>
+<td>Deterministic scenario-driven mean of factor surface</td>
+</tr>
+<tr>
+<td>u</td>
+<td>Stochastic residual ~ N(0, Σ_u)</td>
+</tr>
+<tr>
+<td>Σ_u</td>
+<td>Residual covariance matrix (M×M)</td>
+</tr>
+<tr>
+<td>Corr_S</td>
+<td>Sector correlation matrix (S×S), estimated from MSCI sector
+indices</td>
+</tr>
+<tr>
+<td>Corr_R</td>
+<td>Region correlation matrix (R×R), estimated from MSCI regional
+indices</td>
+</tr>
+<tr>
+<td>A</td>
+<td>Membership matrix (M×S), maps cells to sectors</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Membership matrix (M×R), maps cells to regions</td>
+</tr>
+<tr>
+<td>ω</td>
+<td>Sector-vs-region mix parameter ∈ [0,1] (ω=1: all sector, ω=0: all
+region)</td>
+</tr>
+<tr>
+<td>η</td>
+<td>Structured-vs-cell share parameter ∈ [0,1] (η=1: all structured,
+η=0: all cell-specific)</td>
+</tr>
+<tr>
+<td>ρ</td>
+<td>Asset correlation (fraction of variance that is systematic)</td>
+</tr>
+<tr>
+<td>Z_i</td>
+<td>Latent creditworthiness index for obligor i</td>
+</tr>
+<tr>
+<td>S_i</td>
+<td>Systematic score for obligor i: β_i^T f</td>
+</tr>
+<tr>
+<td>S̃_i</td>
+<td>Standardized systematic score: S_i / √(β_i^T Σ_u β_i)</td>
+</tr>
+<tr>
+<td>β_i</td>
+<td>Factor loadings/exposures for obligor i (sum to 1)</td>
+</tr>
+<tr>
+<td>ε_i</td>
+<td>Idiosyncratic noise for obligor i ~ N(0,1)</td>
+</tr>
+<tr>
+<td>τ_i</td>
+<td>Default threshold for obligor i: Φ^(-1)(PD_i)</td>
+</tr>
+<tr>
+<td>Φ</td>
+<td>Standard normal cumulative distribution function</td>
+</tr>
+<tr>
+<td>PD_i</td>
+<td>Probability of default for obligor i</td>
+</tr>
+<tr>
+<td>LGD_i</td>
+<td>Loss given default for obligor i</td>
+</tr>
+<tr>
+<td>EAD_i</td>
+<td>Exposure at default for obligor i</td>
+</tr>
+<tr>
+<td>W</td>
+<td>Sensitivity matrix (M×K)</td>
+</tr>
+<tr>
+<td>φ(X)</td>
+<td>Standardized feature transformation of climate variables</td>
+</tr>
+<tr>
+<td>S_{s,k}</td>
+<td>Sector exposure score for sector s to driver k (optional hybrid
+structure)</td>
+</tr>
+<tr>
+<td>R_{r,k}</td>
+<td>Region exposure score for region r to driver k (optional hybrid
+structure)</td>
+</tr>
+<tr>
+<td>λ_k</td>
+<td>Scale parameter for driver k (optional hybrid structure)</td>
+</tr>
+<tr>
+<td>σ_k</td>
+<td>Standardization scale for driver k</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
