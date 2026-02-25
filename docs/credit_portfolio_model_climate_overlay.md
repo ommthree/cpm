@@ -32,25 +32,29 @@ So the model is:
 
 ## 2. Conceptual overview
 
-### Three layers of the system
+### Four layers of the system
 
-1. **Scenario/Climate state (deterministic)**:
-   C contains the scenario inputs. For an NGFS scenario, C is fixed and known per year/horizon.
+1. **Scenario/Climate drivers (deterministic)**:
+   C contains the scenario inputs. For an NGFS scenario, C is fixed and known per year/horizon. Includes both transition drivers (carbon price, energy prices, GDP) and physical drivers (heat, flood, drought).
 
-2. **Systematic credit environment (factor matrix)**:
-   F summarises how "good vs bad" credit conditions are for each sector and region cell. It is the channel through which correlation and clustering of losses are produced.
+2. **Systematic latent factors (random, conditional on C)**:
+   - F_s: Sector factors (s = 1,...,S) representing systematic credit conditions for each sector
+   - F_r: Region factors (r = 1,...,R) representing systematic credit conditions for each region
+   - These are multivariate normal, conditional on climate drivers: F | C ~ MVN(μ(C), Σ_F|C)
 
-3. **Idiosyncratic noise**:
-   Each obligor still has a firm-specific component independent of the systematic environment.
+3. **Obligor creditworthiness**:
+   Each obligor loads on sector and region factors: Z_i = β_{s,i} · F_s + β_{r,i} · F_r + ε_i
 
-### Why a sector–region matrix?
+4. **Idiosyncratic noise**:
+   Each obligor still has a firm-specific component ε_i independent of systematic factors.
 
-A sector–region grid is a practical compromise:
-- Captures the biggest drivers of correlated credit risk in diversified portfolios.
-- Is interpretable and easy to explain.
-- Provides a natural scaffold to attach climate sensitivities:
-  - Transition risk is often sector-driven (and region-modulated).
-  - Physical risk is often region-driven (and sector-modulated).
+### Why separate sector and region factors?
+
+Sector and region factors are explicit latent variables (not derived constructs):
+- **Interpretability**: F_coal directly represents systematic stress in the coal sector
+- **Flexibility**: Sectors and regions can have residual correlation beyond climate drivers
+- **Clean separation**: Climate drivers C are deterministic (scenario-defined), while factors F are random (business cycle variation)
+- **Realistic correlation**: Brown sectors co-move, physical-exposed regions co-move, naturally
 
 ---
 
@@ -100,38 +104,39 @@ where Φ is the standard normal CDF.
 
 ## 4. Our model specification
 
-### 4.1 Factor definition: a single sector–region matrix F
+### 4.1 Factor definition: Separate sector and region factors
 
-Let sectors be s = 1,...,S and regions be r = 1,...,R.
+Let sectors be s = 1,...,S (e.g., S=15) and regions be r = 1,...,R (e.g., R=7).
 
-Define one systematic factor per cell:
-
-```
-F_{s,r}
-```
-
-**Interpretation**: how favourable or stressed credit conditions are for that sector–region segment over the horizon being modelled (e.g., one-year shock, or multi-year change).
-
-Stack the matrix into a vector:
+Define systematic factors:
 
 ```
-vec(F) ∈ ℝ^(SR)
+F = [F_1, ..., F_S, F_{R+1}, ..., F_{R+R}]  ∈ ℝ^(S+R)
 ```
+
+Where:
+- **F_s** (s = 1,...,S): Sector factors representing systematic credit stress for each sector
+- **F_r** (r = 1,...,R): Region factors representing systematic credit stress for each region
+
+**Interpretation**:
+- F_coal represents how stressed the coal sector is (globally, or as a sector-wide systematic shock)
+- F_europe represents how stressed the European economy is (across all sectors)
+- These are **latent random variables**, not deterministic functions of climate
 
 ### 4.2 Obligor equation
 
-Each obligor i has exposures β_i ∈ ℝ^(SR).
-
-In the simplest "one bucket per obligor" assignment:
-- if obligor i belongs to sector s(i) and region r(i), then β_i is 1 on that cell and 0 elsewhere.
-
-More realistic variants allow mixtures (e.g., multi-region revenue weighting).
-
-The latent credit index is:
+Each obligor i loads on both sector and region factors:
 
 ```
-Z_i = β_i^T vec(F) + ε_i
+Z_i = Σ_s β_{s,i} · F_s + Σ_r β_{r,i} · F_r + ε_i
 ```
+
+In the simplest "single sector, single region" assignment:
+- If obligor i is in sector s(i) and region r(i), then β_{s(i),i} = 1, β_{r(i),i} = 1, all other β = 0
+
+More realistic variants allow mixtures:
+- Revenue-weighted sectors: β_{coal,i} = 0.7, β_{oil,i} = 0.3
+- Revenue-weighted regions: β_{NA,i} = 0.6, β_{EU,i} = 0.4
 
 Default rule:
 
@@ -140,6 +145,16 @@ Default if Z_i < τ_i,  where τ_i = Φ^(-1)(PD_i)
 ```
 
 Loss is then `LGD_i × EAD_i` if default occurs (or a more detailed loss model if desired).
+
+### 4.3 Factor count: S+R rather than S×R
+
+**Key advantage**: We use S+R = 22 factors (15 sectors + 7 regions) instead of S×R = 105 sector-region cell factors.
+
+This is:
+- More parsimonious (22 vs 105 dimensions)
+- More interpretable (factors have clear meaning)
+- Statistically better behaved (fewer parameters to calibrate)
+- Flexible enough (captures sector-wide and region-wide correlation)
 
 ---
 
@@ -150,226 +165,321 @@ Loss is then `LGD_i × EAD_i` if default occurs (or a more detailed loss model i
 C is a vector of scenario variables:
 
 ```
-C ∈ ℝ^k
+C ∈ ℝ^K    (K = 8 in our implementation)
 ```
 
-It is deterministic for a chosen scenario and horizon. It can include both transition and physical variables, such as:
+It is deterministic for a chosen scenario and horizon. It includes:
 
-**Transition examples**: carbon price, energy price indices, GDP deviation, policy stringency.
+**Transition drivers (5)**:
+1. CarbonPrice - Carbon tax/price (US$2010/t CO2)
+2. CoalPrice - Coal price index (US$2010/GJ)
+3. OilPrice - Oil price index (US$2010/GJ)
+4. GasPrice - Natural gas price (US$2010/GJ)
+5. GDP - GDP growth/deviation (billion US$2010/yr, PPP)
 
-**Physical examples**: region-level hazard severity indices (flood, storm, heat, drought), or derived damage proxies.
+**Physical drivers (3)**:
+6. HeatIndex - Days with heat index >35°C
+7. FloodRisk - Maximum 1-day precipitation (mm)
+8. DroughtRisk - Consecutive dry days
 
-**Crucially**: C is not directly used in the obligor default equation. Instead, it determines the systematic credit environment F.
+**Crucially**: C is not directly used in the obligor default equation. Instead, it determines the **conditional distribution** of systematic factors F.
 
-### 5.2 Mapping climate state to credit factors
+### 5.2 Factors are random, conditional on climate drivers
 
-We define a mapping:
-
-```
-F = g(C)
-```
-
-A practical, interpretable form is cell-wise linear mapping on standardised features:
-
-```
-F_{s,r} = α_{s,r} + w_{s,r}^T φ(C)
-```
-
-- **φ(C)** is a feature transform (see below).
-- **w_{s,r}** are sensitivities ("weights") that we must calibrate.
-- **α_{s,r}** can be set to zero if factors represent deviations from baseline.
-
-### Why we standardise the drivers
-
-We define features in unitless "sigma" terms:
+The key innovation: factors F are **random variables** that depend on climate scenario C:
 
 ```
-φ_k(C) = ΔC_k / σ_k
+F | C ~ MVN(μ(C), Σ_F|C)
 ```
 
-- **ΔC_k** is the scenario change (over horizon).
-- **σ_k** is a scale representing a "typical" move for driver k (chosen by design; see calibration).
+Where:
+- **μ(C) = A · φ(C)**: Expected factors given climate scenario (S+R × 1 vector)
+- **A**: Factor loading matrix (S+R × K), how each factor responds to each driver
+- **φ(C)**: Standardized climate drivers (K × 1 vector)
+- **Σ_F|C**: Residual factor covariance (S+R × S+R), capturing non-climate systematic risk
 
-This makes w interpretable as:
+### 5.3 Factor loading matrix A
 
-> "How many standard deviations does the sector–region credit factor move for a 1σ move in driver k?"
+The A matrix (22 × 8) encodes how each sector/region factor responds to each climate driver:
+
+```
+         CarbonPrice  CoalPrice  OilPrice  GasPrice  GDP  HeatIndex  FloodRisk  DroughtRisk
+F_coal        -2.0      -1.5      -0.3      -0.2    0.8     -0.2        0.0        0.0
+F_oil         -1.5      -0.2      -1.8      -0.5    0.8     -0.1        0.0        0.0
+F_renew       +1.0      +0.5      +0.3      +0.2    0.5     -0.3       -0.2       -0.2
+F_agri        -0.3       0.0       0.0       0.0    1.2     -1.0       -0.8       -1.2
+...
+F_europe      -0.5      -0.2      -0.3      -0.2    1.5     -0.6       -0.4       -0.3
+F_asia_em     -0.4      -0.1      -0.2      -0.1    1.8     -1.2       -0.8       -0.5
+...
+```
+
+**Interpretation of A_{coal, carbon} = -2.0**:
+- When carbon price increases by 1σ (standardized), coal sector factor decreases by 2.0σ (severe stress)
+
+**Interpretation of A_{agri, heat} = -1.0**:
+- When heat index increases by 1σ, agriculture sector factor decreases by 1.0σ (credit stress)
+
+### 5.4 Standardization of climate drivers
+
+We define standardized features in unitless "sigma" terms:
+
+```
+φ_k(C) = (C_k - C_baseline,k) / σ_k
+```
+
+Where:
+- **C_k**: Raw driver value in scenario
+- **C_baseline,k**: Baseline value (we use Current Policies scenario)
+- **σ_k**: Standard deviation across scenarios (cross-scenario dispersion)
+
+This makes A_{f,k} interpretable as:
+
+> "How many σ does factor f move for a 1σ move in driver k?"
+
+**Example**: Under Net Zero 2050 in year 2050:
+- CarbonPrice: φ ~ +2.0σ (high carbon price vs. baseline)
+- HeatIndex: φ ~ -2.0σ (low heat stress vs. baseline)
+- Combined effect on F_coal: μ_coal = -2.0×(+2.0) + (-0.2)×(-2.0) = -3.6σ (severe stress)
+
+### 5.5 Residual factor covariance Σ_F|C
+
+The Σ_F|C matrix (22 × 22) captures factor correlations **beyond climate drivers**:
+
+```
+Σ_F|C = [Corr(F_coal, F_oil | C)      ...  Corr(F_coal, F_europe | C)     ]
+        [        ...                   ...           ...                    ]
+        [Corr(F_europe, F_coal | C)    ...  Corr(F_europe, F_asia_em | C) ]
+```
+
+**Sources of residual correlation**:
+- **Sectoral co-movement**: Business cycles, supply chains, credit spreads (e.g., brown sectors beyond carbon price)
+- **Regional co-movement**: Macro shocks, trade linkages, contagion (e.g., Europe-Asia beyond climate)
+- **Factor structure**: Can be diagonal (independent residuals) or structured (sectoral/regional blocks)
+
+**Calibration approach**:
+- **Option 1 (simple)**: Diagonal Σ_F|C (factors independent conditional on climate)
+- **Option 2 (moderate)**: Block-diagonal (within-sector correlation, within-region correlation)
+- **Option 3 (realistic)**: Full matrix estimated from historical factor analysis or expert judgment
 
 ---
 
 ## 6. Key design choices we made (and why)
 
-### Choice 1: Keep a single factor object F (sector–region matrix)
+### Choice 1: Separate sector and region factors (not sector×region cells)
 
-We explicitly simplified the factor universe:
-- We do not keep separate F^phys, F^tran factor blocks.
-- Instead, we represent the net effect of all systematic stress through a single matrix F_{s,r}.
+We use **S+R = 22 factors** (15 sectors + 7 regions) rather than S×R = 105 sector-region cell factors:
+- **Parsimony**: Far fewer dimensions (22 vs 105)
+- **Interpretability**: F_coal, F_europe have clear meaning
+- **Flexibility**: Sectors and regions can have independent residual correlations
+- **Realistic**: A coal company in Europe loads on both F_coal (sector stress) and F_europe (regional macro)
 
-This is governance-friendly: one factor layer, one place credit correlation lives.
+This additive structure captures the key correlation patterns while remaining tractable.
 
-### Choice 2: Treat C as deterministic scenario inputs
+### Choice 2: Factors are random, drivers are deterministic
 
-We take climate scenarios as exogenous and deterministic:
-- selecting "NGFS scenario X" fixes C(t).
+**Climate drivers C**: Deterministic, scenario-defined
+- Selecting "NGFS Net Zero 2050" fixes C(t) completely
+- No uncertainty in carbon price, heat index conditional on scenario
+- Matches stress testing convention: scenarios are narratives, not forecasts
 
-This matches typical stress testing usage: scenarios are narratives, not stochastic forecasts.
+**Systematic factors F**: Random, conditional on C
+- F | C ~ MVN(μ(C), Σ_F|C)
+- Captures business cycle variation, credit market volatility, non-climate shocks
+- Allows proper correlation structure and tail risk
 
-### Choice 3: Climate affects credit only through sector–region systematic conditions
+This separation makes uncertainty quantification clean: scenario risk (deterministic C) vs. conditional risk (random F).
+
+### Choice 3: Linear factor loading (A matrix) with residual covariance
+
+The conditional mean is linear:
+```
+μ(C) = A · φ(C)
+```
+
+This is transparent and auditable:
+- Each A_{f,k} has clear interpretation
+- Can be calibrated via expert judgment or historical regression
+- Easy to explain to governance
+
+The residual covariance Σ_F|C captures everything beyond climate:
+- Can start simple (diagonal) and enhance later (structured)
+- Allows sectoral/regional correlation beyond climate drivers
+
+### Choice 4: Climate affects credit only through systematic factors
 
 No direct climate term appears in Z_i. That implies:
-- Climate does not create new within-cell differentiation unless obligors have different β_i mixtures.
-- Cross-sectional differentiation comes from sector and region assignment (or weights).
+- Climate does not create within-sector/region differentiation unless obligors have different β mixtures
+- Cross-sectional differentiation comes from sector and region loadings
+- All climate-driven default correlation flows through F
 
 This is a deliberate simplification appropriate for a first build; it keeps the model coherent and auditable.
 
-### Choice 4: Calibration by "hybrid" approach rather than pure estimation
+### Choice 5: Calibration by structured approach
 
-Because we lack observables for fitting w, we calibrate by:
-1. Constructing relative sensitivities from economic/physical logic, and then
-2. Setting overall magnitudes via a small set of scaling parameters chosen to meet reasonableness targets.
+Because we lack long time series of climate-credit outcomes, we calibrate:
+1. **A matrix**: Expert judgment on factor-driver sensitivities (how does F_coal respond to carbon price?)
+2. **Σ_F|C**: Historical factor analysis or simplified structure (diagonal, block-diagonal)
+3. **β loadings**: Portfolio data on sector/region exposures (revenue breakdowns)
 
-This sacrifices statistical identification but gains transparency.
-
----
-
-## 7. The calibration challenge: what is w, and why it's hard
-
-### What w_{s,r} represents
-
-Each w_{s,r} is a vector of sensitivities linking scenario features φ(C) to systematic credit stress for that sector–region cell.
-
-It encodes:
-- **Transition sensitivity**: "how do credit conditions for sector s in region r respond to policy/energy/macro changes?"
-- **Physical sensitivity**: "how do they respond to hazard severity changes?"
-
-### Why we can't just "estimate it"
-
-To estimate w statistically you need:
-- time series of credit outcomes by sector/region (spreads, EDFs, defaults), and
-- matching time series of climate/transition drivers that are meaningful at credit horizons.
-
-Often:
-- defaults are sparse and noisy,
-- spreads contain many confounders,
-- climate variables are not observed historically in the way scenario models require.
-
-Hence the hybrid approach.
+This sacrifices statistical identification but gains transparency and implementability.
 
 ---
 
-## 8. Hybrid calibration approach (in detail)
+## 7. The calibration challenge: what needs to be specified
 
-The hybrid approach deliberately separates shape and scale.
+We need to calibrate three objects:
 
-### 8.1 Step A: choose a small set of drivers in C
+### 7.1 Factor loading matrix A (22 × 8)
 
-We keep the driver set compact to avoid overfitting and to keep interpretation clear.
+Each A_{f,k} represents: "How many σ does factor f move for a 1σ move in driver k?"
 
-A typical v1 might use 4–6 drivers:
+**Example rows**:
+- A_{coal, carbon} = -2.0: Coal sector stressed by carbon price
+- A_{renewables, carbon} = +1.0: Renewables benefit from carbon price
+- A_{europe, heat} = -0.6: European economy stressed by heat
+- A_{agriculture, drought} = -1.2: Agriculture very stressed by drought
 
-**Transition drivers**
-1. Carbon policy / carbon price shock
-2. Energy price shock (or fossil price index)
-3. Macro demand/output shock (GDP deviation proxy)
+**Challenge**: We don't have long time series of climate drivers and sector factor realizations.
 
-**Physical drivers**
-4. Flood severity index (by region/country)
-5. Storm severity index (by region/country)
-6. Heat/drought severity index (by region/country)
+### 7.2 Residual factor covariance Σ_F|C (22 × 22)
 
-These can be constructed from NGFS scenario outputs plus physical risk datasets (or NGFS physical indicators where available).
+Captures factor correlation beyond climate drivers:
+- Corr(F_coal, F_oil | C): How much do coal and oil co-move beyond energy prices?
+- Corr(F_europe, F_asia | C): How much do regional factors co-move beyond climate?
 
-### 8.2 Step B: define standardisation scales σ_k
+**Challenge**: Need to estimate systematic correlation not explained by climate.
 
-We need σ_k for each driver. Because we aren't fitting statistically, σ_k is a modelling choice.
+### 7.3 Obligor loadings β (N × 22, where N = number of obligors)
 
-Common defensible options:
-- **Cross-scenario dispersion**: use SD of ΔC_k across the scenario set and models.
-- **Chosen stress unit**: define "1σ carbon shock" as a specified log-change, etc.
+Each obligor's exposure to sector and region factors:
+- Pure play: β_i has one sector entry = 1, one region entry = 1, rest = 0
+- Diversified: β_i has multiple nonzero entries (revenue-weighted)
 
-The aim is interpretability and stability.
+**Challenge**: Need revenue/asset breakdown by sector and region (often available from financial reports).
 
-### 8.3 Step C: build a sensitivity library (relative weights)
+---
 
-Define sector scores and region scores:
-- **S_{s,k} ∈ [0,1]**: how exposed sector s is to driver k
-- **R_{r,k} ∈ [0,1]**: how exposed region r is to driver k
+## 8. Calibration approach (in detail)
 
-Then define relative cell sensitivities:
+### 8.1 Step A: Define climate drivers C (COMPLETE ✅)
 
-```
-w̃_{s,r,k} = S_{s,k} · R_{r,k}
-```
+We use **8 drivers** (5 transition + 3 physical):
 
-This produces the correct qualitative behaviour:
-- high-carbon sectors respond more to carbon policy shocks,
-- hazard-prone regions respond more to physical indices,
-- some sectors are naturally more vulnerable to physical disruption than others.
+**Transition drivers**:
+1. CarbonPrice - Carbon tax (US$2010/t CO2)
+2. CoalPrice - Coal price index (US$2010/GJ)
+3. OilPrice - Oil price index (US$2010/GJ)
+4. GasPrice - Natural gas price (US$2010/GJ)
+5. GDP - GDP growth/deviation (billion US$2010/yr, PPP)
 
-### What goes into the scores
+**Physical drivers**:
+6. HeatIndex - Days >35°C heat index
+7. FloodRisk - Max 1-day precipitation (mm)
+8. DroughtRisk - Consecutive dry days
 
-These are not arbitrary; they are grounded in observable proxies and expert judgement:
+**Data sources**:
+- Transition: NGFS Phase V (IIASA), 420 data points
+- Physical: World Bank CCKP (CMIP6), 126 data points
+- Total: 546 data points (3 scenarios × 7 regions × varying years)
 
-**Transition:**
-- emissions intensity / abatement difficulty,
-- energy intensity,
-- pricing power / pass-through,
-- stranded asset risk.
+### 8.2 Step B: Standardize drivers φ(C) (COMPLETE ✅)
 
-**Physical:**
-- asset heaviness and fixed-site dependence,
-- supply chain fragility,
-- sensitivity to outages and business interruption,
-- adaptation/insurance assumptions (if included).
-
-**Region scores:**
-- hazard propensity (for physical),
-- policy/regulatory stance and energy mix (for transition),
-- adaptation capacity (optional).
-
-### 8.4 Step D: introduce a small number of scale parameters λ_k
-
-We then define:
+We standardize using cross-scenario dispersion:
 
 ```
-w_{s,r,k} = λ_k · w̃_{s,r,k}
+φ_k = (C_k - C_baseline,k) / σ_k
 ```
 
-Now calibration reduces to choosing 4–6 numbers λ_k, rather than S×R×k parameters.
+Where:
+- **C_baseline**: Current Policies scenario (high warming baseline)
+- **σ_k**: Standard deviation across 3 scenarios (Net Zero, Delayed, Current)
 
-**Interpretation:**
+**Result**: φ values range from -2σ to +2σ across scenarios, interpretable as "mild" to "severe" deviations from baseline.
 
-λ_k controls how strongly the entire credit system responds to driver k, while w̃ controls which sectors/regions are most exposed.
+### 8.3 Step C: Calibrate factor loading matrix A (22 × 8) - PHASE 3
 
-### 8.5 Step E: set λ_k using anchor constraints ("reasonableness targets")
+The A matrix encodes how each of 22 factors responds to each of 8 drivers.
 
-With no observables, we choose λ_k so that outputs meet a small set of qualitative and quantitative expectations:
+**Calibration approaches**:
 
-**Anchor type 1: factor-magnitude plausibility**
+1. **Expert judgment** (Phase 3 start):
+   - Sector sensitivities: Brown sectors (coal, oil) stressed by carbon price; renewables benefit
+   - Region sensitivities: Physical-exposed regions (Asia emerging, Africa) stressed by heat/flood
+   - Sign and rough magnitude based on economic logic
+   - Document rationale for each entry
 
-We impose conventions such as:
-- Under a "strong transition shock" year, the most exposed cells should move by ~2σ (severe but not absurd).
-- Under moderate scenario years, the shift might be ~0.5–1σ.
+2. **Historical regression** (Phase 3 optional enhancement):
+   - Regress sector CDS spreads / equity indices on macro proxies
+   - Use energy price shocks, GDP growth as training data
+   - Extrapolate to climate drivers (carbon price ~ energy price shock)
+   - Limited by data availability
 
-This is a disciplined way to avoid unrealistic overreaction.
+3. **Anchor calibration** (Phase 3 validation):
+   - Check that severe scenarios produce plausible factor moves (~2σ for most exposed)
+   - Check that portfolio-level EL uplift is reasonable (e.g., 2x-5x baseline under Net Zero)
+   - Iterate on magnitudes
 
-**Anchor type 2: portfolio-level uplift bounds**
+**Example calibration**:
+```
+A_{coal, carbon} = -2.0      (coal sector crashes under high carbon price)
+A_{coal, coal_price} = -1.5  (coal sector also hurt by low coal prices)
+A_{coal, GDP} = +0.8         (coal somewhat pro-cyclical)
+A_{renewables, carbon} = +1.0 (renewables benefit from high carbon price)
+A_{europe, heat} = -0.6      (European economy moderately stressed by heat)
+A_{agriculture, drought} = -1.2 (agriculture very stressed by drought)
+```
 
-We pick a small set of portfolio metrics to match under benchmark scenarios:
-- EL uplift under severe transition scenario is of plausible order (you choose bounds).
-- Tail loss uplift under severe scenario is plausible and not dominated by a single cell unless expected.
-- Sector contributions line up with intuition (brown sectors contribute most under transition).
+### 8.4 Step D: Specify residual factor covariance Σ_F|C (22 × 22) - PHASE 3
 
-This is calibration-by-target, but with minimal knobs and explicit governance.
+Captures factor correlation beyond climate drivers.
 
-### 8.6 Step F: scenario sanity testing and iterative tightening
+**Calibration approaches**:
 
-We iterate:
-- Run baseline and selected NGFS scenarios,
-- inspect factor heatmaps F_{s,r},
-- inspect loss decomposition by sector/region,
-- adjust λ_k (and only if necessary, adjust score tables).
+1. **Diagonal (simple)**: Σ_F|C = σ² · I
+   - Factors independent conditional on climate
+   - Single volatility parameter σ (e.g., σ = 1.0 or 0.5)
+   - Easy to implement, minimal parameters
 
-Document each change with a rationale (this matters for audit).
+2. **Block-diagonal (moderate)**:
+   - Within-sector block: Corr(F_coal, F_oil | C) = 0.5
+   - Within-region block: Corr(F_europe, F_asia | C) = 0.3
+   - Captures brown sector co-movement, regional contagion
+   - ~10-20 parameters
+
+3. **Full covariance (realistic)**:
+   - Estimate from historical factor analysis (sector/region indices)
+   - Use equity sector indices, regional GDP correlations
+   - ~200+ parameters but most realistic
+
+**Recommended start**: Diagonal with σ = 0.8 (allows some residual volatility but keeps factors mostly climate-driven)
+
+### 8.5 Step E: Assign obligor loadings β - PHASE 1 COMPLETE ✅
+
+For each obligor i, specify β_i ∈ ℝ^22:
+
+**Pure play** (single sector, single region):
+- β_{coal,i} = 1, β_{europe,i} = 1, all others = 0
+- Most common for focused corporates
+
+**Diversified** (multi-sector or multi-region):
+- β_{coal,i} = 0.6, β_{oil,i} = 0.4 (revenue-weighted sectors)
+- β_{NA,i} = 0.5, β_{europe,i} = 0.5 (revenue-weighted regions)
+- Typical for large multinationals
+
+**Data source**: Financial reports (segment revenue breakdowns, geographic revenue)
+
+**Current status**: Synthetic portfolio created with pure-play assignments. Real portfolio can load from CSV templates.
+
+### 8.6 Step F: Validation and iteration - PHASE 6
+
+After calibration:
+1. Run all 3 scenarios (Net Zero, Delayed, Current Policies)
+2. Check factor realizations: Do they make sense? (e.g., F_coal very negative under Net Zero?)
+3. Check portfolio losses: Plausible magnitudes? (e.g., EL 2x-5x baseline?)
+4. Check decomposition: Brown sectors dominate transition scenarios? Physical-exposed sectors dominate Current Policies?
+5. Sensitivity analysis: Vary A entries by ±30%, check impact on results
+6. Document all assumptions and rationale
 
 ---
 

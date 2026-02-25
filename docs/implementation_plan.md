@@ -201,93 +201,114 @@ Extract, transform, and standardize NGFS climate scenarios into model-ready driv
 ## Phase 3: Sensitivity Calibration (Weeks 5-8)
 
 ### Objectives
-Build sector and region sensitivity scores, construct relative weights w̃, and calibrate scale parameters λ.
+Calibrate the factor loading matrix A (22×8) and residual factor covariance Σ_F|C (22×22) for the revised factor structure with separate sector and region factors.
 
 ### Prerequisites
 - Completed Phase 1 (portfolio data with sector/region mappings)
 - Completed Phase 2 (standardized climate drivers φ(C))
+- Updated model documentation (revised factor structure)
 
 ### Tasks
 
-#### 3.1 Sector Sensitivity Scores (Transition)
-- [ ] For each sector s and transition driver k, assign S_{s,k} ∈ [0,1]:
-  - Carbon price sensitivity (based on emissions intensity, abatement cost)
-  - Energy price sensitivity (based on energy intensity)
-  - GDP sensitivity (based on cyclicality)
-- [ ] Document scoring methodology and data sources
-- [ ] Create sector sensitivity heatmap
+#### 3.1 Factor Loading Matrix A - Sector Sensitivities (15 rows × 8 columns)
+- [ ] For each sector factor s (15 sectors) and each driver k (8 drivers), assign A_{s,k}:
 
-**Data sources for sector scores:**
-- Emissions intensity: CDP, company disclosures, sector averages
-- Energy intensity: National accounts, industry reports
-- Abatement cost curves: McKinsey, IEA
-- Expert judgment: Internal sector specialists
+  **Transition drivers** (CarbonPrice, CoalPrice, OilPrice, GasPrice, GDP):
+  - Coal sector: A_{coal,carbon} ~ -2.0 (severe stress from carbon price)
+  - Oil & Gas: A_{oil,carbon} ~ -1.5 (high stress from carbon price)
+  - Renewables: A_{renewables,carbon} ~ +1.0 (benefit from carbon price)
+  - Heavy Industry: A_{heavy_ind,carbon} ~ -0.8 (moderate stress)
+  - All sectors: A_{s,GDP} > 0 (pro-cyclical, positive GDP loading)
 
-#### 3.2 Sector Sensitivity Scores (Physical)
-- [ ] For each sector s and physical driver k, assign S_{s,k} ∈ [0,1]:
-  - Flood sensitivity (asset-heavy, location-dependent sectors)
-  - Storm sensitivity (infrastructure, supply chain fragility)
-  - Heat/drought sensitivity (agriculture, water-dependent sectors)
-- [ ] Document scoring methodology
+  **Physical drivers** (HeatIndex, FloodRisk, DroughtRisk):
+  - Agriculture: A_{agri,drought} ~ -1.2 (very sensitive to drought)
+  - Real Estate: A_{real_estate,flood} ~ -0.8 (sensitive to flooding)
+  - Transportation: A_{transport,storm} ~ -0.6 (sensitive to disruption)
 
-#### 3.3 Region Sensitivity Scores (Transition)
-- [ ] For each region r and transition driver k, assign R_{r,k} ∈ [0,1]:
-  - Carbon policy likelihood/stringency
-  - Energy mix (fossil dependence)
-  - Regulatory environment
-- [ ] Document methodology
+- [ ] Document rationale for each entry (economic logic, historical analogues)
+- [ ] Create heatmap visualization of A matrix
 
-#### 3.4 Region Sensitivity Scores (Physical)
-- [ ] For each region r and physical driver k, assign R_{r,k} ∈ [0,1]:
-  - Flood propensity (coastal exposure, flood plain share)
-  - Storm propensity (cyclone tracks, historical frequency)
-  - Heat/drought propensity (climate zone, water stress)
-- [ ] Use historical hazard data and climate projections
-- [ ] Document sources and assumptions
+**Calibration approach:**
+- Expert judgment based on sector characteristics
+- Historical regression where possible (sector CDS spreads on energy prices, GDP)
+- Anchor to reasonableness: severe scenario should move most-exposed factors by ~2σ
 
-**Data sources for region scores:**
-- Hazard exposure: World Bank Climate Change Knowledge Portal, EM-DAT
-- Coastal exposure: UNEP, national statistics
-- Policy stance: OECD, IMF climate policy trackers
+#### 3.2 Factor Loading Matrix A - Region Sensitivities (7 rows × 8 columns)
+- [ ] For each region factor r (7 regions) and each driver k (8 drivers), assign A_{r,k}:
 
-#### 3.5 Construct Relative Weights
-- [ ] Compute w̃_{s,r,k} = S_{s,k} · R_{r,k} for all cells and drivers
-- [ ] Create weight heatmaps (sector × region for each driver)
-- [ ] Sanity check: highest weights align with intuition
-- [ ] Document any manual adjustments
+  **Transition drivers**:
+  - All regions: A_{r,GDP} ~ 1.2-1.8 (regional GDP loading, higher for emerging)
+  - Fossil-dependent regions: Negative loading on energy prices
+  - Europe/NA: A_{r,carbon} ~ -0.5 (transition costs)
 
-#### 3.6 Define Anchor Targets
+  **Physical drivers**:
+  - Asia-Pacific (emerging): A_{r,heat} ~ -1.2, A_{r,flood} ~ -0.8 (high physical exposure)
+  - Middle East & Africa: A_{r,heat} ~ -1.0, A_{r,drought} ~ -0.8
+  - Europe: A_{r,heat} ~ -0.6 (moderate exposure)
+  - North America: A_{r,storm} ~ -0.5 (hurricane/tornado exposure)
+
+- [ ] Document regional climate exposure, economic structure
+- [ ] Validate against World Bank physical risk data
+
+#### 3.3 Residual Factor Covariance Σ_F|C (22 × 22)
+- [ ] Choose covariance structure:
+
+  **Option 1 - Diagonal (recommended start)**:
+  - Σ_F|C = σ² · I, where σ = 0.8
+  - Factors independent conditional on climate
+  - 1 parameter (σ)
+
+  **Option 2 - Block diagonal**:
+  - Within-sector block: Corr(F_coal, F_oil | C) = 0.5
+  - Within-region block: Corr(F_europe, F_asia | C) = 0.3
+  - ~10-20 parameters
+
+  **Option 3 - Full covariance**:
+  - Estimate from historical factor analysis
+  - Use equity sector indices, regional GDP correlations
+  - ~200+ parameters
+
+- [ ] Implement chosen structure in calibration CSV template
+- [ ] Document rationale for structure choice
+
+#### 3.4 Define Anchor Targets
 - [ ] Define factor magnitude targets:
-  - "Max cell movement under severe scenario should be ~2σ"
-  - "Median cell movement under moderate scenario ~0.5-1σ"
+  - "Max factor movement under severe scenario should be ~2σ"
+  - "Median factor movement under moderate scenario ~0.5-1σ"
 - [ ] Define portfolio targets:
-  - "EL uplift under Net Zero 2050 should be X-Y% of baseline EL"
-  - "99th percentile loss uplift should be <Z% of portfolio EAD"
+  - "EL uplift under Net Zero 2050 should be 2-5x baseline EL"
+  - "99th percentile loss uplift should be <20% of portfolio EAD"
 - [ ] Specify sector contribution targets:
-  - "Coal + Oil&Gas should contribute >50% of transition scenario loss"
+  - "Coal + Oil&Gas should contribute >50% of Net Zero transition loss"
+  - "Agriculture + Real Estate should contribute >40% of Current Policies physical loss"
 - [ ] Document rationale for each target
 
-#### 3.7 Calibrate Scale Parameters λ
-- [ ] Initialize λ_k = 1 for all drivers
-- [ ] For each scenario:
-  - Compute F_{s,r} = Σ_k λ_k · w̃_{s,r,k} · φ_k
-  - Check against factor magnitude targets
-- [ ] Adjust λ_k iteratively to meet targets
-- [ ] Document calibration iterations and final λ values
-- [ ] Perform sensitivity analysis: vary λ_k ± 30%, observe impact
+#### 3.5 Calibrate and Validate
+- [ ] Create calibration CSV templates:
+  - `factor_loadings_A.csv` (22 factors × 8 drivers)
+  - `residual_covariance_sigma.csv` (22 × 22 or simplified representation)
+- [ ] Implement A matrix in simulation code
+- [ ] Run test simulations for all 3 scenarios
+- [ ] Check factor realizations: μ(C) = A · φ(C)
+  - Net Zero 2050: F_coal ~ -3.6σ? (coal sector crash)
+  - Current Policies: F_asia_em ~ -2.0σ? (physical stress)
+- [ ] Iterate on A entries if targets not met
+- [ ] Perform sensitivity analysis: vary A entries ± 30%, observe impact
+- [ ] Document calibration process and final values
 
 ### Deliverables
-✅ Sector sensitivity score library (S matrix: sectors × drivers)
-✅ Region sensitivity score library (R matrix: regions × drivers)
-✅ Relative weight library (w̃: cells × drivers)
+✅ Factor loading matrix A (22 × 8) with documented rationale
+✅ Residual covariance structure Σ_F|C with parameters
+✅ Calibration CSV templates (factor_loadings_A.csv, residual_covariance_sigma.csv)
 ✅ Calibration target specification document
-✅ Final scale parameters λ with calibration report
-✅ Sensitivity analysis report (impact of λ uncertainty)
+✅ Validation report (factor realizations, portfolio losses, decompositions)
+✅ Sensitivity analysis report (impact of A uncertainty)
 
 ### Success Criteria
-- Sector/region scores have documented data sources/rationale
-- Calibrated model meets anchor targets within tolerance
-- λ sensitivity analysis shows reasonable stability
+- All A entries have documented economic rationale
+- Test simulations meet anchor targets within tolerance
+- Sensitivity analysis shows reasonable stability (±30% → <50% change in key metrics)
+- Factor realizations make intuitive sense (coal stressed under Net Zero, etc.)
 
 ---
 
@@ -329,19 +350,36 @@ Build the core C++ simulation engine with REST API, computing both risk metrics 
 - [ ] CSV export functions (results, factor matrices)
 
 #### 4.3 Core Data Structures
-- [ ] Define `Portfolio` class (obligors, sector-region grid, β matrix)
-- [ ] Define `Scenario` class (drivers C, standardized φ)
-- [ ] Define `CalibrationParams` class (S, R, w̃, λ)
-- [ ] Define `FactorMatrix` class (F_{s,r} for all cells)
-- [ ] Use Eigen for matrix/vector operations
+- [ ] Define `Portfolio` class:
+  - Obligor list with sector/region assignments
+  - β matrix (N × 22): obligor loadings on factors
+  - PD, LGD, EAD vectors
+- [ ] Define `Scenario` class:
+  - Raw drivers C (K × 1 vector, K=8)
+  - Standardized φ (K × 1 vector)
+  - Scenario metadata (name, year, narrative)
+- [ ] Define `CalibrationParams` class:
+  - A matrix (22 × 8): factor loadings
+  - Σ_F|C (22 × 22): residual covariance
+  - Variance parameter σ² for diagonal case
+- [ ] Define `FactorRealization` class:
+  - Factor vector F (22 × 1)
+  - Conditional mean μ(C) = A · φ(C)
+  - Covariance Σ_F|C
+- [ ] Use Eigen for all matrix/vector operations
 
-#### 4.4 Factor Mapping Module
-- [ ] Implement `FactorMapper` class:
-  - `computeFactors(Scenario, CalibrationParams) -> FactorMatrix`
-  - Apply: F_{s,r} = Σ_k λ_k · w̃_{s,r,k} · φ_k
+#### 4.4 Factor Generation Module
+- [ ] Implement `FactorGenerator` class:
+  - `computeConditionalMean(Scenario, CalibrationParams) -> Eigen::VectorXd`:
+    * μ(C) = A · φ(C)  (22 × 1 vector)
+  - `sampleFactors(μ, Σ_F|C, rng) -> Eigen::VectorXd`:
+    * F ~ MVN(μ, Σ_F|C)
+    * Use Cholesky decomposition for sampling
+  - `sampleFactorsBatch(μ, Σ_F|C, n_simulations, rng) -> Eigen::MatrixXd`:
+    * Generate n_simulations draws (22 × n_simulations matrix)
 - [ ] Vectorized operations using Eigen
-- [ ] Factor diagnostics (min, max, mean by sector/region)
-- [ ] Unit tests
+- [ ] Factor diagnostics (min, max, mean, covariance across simulations)
+- [ ] Unit tests for MVN sampling
 
 #### 4.5 Monte Carlo Simulation Engine
 - [ ] Implement `SimulationEngine` class with parallel execution:
