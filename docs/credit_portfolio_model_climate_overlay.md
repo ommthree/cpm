@@ -2,6 +2,12 @@
 
 A factor-based framework with deterministic climate/scenario drivers and systematic credit factors with market-calibrated correlation structure.
 
+**Related Documentation**:
+- **Implementation Plan**: `/docs/implementation_plan.md`
+- **Data Sources**: `/docs/data_sources.md` (NGFS, World Bank CCKP, Yahoo Finance)
+- **Calibration Parameters**: `/data/calibration/README.md`
+- **Market Data Mapping**: `/docs/market_data_sources.md`
+
 ---
 
 ## 1. Purpose and scope

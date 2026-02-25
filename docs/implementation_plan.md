@@ -208,6 +208,7 @@ Calibrate the climate-to-credit transmission parameters (S, R, λ) and residual 
 - Completed Phase 2 (standardized climate drivers φ(X))
 - Updated model documentation (cell-level factors with market-calibrated Σ_u)
 - Access to MSCI sector/regional indices or equivalent equity market data
+- **Data Sources**: See `/docs/data_sources.md` for comprehensive documentation of all external data (NGFS, World Bank CCKP, Yahoo Finance)
 
 ### Tasks
 
@@ -287,6 +288,13 @@ Calibrate the climate-to-credit transmission parameters (S, R, λ) and residual 
 **Expected ranges:** λ_k ∈ [0.5, 1.2] (most drivers), with adjustments based on validation
 
 #### 3.4 Residual Covariance Σ_u from Market Data
+
+**Reference**: See `/docs/market_data_sources.md` for comprehensive mapping between our 15-sector, 7-region taxonomy and available market indices (MSCI, S&P, Bloomberg). That document provides:
+- Detailed sector-to-index mappings with alternatives
+- Regional index mappings (straightforward)
+- Data vendor commands (Bloomberg, Refinitiv, free sources)
+- Handling special cases (Coal, Agriculture, Manufacturing split)
+- Implementation checklist and governance
 
 **Step 1**: Download and process equity sector index data
 - [ ] Download MSCI Global Sector Indices (or equivalent):

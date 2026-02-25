@@ -195,5 +195,6 @@ All calibration parameters should undergo:
 
 - **Model Documentation**: `/docs/credit_portfolio_model_climate_overlay.md`
 - **Implementation Plan**: `/docs/implementation_plan.md` (Phase 3)
+- **Market Data Sources**: `/docs/market_data_sources.md` (sector/region correlation data)
 - **Scenario Data**: `/data/scenarios/README.md`
 - **NGFS Documentation**: https://www.ngfs.net/en/publications-and-statistics/publications/ngfs-climate-scenarios-central-banks-and-supervisors-phase-v

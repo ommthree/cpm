@@ -1,0 +1,40 @@
+Market Data Download Metadata
+======================================================================
+
+download_date: 2026-02-25 12:30:19
+start_date: 2015-01-01
+end_date: 2024-12-31
+frequency: 1mo
+data_source: Yahoo Finance via yfinance
+
+REGIONAL_ETFS:
+  North_America: SPY
+  Europe: VGK
+  AsiaPac_Developed: VPL
+  AsiaPac_Emerging: VWO
+  Latin_America: ILF
+  Middle_East_Africa: AFK
+  Global: VT
+
+SECTOR_ETFS:
+  Energy_Oil_Gas: XLE
+  Energy_Coal: None
+  Energy_Renewables: ICLN
+  Utilities: XLU
+  Financials: XLF
+  Consumer_Goods: XLP
+  Healthcare: XLV
+  Mining_Metals: XLB
+  Real_Estate: XLRE
+  Technology_Services: XLK
+  Manufacturing_Heavy: XLI
+  Manufacturing_Light: XLY
+  Transportation: IYT
+  Agriculture: MOO
+  Other: None
+
+NOTES:
+  - Energy_Coal: No ETF available, will use Energy_Oil_Gas as proxy (correlation ~0.85)
+  - Other: Will compute as equal-weighted average of all other sectors
+  - Adjusted close prices include dividend reinvestment
+  - Missing data should be handled before computing correlations
