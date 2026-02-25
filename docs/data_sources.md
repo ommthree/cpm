@@ -10,8 +10,8 @@
 
 | Data Type | Source | Status | Location |
 |-----------|--------|--------|----------|
-| **Transition Risk Scenarios** | NGFS Phase V | ⏳ To be downloaded | `/data/scenarios/` |
-| **Physical Risk Projections** | World Bank CCKP | ⏳ To be downloaded | `/data/scenarios/` |
+| **Transition Risk Scenarios** | NGFS Phase V | ✅ Downloaded & Processed | `/data/scenarios/*.csv` (3 files) |
+| **Physical Risk Projections** | World Bank CCKP | ✅ Downloaded & Processed | `/data/scenarios/*.csv` (integrated) |
 | **Regional Correlations** | Yahoo Finance (7 ETFs) | ✅ Downloaded | `/data/market_data/regional_etf_prices.csv` |
 | **Sector Correlations** | Yahoo Finance (13 ETFs) | ✅ Downloaded | `/data/market_data/sector_etf_prices.csv` |
 | **Sector Carbon Scores** | CDP + OECD + IEA | ⏳ To be collected | `/data/calibration/sector_scores.csv` |
@@ -69,12 +69,14 @@
 6. Download as CSV
 7. Save to `/data/scenarios/ngfs_raw_download.csv`
 
-**Status**: ⏳ **To be downloaded**
+**Status**: ✅ **Downloaded & Processed** (February 2026)
 
-**Processing needed**:
-- `/scripts/process_ngfs_scenarios.py` (to be created)
-- Standardize drivers: φ_k(X) = (X - μ) / σ
-- Split into 3 scenario CSVs
+**Files Created**:
+- `/data/scenarios/net_zero_2050.csv` (183 rows)
+- `/data/scenarios/delayed_transition.csv` (183 rows)
+- `/data/scenarios/current_policies.csv` (183 rows)
+- Drivers standardized: φ_k(X) = (X - μ) / σ
+- Ready for model input
 
 ---
 
@@ -107,13 +109,14 @@
    - Download as NetCDF
 4. Save to `/data/physical_risk/raw/`
 
-**Status**: ⏳ **To be downloaded**
+**Status**: ✅ **Downloaded & Processed** (February 2026)
 
-**Processing needed**:
-- `/scripts/process_physical_risk.py` (created)
-- Extract regional averages (7 regions)
-- Compute climatology (decadal mean)
-- Standardize and append to scenario CSVs
+**Integration**: Physical risk data integrated into scenario CSVs above
+- `/data/scenarios/*.csv` includes all 8 drivers (5 transition + 3 physical)
+- Regional averages extracted (7 regions)
+- Climatology computed (2030s, 2050s)
+- Standardized and ready for model input
+- Processing script: `/data/scenarios/process_physical_risk.py`
 
 ---
 
@@ -386,8 +389,8 @@ Technology & Services: 0.20
 |------|--------|--------|-----------|
 | ✅ Regional ETF prices | Yahoo Finance | Downloaded | No |
 | ✅ Sector ETF prices | Yahoo Finance | Downloaded | No |
-| ⏳ NGFS transition scenarios | NGFS/IIASA | To download | **Yes** |
-| ⏳ CCKP physical risk | World Bank | To download | **Yes** |
+| ✅ NGFS transition scenarios | NGFS/IIASA | Downloaded & Processed | No |
+| ✅ CCKP physical risk | World Bank | Downloaded & Processed | No |
 
 ### Medium Priority (Calibration Parameters)
 
@@ -409,25 +412,23 @@ Technology & Services: 0.20
 
 ## Next Steps
 
-### Phase 1: Download Core Scenario Data (BLOCKING)
+### Phase 1: Correlation Matrix Construction (READY)
 
-**Step 1.1: NGFS Transition Data**
+**Step 1.1: Process ETF Data**
 ```bash
-# Manual download from IIASA NGFS Scenario Explorer
-# URL: https://data.ece.iiasa.ac.at/ngfs/
-# Save to: /data/scenarios/ngfs_raw_download.csv
-# Then run: python scripts/process_ngfs_scenarios.py
+python scripts/compute_correlations.py
+# Input: /data/market_data/regional_etf_prices.csv (7 regions)
+#        /data/market_data/sector_etf_prices.csv (13 sectors)
+# Output: /data/calibration/correlation_matrix_R.csv (7×7)
+#         /data/calibration/correlation_matrix_S.csv (15×15)
 ```
 
-**Step 1.2: CCKP Physical Risk Data**
-```bash
-# Manual download from World Bank CCKP
-# URL: https://climateknowledgeportal.worldbank.org/download-data
-# Download 36 NetCDF files → /data/physical_risk/raw/
-# Then run: python scripts/process_physical_risk.py
-```
+**Step 1.2: Construct Σ_u**
+- Choose ω = 0.5 (sector-vs-region mix)
+- Choose η = 0.7 (structured-vs-cell share)
+- Compute Σ_u = η · [ω · (A Σ_S A^T) + (1-ω) · (B Σ_R B^T)] + (1-η) · I_M
 
-**Status**: ⏳ These are **blocking** for Phase 2 (scenario data preparation)
+**Status**: ✅ Ready to proceed (all data downloaded)
 
 ---
 
@@ -451,20 +452,6 @@ Technology & Services: 0.20
 - Populate `/data/calibration/sector_scores.csv` (HeatIndex, FloodRisk, DroughtRisk columns)
 
 **Status**: ⏳ Can proceed with expert judgment if time-constrained
-
----
-
-### Phase 3: Correlation Matrix Construction (READY)
-
-**Step 3.1: Process ETF Data**
-```bash
-python scripts/compute_correlations.py
-# Input: /data/market_data/*_etf_prices.csv
-# Output: /data/calibration/correlation_matrix_S.csv (15×15)
-#         /data/calibration/correlation_matrix_R.csv (7×7)
-```
-
-**Status**: ✅ Ready to proceed (data downloaded)
 
 ---
 
