@@ -2,7 +2,7 @@
 
 **Purpose**: One-page summary of market data sources for Corr_S (15×15 sector) and Corr_R (7×7 region) calibration
 
-**Full documentation**: See `/docs/market_data_sources.md` for comprehensive details
+**Full documentation**: See `/docs/data_sources.md` (Part 2: Market Correlation Data) for comprehensive details
 
 ---
 

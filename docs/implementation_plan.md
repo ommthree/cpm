@@ -289,12 +289,11 @@ Calibrate the climate-to-credit transmission parameters (S, R, λ) and residual 
 
 #### 3.4 Residual Covariance Σ_u from Market Data
 
-**Reference**: See `/docs/market_data_sources.md` for comprehensive mapping between our 15-sector, 7-region taxonomy and available market indices (MSCI, S&P, Bloomberg). That document provides:
-- Detailed sector-to-index mappings with alternatives
-- Regional index mappings (straightforward)
-- Data vendor commands (Bloomberg, Refinitiv, free sources)
-- Handling special cases (Coal, Agriculture, Manufacturing split)
-- Implementation checklist and governance
+**Reference**: See `/docs/data_sources.md` (Part 2: Market Correlation Data) for comprehensive mapping between our 15-sector, 7-region taxonomy and available market indices. That section provides:
+- Detailed sector-to-ETF mappings (downloaded from Yahoo Finance)
+- Regional index mappings (7 regions, complete data)
+- Data status and quality notes
+- Processing requirements for correlation matrices
 
 **Step 1**: Download and process equity sector index data
 - [ ] Download MSCI Global Sector Indices (or equivalent):

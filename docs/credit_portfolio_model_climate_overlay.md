@@ -4,9 +4,9 @@ A factor-based framework with deterministic climate/scenario drivers and systema
 
 **Related Documentation**:
 - **Implementation Plan**: `/docs/implementation_plan.md`
-- **Data Sources**: `/docs/data_sources.md` (NGFS, World Bank CCKP, Yahoo Finance)
+- **Data Sources**: `/docs/data_sources.md` (all external data - scenarios, correlations, calibration)
 - **Calibration Parameters**: `/data/calibration/README.md`
-- **Market Data Mapping**: `/docs/market_data_sources.md`
+- **Quick Reference**: `/docs/correlation_calibration_quick_reference.md`
 
 ---
 

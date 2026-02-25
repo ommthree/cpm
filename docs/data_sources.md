@@ -1,438 +1,532 @@
-# Data Sources Documentation
+# Data Sources - Comprehensive Reference
 
-**Purpose**: Comprehensive documentation of all external data sources used in the credit portfolio model with climate overlay.
+**Purpose**: Complete documentation of all external data sources for the credit portfolio model with climate overlay
 
 **Last Updated**: 2026-02-25
 
 ---
 
-## Overview
+## Quick Reference
 
-The model requires three types of external data:
-
-1. **Transition Risk Data**: Economic and energy drivers from climate scenarios (NGFS Phase V)
-2. **Physical Risk Data**: Climate hazard indicators from climate projections (World Bank CCKP)
-3. **Correlation Data**: Equity market correlations for residual covariance structure (Yahoo Finance)
+| Data Type | Source | Status | Location |
+|-----------|--------|--------|----------|
+| **Transition Risk Scenarios** | NGFS Phase V | ⏳ To be downloaded | `/data/scenarios/` |
+| **Physical Risk Projections** | World Bank CCKP | ⏳ To be downloaded | `/data/scenarios/` |
+| **Regional Correlations** | Yahoo Finance (7 ETFs) | ✅ Downloaded | `/data/market_data/regional_etf_prices.csv` |
+| **Sector Correlations** | Yahoo Finance (13 ETFs) | ✅ Downloaded | `/data/market_data/sector_etf_prices.csv` |
+| **Sector Carbon Scores** | CDP + OECD + IEA | ⏳ To be collected | `/data/calibration/sector_scores.csv` |
+| **Regional Carbon Scores** | World Bank + OECD | ⏳ To be collected | `/data/calibration/region_scores.csv` |
+| **Physical Vulnerability** | IPCC AR6 + Academic | ⏳ To be collected | `/data/calibration/sector_scores.csv` |
 
 ---
 
-## 1. Transition Risk Data
+## Part 1: Climate Scenario Data
 
-### Source: NGFS Phase V Climate Scenarios
+### 1.1 Transition Risk Data (NGFS Phase V)
 
 **Provider**: Network for Greening the Financial System (NGFS)
+**URL**: https://www.ngfs.net/en/publications-and-statistics/publications/ngfs-climate-scenarios-central-banks-and-supervisors-phase-v
 **Database**: IIASA NGFS Scenario Explorer
 **Version**: Phase V (November 2024)
-**URL**: https://www.ngfs.net/en/publications-and-statistics/publications/ngfs-climate-scenarios-central-banks-and-supervisors-phase-v
 
-### Scenarios Used
+#### Scenarios
 
-We use 3 of the 6 NGFS scenarios, mapped to CMIP6 SSP pathways:
+| NGFS Scenario | SSP Pathway | Description |
+|---------------|-------------|-------------|
+| Net Zero 2050 | SSP1-2.6 | Immediate policy action, 1.5°C warming |
+| Delayed Transition | SSP2-4.5 | Late but strong policy, 2°C warming |
+| Current Policies | SSP5-8.5 | No new climate policies, 3°C+ warming |
 
-| NGFS Scenario | SSP Pathway | Description | Climate Outcome |
-|---------------|-------------|-------------|-----------------|
-| **Net Zero 2050** | SSP1-2.6 | Immediate policy action, 1.5°C warming | Low physical risk, high transition risk |
-| **Delayed Transition** | SSP2-4.5 | Late but strong policy, 2°C warming | Moderate physical risk, disorderly transition |
-| **Current Policies** | SSP5-8.5 | No new climate policies, 3°C+ warming | High physical risk, low transition risk |
+#### Variables to Download
 
-### Variables Downloaded
+**5 Transition Drivers** (annual, 2025/2030/2040/2050, 7 regions):
 
-**5 Transition Drivers** (annual, 2025-2050, 7 regions):
+1. **Carbon Price** - `Price|Carbon` (USD per tonne CO₂)
+2. **Coal Price** - `Price|Primary Energy|Coal` (USD per GJ)
+3. **Oil Price** - `Price|Primary Energy|Oil` (USD per GJ)
+4. **Gas Price** - `Price|Primary Energy|Gas` (USD per GJ)
+5. **GDP** - `GDP|PPP` (Billion USD PPP)
 
-1. **Carbon Price** (`Price|Carbon`)
-   - Units: USD per tonne CO₂
-   - Frequency: Annual (2025, 2030, 2040, 2050)
-   - Regions: 7 (North America, Europe, Asia-Pacific dev, Asia-Pacific EM, Latin America, MEA, Global)
-   - Total observations: 5 drivers × 4 years × 7 regions × 3 scenarios = 420 data points
+**Total**: 5 drivers × 4 years × 7 regions × 3 scenarios = **420 data points**
 
-2. **Coal Price** (`Price|Primary Energy|Coal`)
-   - Units: USD per GJ
-   - Derived from NGFS energy price projections
+#### Regions
 
-3. **Oil Price** (`Price|Primary Energy|Oil`)
-   - Units: USD per GJ
-   - Brent crude equivalent
+1. North America (USA, Canada)
+2. Europe (EU27 + UK + EFTA)
+3. Asia-Pacific (developed) - Japan, Australia, NZ
+4. Asia-Pacific (emerging) - China, India, ASEAN
+5. Latin America - Brazil, Mexico, etc.
+6. Middle East & Africa
+7. Global (world aggregate)
 
-4. **Gas Price** (`Price|Primary Energy|Gas`)
-   - Units: USD per GJ
-   - Natural gas prices
+#### How to Download
 
-5. **GDP** (`GDP|PPP`)
-   - Units: Billion USD (purchasing power parity)
-   - Regional GDP projections
+1. Go to: https://data.ece.iiasa.ac.at/ngfs/
+2. Select model: MESSAGE-GLOBIOM 1.1
+3. Select scenarios: Net Zero 2050, Delayed Transition, Current Policies
+4. Select variables: Price|Carbon, Price|Primary Energy|*, GDP|PPP
+5. Select regions: All R5 regions
+6. Download as CSV
+7. Save to `/data/scenarios/ngfs_raw_download.csv`
 
-### Data Processing
+**Status**: ⏳ **To be downloaded**
 
-**Location**: `/data/scenarios/` (3 CSV files, one per scenario)
-
-**Processing Script**: `/scripts/process_ngfs_scenarios.py` (not yet created)
-
-**Standardization**:
-- All drivers standardized using Current Policies 2050 as baseline
-- φ_k(X) = (X - μ_baseline) / σ_baseline
-- Standardized values saved for simulation engine
-
-### Data Quality
-
-**Completeness**: 100% (all NGFS scenarios have complete time series)
-**Regional Coverage**: Global, with detailed breakdowns for R5 regions
-**Temporal Resolution**: 5-year intervals (2025, 2030, 2040, 2050)
-**Consistency**: Internally consistent SSP-IAM pathways
-
-### Access Method
-
-1. **Download**: IIASA NGFS Scenario Explorer (web interface or API)
-2. **Format**: CSV export from scenario database
-3. **License**: Publicly available for research and policy use
-4. **Citation**: NGFS (2024), NGFS Climate Scenarios for Central Banks and Supervisors, Phase V
+**Processing needed**:
+- `/scripts/process_ngfs_scenarios.py` (to be created)
+- Standardize drivers: φ_k(X) = (X - μ) / σ
+- Split into 3 scenario CSVs
 
 ---
 
-## 2. Physical Risk Data
+### 1.2 Physical Risk Data (World Bank CCKP)
 
-### Source: World Bank Climate Change Knowledge Portal (CCKP)
-
-**Provider**: World Bank Group
-**Database**: Climate Change Knowledge Portal
-**Climate Model**: CMIP6 ACCESS-CM2 (Australia, CSIRO)
+**Provider**: World Bank Climate Change Knowledge Portal
 **URL**: https://climateknowledgeportal.worldbank.org/
+**Climate Model**: CMIP6 ACCESS-CM2
+**Resolution**: 0.5° grid (~50 km)
 
-### Data Downloaded
+#### Indicators to Download
 
-**3 Physical Risk Indicators** (2030, 2050, 7 regions):
+**3 Physical Risk Indicators** (2030s and 2050s climatology):
 
-1. **Heat Index** (`hi35`)
-   - **Definition**: Number of days per year with heat index > 35°C
-   - **Units**: Days per year
-   - **Relevance**: Labor productivity, health impacts, energy demand
-   - **Files**: 12 NetCDF files (3 scenarios × 4 decades × 1 indicator)
-   - **Size**: ~23 MB total
+1. **Heat Index** - `hi35` (Days per year with heat index >35°C)
+2. **Flood Risk** - `rx1day` (Maximum 1-day precipitation in mm)
+3. **Drought Risk** - `cdd` (Consecutive dry days, maximum annual)
 
-2. **Flood Risk** (`rx1day`)
-   - **Definition**: Maximum 1-day precipitation (mm)
-   - **Units**: Millimeters
-   - **Relevance**: Flood hazard proxy, infrastructure damage
-   - **Files**: 12 NetCDF files
-   - **Size**: ~23 MB total
+**SSP Scenarios**: SSP1-2.6, SSP2-4.5, SSP5-8.5 (maps to our 3 NGFS scenarios)
 
-3. **Drought Risk** (`cdd`)
-   - **Definition**: Consecutive dry days (maximum annual)
-   - **Units**: Days
-   - **Relevance**: Water stress, agriculture, supply chains
-   - **Files**: 12 NetCDF files
-   - **Size**: ~23 MB total
+**Total**: 3 indicators × 2 time periods × 3 scenarios = **18 global NetCDF files** × 2 decadal periods = 36 files (~69 MB)
 
-**Total Physical Risk Data**: 36 NetCDF files, ~69 MB
+#### How to Download
 
-### SSP Scenario Mapping
+1. Go to: https://climateknowledgeportal.worldbank.org/download-data
+2. Select: Climate Projections → CMIP6 → ACCESS-CM2
+3. For each indicator (hi35, rx1day, cdd):
+   - Select SSP scenarios: 126, 245, 585
+   - Select time periods: 2030-2039, 2050-2059
+   - Download as NetCDF
+4. Save to `/data/physical_risk/raw/`
 
-World Bank CCKP uses SSP scenarios. We map to NGFS:
+**Status**: ⏳ **To be downloaded**
 
-| CCKP SSP | CMIP6 Pathway | Maps to NGFS |
-|----------|---------------|--------------|
-| SSP1-2.6 | Low emissions | Net Zero 2050 |
-| SSP2-4.5 | Moderate emissions | Delayed Transition |
-| SSP5-8.5 | High emissions | Current Policies |
-
-### Time Periods
-
-CCKP provides decadal climatology:
-- **2030s**: 2030-2039 average → assigned to year 2030
-- **2050s**: 2050-2059 average → assigned to year 2050
-
-We use 2030 and 2050 projections (no data for 2025 or 2040).
-
-### Regional Processing
-
-**Original Resolution**: 0.5° × 0.5° global grid (~50 km)
-
-**Regional Aggregation**:
-1. Load NetCDF file with global grid
-2. Define regional bounding boxes (lat/lon coordinates)
-3. Extract grid cells within each region
-4. Compute spatial average (area-weighted)
-5. Result: 7 regional values per indicator per scenario per year
-
-**Regional Definitions**:
-- North America: 15°N-75°N, 170°W-50°W
-- Europe: 35°N-70°N, 10°W-40°E
-- Asia-Pacific (developed): Japan, Australia, NZ, Korea (specific coordinates)
-- Asia-Pacific (emerging): South/Southeast/East Asia
-- Latin America: 55°S-30°N, 120°W-30°W
-- Middle East & Africa: 35°S-40°N, 20°W-60°E
-- Global: All grid cells (global mean)
-
-### Data Processing
-
-**Processing Script**: `/scripts/process_physical_risk.py` (completed)
-
-**Method**:
-1. Download 36 NetCDF files from CCKP
-2. Extract regional averages for each indicator
-3. Compute climatology baseline (2020s) for standardization
-4. Standardize: φ_k(X) = (X - μ_2020s) / σ_historical
-5. Append to scenario CSV files (transition + physical combined)
-
-**Output**: `/data/scenarios/*.csv` with 8 drivers (5 transition + 3 physical)
-
-### Data Quality
-
-**Completeness**: 100% (all SSP scenarios have global coverage)
-**Spatial Resolution**: 0.5° (~50 km), adequate for regional aggregation
-**Temporal Resolution**: Decadal climatology (reduces interannual noise)
-**Model Uncertainty**: Single model (ACCESS-CM2); future versions should use multi-model ensemble
-
-### Access Method
-
-1. **Download**: World Bank CCKP web interface or API
-2. **Format**: NetCDF (Network Common Data Form)
-3. **License**: Open access for research and policy
-4. **Citation**: World Bank (2024), Climate Change Knowledge Portal, CMIP6 ACCESS-CM2 projections
+**Processing needed**:
+- `/scripts/process_physical_risk.py` (created)
+- Extract regional averages (7 regions)
+- Compute climatology (decadal mean)
+- Standardize and append to scenario CSVs
 
 ---
 
-## 3. Correlation Data (Market Indices)
+## Part 2: Market Correlation Data
 
-### Source: Yahoo Finance (via yfinance Python library)
+### 2.1 Regional Correlations (Yahoo Finance)
 
-**Provider**: Yahoo Finance
-**Library**: yfinance 1.2.0 (Python)
-**License**: Free for non-commercial use
-**URL**: https://finance.yahoo.com
+**Purpose**: Construct Corr_R (7×7 regional correlation matrix)
 
-### Data Downloaded
+**Source**: Yahoo Finance via yfinance Python library
+**Time Period**: 2015-01-01 to 2024-12-31 (120 months)
+**Status**: ✅ **Downloaded 2026-02-25**
 
-**Purpose**: Construct empirical correlation matrices for residual covariance Σ_u
+#### ETF Mappings
 
-**Download Date**: 2026-02-25
-**Time Period**: 2015-01-01 to 2024-12-31 (10 years)
-**Frequency**: Monthly (end-of-month close prices)
-**Total Observations**: 120 months
+| Region | ETF Ticker | ETF Name | Observations |
+|--------|------------|----------|--------------|
+| North America | SPY | S&P 500 ETF | 120 ✅ |
+| Europe | VGK | FTSE Europe ETF | 120 ✅ |
+| Asia-Pacific (developed) | VPL | FTSE Pacific ETF | 120 ✅ |
+| Asia-Pacific (emerging) | VWO | Emerging Markets ETF | 120 ✅ |
+| Latin America | ILF | Latin America 40 | 120 ✅ |
+| Middle East & Africa | AFK | Africa ETF | 120 ✅ |
+| Global | VT | Total World Stock ETF | 120 ✅ |
 
-### Regional ETF Data (7 regions)
+**Data Location**: `/data/market_data/regional_etf_prices.csv`
 
-Used to construct **Corr_R (7×7 regional correlation matrix)**:
+**Data Quality**: ✅ No missing data, all 7 regions complete
 
-| Region | ETF Ticker | ETF Name | Provider | Status |
-|--------|-----------|----------|----------|--------|
-| North America | SPY | S&P 500 ETF | State Street | ✓ 120 obs |
-| Europe | VGK | FTSE Europe ETF | Vanguard | ✓ 120 obs |
-| Asia-Pacific (developed) | VPL | FTSE Pacific ETF | Vanguard | ✓ 120 obs |
-| Asia-Pacific (emerging) | VWO | Emerging Markets ETF | Vanguard | ✓ 120 obs |
-| Latin America | ILF | Latin America 40 ETF | iShares | ✓ 120 obs |
-| Middle East & Africa | AFK | Africa ETF | VanEck | ✓ 120 obs |
-| Global | VT | Total World Stock ETF | Vanguard | ✓ 120 obs |
+---
 
-**Data Quality**: No missing data, all 7 regions have complete 120-month history.
+### 2.2 Sector Correlations (Yahoo Finance)
 
-### Sector ETF Data (15 sectors)
+**Purpose**: Construct Corr_S (15×15 sector correlation matrix)
 
-Used to construct **Corr_S (15×15 sector correlation matrix)**:
+**Source**: Yahoo Finance via yfinance Python library
+**Time Period**: 2015-01-01 to 2024-12-31 (120 months)
+**Status**: ✅ **Downloaded 2026-02-25** (13 of 15 sectors)
 
-| Sector | ETF Ticker | ETF Name | Provider | Status |
-|--------|-----------|----------|----------|--------|
-| **Energy - Oil & Gas** | XLE | Energy Select Sector | State Street | ✓ 120 obs |
-| **Energy - Coal** | - | No ETF available | - | Proxy with XLE |
-| **Energy - Renewables** | ICLN | Clean Energy ETF | iShares | ✓ 120 obs |
-| **Utilities** | XLU | Utilities Select Sector | State Street | ✓ 120 obs |
-| **Financials** | XLF | Financial Select Sector | State Street | ✓ 120 obs |
-| **Consumer Goods** | XLP | Consumer Staples Select | State Street | ✓ 120 obs |
-| **Healthcare** | XLV | Health Care Select Sector | State Street | ✓ 120 obs |
-| **Mining & Metals** | XLB | Materials Select Sector | State Street | ✓ 120 obs |
-| **Real Estate** | XLRE | Real Estate Select Sector | State Street | ⚠️ 111 obs (9 missing) |
-| **Technology & Services** | XLK | Technology Select Sector | State Street | ✓ 120 obs |
-| **Manufacturing - Heavy** | XLI | Industrials Select Sector | State Street | ✓ 120 obs |
-| **Manufacturing - Light** | XLY | Consumer Discretionary Select | State Street | ✓ 120 obs |
-| **Transportation** | IYT | Transportation ETF | iShares | ✓ 120 obs |
-| **Agriculture** | MOO | Agribusiness ETF | VanEck | ✓ 120 obs |
-| **Other** | - | Derived (avg of 14 others) | - | To be computed |
+#### ETF Mappings
+
+| Sector | ETF Ticker | ETF Name | Observations |
+|--------|------------|----------|--------------|
+| **Energy - Oil & Gas** | XLE | Energy Select Sector | 120 ✅ |
+| **Energy - Coal** | - | No ETF (use XLE proxy) | - ⚠️ |
+| **Energy - Renewables** | ICLN | Clean Energy ETF | 120 ✅ |
+| **Utilities** | XLU | Utilities Select | 120 ✅ |
+| **Financials** | XLF | Financial Select | 120 ✅ |
+| **Consumer Goods** | XLP | Consumer Staples Select | 120 ✅ |
+| **Healthcare** | XLV | Health Care Select | 120 ✅ |
+| **Mining & Metals** | XLB | Materials Select | 120 ✅ |
+| **Real Estate** | XLRE | Real Estate Select | 111 ⚠️ (9 missing) |
+| **Technology & Services** | XLK | Technology Select | 120 ✅ |
+| **Manufacturing - Heavy** | XLI | Industrials Select | 120 ✅ |
+| **Manufacturing - Light** | XLY | Consumer Discretionary | 120 ✅ |
+| **Transportation** | IYT | Transportation ETF | 120 ✅ |
+| **Agriculture** | MOO | Agribusiness ETF | 120 ✅ |
+| **Other** | - | Derived (avg of others) | - 🔄 |
+
+**Data Location**: `/data/market_data/sector_etf_prices.csv`
 
 **Data Quality**:
-- 13 of 15 sectors have complete data
-- Real Estate (XLRE): 9 missing observations (7.5%) - ETF launched Oct 2015
-- Coal: No public ETF (ESG divestment) - will proxy with Oil & Gas at 0.85 correlation
-- "Other": Will compute as equal-weighted average of other 14 sectors
+- ✅ 13 of 15 sectors complete
+- ⚠️ Real Estate (XLRE): 9 missing observations (ETF launched Oct 2015) - needs forward fill
+- ⚠️ Coal: No public ETF - will use correlation with Oil & Gas (XLE) × 0.85
 
-### Data Processing
+**Processing needed**:
+- Handle Real Estate missing data (forward fill)
+- Compute log returns
+- Calculate Corr_S and Corr_R matrices
+- Validate positive definiteness
 
-**Download Script**: `/scripts/download_market_data.py` (completed)
+---
 
-**Method**:
-1. Download adjusted close prices for each ETF (monthly)
-2. Extract "Close" price (which includes dividend adjustment in yfinance 1.0+)
-3. Save to CSV: `/data/market_data/regional_etf_prices.csv`, `/data/market_data/sector_etf_prices.csv`
-4. Document metadata: `/data/market_data/download_metadata.txt`
+## Part 3: Calibration Data (Sensitivity Scores)
 
-**Future Processing** (Phase 3.4):
-1. Handle Real Estate missing data (forward fill from Oct 2015)
-2. Compute log returns: r_t = log(P_t / P_{t-1})
-3. Compute correlation matrices: Corr_R = corr(r_regional), Corr_S = corr(r_sector)
-4. Validate positive definiteness
-5. Construct Σ_u using ω and η parameters
+### 3.1 Sector Carbon Dependencies (S_{s,carbon})
 
-### Why ETFs Instead of MSCI Indices?
+**Purpose**: Calibrate how sensitive each sector is to carbon pricing
 
-**Budget constraints**: Bloomberg/Refinitiv MSCI data costs $1,500-2,000/month
-**ETF advantages**:
-- Free and publicly accessible
-- Highly liquid and representative
-- Long history (10+ years for most)
-- Adjusted for dividends
+**Question**: "If carbon price increases by $50/tCO2, which sectors face the most credit stress?"
 
-**ETF limitations**:
-- Slightly different composition than MSCI (but highly correlated)
-- Coal sector not available (no public coal ETF)
-- Some ETFs launched after 2015 (e.g., XLRE in Oct 2015)
+#### Data Sources
 
-**Mitigation**: Use ETFs as best available free data source; document limitations; perform sensitivity analysis
+**Primary Source: CDP (Carbon Disclosure Project)**
 
-### Access Method
+- **URL**: https://www.cdp.net/en
+- **What**: Company-level Scope 1+2 emissions disclosures, ~18,000 companies
+- **Metric**: Emissions intensity (tCO2e per $M revenue)
+- **Access**: Free registration required
+- **Status**: ⏳ **To be downloaded**
 
-1. **Library**: `pip install yfinance`
-2. **API**: `yf.download(ticker, start, end, interval='1mo')`
-3. **Rate Limits**: None for reasonable use
-4. **License**: Free for personal and research use (check terms for commercial)
-5. **Data Lag**: ~15 minutes delayed (sufficient for monthly data)
+**How to use**:
+1. Register at CDP website (free)
+2. Download company emissions data (Scope 1 + Scope 2)
+3. Map companies to our 15 sectors
+4. Compute sector median emissions intensity
+5. Normalize to [0,1] scale
+
+**Secondary Source: OECD Air Emissions Database**
+
+- **URL**: https://stats.oecd.org/ → Environment → Air and Climate
+- **What**: Sectoral GHG emissions by ISIC sector code
+- **Access**: Free download
+- **Status**: ⏳ **To be downloaded**
+
+**How to use**:
+1. Download "Air emissions accounts by industry"
+2. Map ISIC codes to our 15 sectors
+3. Compute emissions per $ output
+4. Use to fill gaps in CDP data
+
+**Validation Source: Academic Carbon Betas**
+
+- **Papers**:
+  - Görgen et al. (2020) "Carbon Risk" - sector carbon betas
+  - Bolton & Kacperczyk (2021) "Do Investors Care About Carbon Risk?"
+  - Ilhan et al. (2021) "Carbon Tail Risk"
+- **Access**: Published papers (free via Google Scholar)
+- **Status**: ⏳ **To be extracted**
+
+**Expected Output**: S_{s,carbon} scores in `/data/calibration/sector_scores.csv`
+
+```
+Energy - Coal: 1.00 (maximum by definition)
+Energy - Oil & Gas: 0.90
+Heavy Manufacturing: 0.80
+Utilities: 0.70
+Mining & Metals: 0.70
+Transportation: 0.80
+...
+```
+
+---
+
+### 3.2 Regional Carbon Dependencies (R_{r,carbon})
+
+**Purpose**: Calibrate which regions face most exposure to carbon pricing policies
+
+**Question**: "Which regions have the strongest carbon pricing policies today and in NGFS scenarios?"
+
+#### Data Sources
+
+**Primary Source: World Bank Carbon Pricing Dashboard**
+
+- **URL**: https://carbonpricingdashboard.worldbank.org/
+- **What**: Carbon pricing coverage (% emissions), effective carbon rates by country
+- **Access**: Free (web scraping or manual download)
+- **Status**: ⏳ **To be collected**
+
+**How to use**:
+1. Visit dashboard, extract coverage by country
+2. Aggregate to our 7 regions (weighted by emissions)
+3. Compute: R = (Coverage × Effective Rate) / max(Coverage × Rate)
+
+**Secondary Source: OECD Effective Carbon Rates**
+
+- **URL**: https://www.oecd.org/tax/tax-policy/effective-carbon-rates-2021.htm
+- **What**: Explicit + implicit carbon pricing (incl. fuel taxes)
+- **Access**: Free report download
+- **Status**: ⏳ **To be downloaded**
+
+**Validation Source: Climate Action Tracker**
+
+- **URL**: https://climateactiontracker.org/
+- **What**: Policy stringency ratings by country
+- **Access**: Free
+- **Status**: ⏳ **To be reviewed**
+
+**Cross-Check: Our Own NGFS Data**
+
+- Use NGFS 2030 carbon price projections (already have this data once downloaded)
+- Ensure R_{r,carbon} ranking matches NGFS carbon price ranking
+
+**Expected Output**: R_{r,carbon} scores in `/data/calibration/region_scores.csv`
+
+```
+Europe: 0.90 (EU ETS mature, high coverage)
+North America: 0.70 (growing coverage)
+Asia-Pacific (developed): 0.70
+Asia-Pacific (emerging): 0.60 (China ETS, low price)
+Latin America: 0.50
+Middle East & Africa: 0.40
+Global: 0.70
+```
+
+---
+
+### 3.3 Sector Physical Risk Vulnerabilities
+
+**Purpose**: Calibrate sector sensitivity to heat, flood, drought
+
+**Question**: "Which sectors are most operationally vulnerable to physical climate hazards?"
+
+#### Data Sources
+
+**Primary Source: IPCC AR6 Working Group II**
+
+- **URL**: https://www.ipcc.ch/report/ar6/wg2/
+- **Chapters**:
+  - Chapter 4: Water (drought)
+  - Chapter 5: Food and agriculture
+  - Chapter 7: Health (heat stress)
+  - Chapter 8: Poverty and livelihoods (sectoral impacts)
+- **What**: Qualitative vulnerability assessments (HIGH/MEDIUM/LOW confidence)
+- **Access**: Free download (full report PDF)
+- **Status**: ⏳ **To be reviewed**
+
+**How to use**:
+1. Download WGII report chapters 4, 5, 7, 8
+2. Extract sectoral vulnerability tables
+3. Map IPCC sectors to our 15 sectors
+4. Convert qualitative (HIGH/MED/LOW) to quantitative (0.8-1.0 / 0.4-0.7 / 0.1-0.3)
+
+**Secondary Source: Academic Literature**
+
+**Heat Vulnerability**:
+- Burke et al. (2015) "Global Non-Linear Effect of Temperature on Economic Production" - labor productivity by sector
+- **Proxy**: Outdoor labor intensity (BLS/ILO data)
+
+**Flood Vulnerability**:
+- Hsiang et al. (2017) "Estimating Economic Damage from Climate Change" - sectoral damage functions
+- **Proxy**: Fixed asset coastal exposure (inferred)
+
+**Drought Vulnerability**:
+- Kahn et al. (2021) "Long-Term Macroeconomic Effects of Climate Change" - water stress impacts
+- **Proxy**: Water intensity (USGS water use data)
+
+**Access**: Google Scholar (free)
+**Status**: ⏳ **To be reviewed and extracted**
+
+**Expected Output**: S_{s,physical} scores in `/data/calibration/sector_scores.csv`
+
+**Heat (HeatIndex)**:
+```
+Agriculture: 0.90 (outdoor labor, crop stress)
+Real Estate & Construction: 0.75 (outdoor work)
+Transportation: 0.70
+Utilities: 0.60
+Manufacturing - Heavy: 0.50
+Technology & Services: 0.20 (indoor, AC)
+```
+
+**Flood (FloodRisk)**:
+```
+Real Estate & Construction: 0.90 (fixed assets)
+Transportation: 0.75 (infrastructure)
+Agriculture: 0.70
+Utilities: 0.60
+Manufacturing - Heavy: 0.50
+Technology & Services: 0.20
+```
+
+**Drought (DroughtRisk)**:
+```
+Agriculture: 0.95 (crop failure)
+Utilities: 0.70 (hydropower, cooling water)
+Manufacturing - Heavy: 0.45 (water-intensive)
+Mining & Metals: 0.50
+Technology & Services: 0.20
+```
+
+---
+
+## Data Collection Priority and Status
+
+### High Priority (Core Model Inputs)
+
+| Data | Source | Status | Blocking? |
+|------|--------|--------|-----------|
+| ✅ Regional ETF prices | Yahoo Finance | Downloaded | No |
+| ✅ Sector ETF prices | Yahoo Finance | Downloaded | No |
+| ⏳ NGFS transition scenarios | NGFS/IIASA | To download | **Yes** |
+| ⏳ CCKP physical risk | World Bank | To download | **Yes** |
+
+### Medium Priority (Calibration Parameters)
+
+| Data | Source | Status | Blocking? |
+|------|--------|--------|-----------|
+| ⏳ Sector carbon intensity | CDP + OECD | To collect | No (can use expert judgment) |
+| ⏳ Regional carbon pricing | World Bank + OECD | To collect | No (can use NGFS data) |
+| ⏳ Physical vulnerabilities | IPCC AR6 + Academic | To review | No (can use expert judgment) |
+
+### Low Priority (Validation)
+
+| Data | Source | Status | Blocking? |
+|------|--------|--------|-----------|
+| ⏳ Academic carbon betas | Papers | To extract | No |
+| ⏳ Credit spread correlations | iTraxx/CDX | Optional | No |
+| ⏳ Munich Re loss data | Proprietary | Optional | No |
+
+---
+
+## Next Steps
+
+### Phase 1: Download Core Scenario Data (BLOCKING)
+
+**Step 1.1: NGFS Transition Data**
+```bash
+# Manual download from IIASA NGFS Scenario Explorer
+# URL: https://data.ece.iiasa.ac.at/ngfs/
+# Save to: /data/scenarios/ngfs_raw_download.csv
+# Then run: python scripts/process_ngfs_scenarios.py
+```
+
+**Step 1.2: CCKP Physical Risk Data**
+```bash
+# Manual download from World Bank CCKP
+# URL: https://climateknowledgeportal.worldbank.org/download-data
+# Download 36 NetCDF files → /data/physical_risk/raw/
+# Then run: python scripts/process_physical_risk.py
+```
+
+**Status**: ⏳ These are **blocking** for Phase 2 (scenario data preparation)
+
+---
+
+### Phase 2: Calibration Data Collection (NON-BLOCKING)
+
+**Step 2.1: Sector Carbon Scores**
+- CDP registration + download
+- OECD emissions data download
+- Academic paper review
+- Populate `/data/calibration/sector_scores.csv` (CarbonPrice column)
+
+**Step 2.2: Regional Carbon Scores**
+- World Bank dashboard data extraction
+- OECD effective carbon rates report
+- Climate Action Tracker review
+- Populate `/data/calibration/region_scores.csv` (CarbonPrice column)
+
+**Step 2.3: Physical Vulnerability Scores**
+- IPCC AR6 WGII chapters 4, 5, 7, 8 review
+- Academic paper review (Burke, Hsiang, Kahn)
+- Populate `/data/calibration/sector_scores.csv` (HeatIndex, FloodRisk, DroughtRisk columns)
+
+**Status**: ⏳ Can proceed with expert judgment if time-constrained
+
+---
+
+### Phase 3: Correlation Matrix Construction (READY)
+
+**Step 3.1: Process ETF Data**
+```bash
+python scripts/compute_correlations.py
+# Input: /data/market_data/*_etf_prices.csv
+# Output: /data/calibration/correlation_matrix_S.csv (15×15)
+#         /data/calibration/correlation_matrix_R.csv (7×7)
+```
+
+**Status**: ✅ Ready to proceed (data downloaded)
 
 ---
 
 ## Data Governance
 
-### Version Control
+### Update Schedule
 
-All raw data and processing scripts are version-controlled in Git:
-- `/data/scenarios/` - NGFS scenario data (CSV)
-- `/data/physical_risk/` - World Bank CCKP data (NetCDF, not in Git due to size)
-- `/data/market_data/` - Yahoo Finance ETF data (CSV)
-- `/scripts/` - Data processing scripts (Python)
+| Data Source | Update Frequency | Last Updated | Next Update |
+|-------------|------------------|--------------|-------------|
+| NGFS Scenarios | ~18 months | Nov 2024 | Mid 2026 |
+| CCKP Physical Risk | ~5 years (IPCC cycle) | 2023 | 2028+ |
+| Yahoo Finance ETFs | Daily (we use monthly) | 2026-02-25 | Annual recalibration |
+| CDP Emissions | Annual | TBD | Annual |
+| World Bank Carbon Pricing | Annual | TBD | Annual |
+| IPCC Assessments | 5-7 years | 2021-2022 | 2028+ |
 
 ### Data Lineage
 
 ```
-NGFS Phase V → process_ngfs_scenarios.py → /data/scenarios/net_zero_2050.csv
-                                         → /data/scenarios/delayed_transition.csv
-                                         → /data/scenarios/current_policies.csv
+SCENARIO DATA:
+NGFS Phase V → process_ngfs_scenarios.py → /data/scenarios/*.csv (420 points)
+World Bank CCKP → process_physical_risk.py → /data/scenarios/*.csv (126 points)
 
-World Bank CCKP → process_physical_risk.py → (appended to scenario CSVs)
+CORRELATION DATA:
+Yahoo Finance → download_market_data.py → /data/market_data/*.csv (120 months)
+ETF prices → compute_correlations.py → Corr_S (15×15), Corr_R (7×7)
 
-Yahoo Finance → download_market_data.py → /data/market_data/regional_etf_prices.csv
-                                       → /data/market_data/sector_etf_prices.csv
+CALIBRATION DATA:
+CDP + OECD → sector_scores.csv (S matrix: 15×8)
+World Bank + OECD → region_scores.csv (R matrix: 7×8)
+IPCC + Academic → sector_scores.csv (physical vulnerability scores)
 ```
-
-### Update Frequency
-
-| Data Source | Update Frequency | Last Updated | Next Update Due |
-|-------------|------------------|--------------|-----------------|
-| NGFS Scenarios | ~18 months | Nov 2024 (Phase V) | Mid 2026 (Phase VI) |
-| CCKP Physical Risk | ~5 years (IPCC cycle) | 2023 (CMIP6) | 2028+ (CMIP7) |
-| Yahoo Finance ETF Data | Daily (we use monthly) | 2026-02-25 | As needed for recalibration |
-
-### Data Review Process
-
-1. **Annual Review**: Check for NGFS updates, IPCC reports, major climate events
-2. **Model Validation Cycle**: Recalibrate correlations annually with updated market data
-3. **Scenario Updates**: When NGFS releases new phase, download and reprocess
-4. **Physical Risk Updates**: When CMIP7 or new IPCC assessment released
-
-### Data Quality Checks
-
-**Transition Data (NGFS)**:
-- [ ] All scenarios have complete time series (2025-2050)
-- [ ] Regional values sum approximately to global (GDP, emissions)
-- [ ] Carbon prices non-negative and increasing in Net Zero scenario
-- [ ] Fossil fuel prices consistent with energy transition narrative
-
-**Physical Data (CCKP)**:
-- [ ] NetCDF files load without errors
-- [ ] Regional averages within plausible ranges (e.g., heat index < 200 days)
-- [ ] Time progression is monotonic for chronic hazards (heat, drought)
-- [ ] Spatial coverage is global (no missing regions)
-
-**Correlation Data (Yahoo Finance)**:
-- [ ] No gaps in monthly time series
-- [ ] Price series are non-negative
-- [ ] Returns are plausible (< 50% monthly change, typical for ETFs)
-- [ ] Correlations are in valid range [-1, 1]
-- [ ] Correlation matrices are positive definite
-
----
-
-## Data Limitations and Future Improvements
-
-### Current Limitations
-
-1. **Physical Risk - Single Climate Model**:
-   - Using ACCESS-CM2 only (one of 30+ CMIP6 models)
-   - Model uncertainty not quantified
-   - **Future**: Use multi-model ensemble (e.g., mean of 5-10 CMIP6 models)
-
-2. **Transition Risk - Regional Granularity**:
-   - NGFS uses R5 regions (5 world regions)
-   - We map to 7 regions with interpolation
-   - **Future**: Use country-level NGFS data where available
-
-3. **Correlation Data - ETF Proxies**:
-   - Using free ETFs instead of MSCI institutional indices
-   - Coal sector has no ETF (using proxy)
-   - Real Estate has incomplete history
-   - **Future**: If budget allows, upgrade to Bloomberg/MSCI data
-
-4. **Temporal Resolution**:
-   - Transition data: 5-year intervals (2025, 2030, 2040, 2050)
-   - Physical data: Decadal climatology (2030s, 2050s)
-   - Linear interpolation between years
-   - **Future**: Annual resolution if available
-
-5. **Static Correlations**:
-   - Using 10-year historical correlation (2015-2024)
-   - Assumes correlations are time-invariant
-   - **Future**: Time-varying or scenario-dependent correlations
-
-### Data Enhancement Roadmap
-
-**Phase 1 (Current)**: MVP with best available free data
-- ✓ NGFS Phase V scenarios
-- ✓ World Bank CCKP single-model projections
-- ✓ Yahoo Finance ETF correlations
-
-**Phase 2 (6-12 months)**: Improved granularity
-- [ ] NGFS country-level data (if available)
-- [ ] Multi-model CCKP ensemble (5 CMIP6 models)
-- [ ] Bloomberg/MSCI institutional data (if budget approved)
-
-**Phase 3 (12-24 months)**: Advanced features
-- [ ] High-resolution physical risk (0.25° grid, city-level)
-- [ ] Credit spread correlations (iTraxx/CDX for validation)
-- [ ] Time-varying correlations (regime-switching model)
-- [ ] Non-linear climate response functions
 
 ---
 
 ## References
 
-### NGFS Climate Scenarios
-- NGFS (2024). "NGFS Climate Scenarios for Central Banks and Supervisors, Phase V." Network for Greening the Financial System. https://www.ngfs.net/en/publications
+### Scenario Data
+- NGFS (2024). NGFS Climate Scenarios Phase V. https://www.ngfs.net/
+- World Bank (2024). Climate Change Knowledge Portal. https://climateknowledgeportal.worldbank.org/
+- IPCC (2021). Climate Change 2021: The Physical Science Basis. AR6 WGI.
 
-### World Bank CCKP
-- World Bank (2024). "Climate Change Knowledge Portal." World Bank Group. https://climateknowledgeportal.worldbank.org/
-
-### CMIP6 Climate Models
-- Eyring, V., et al. (2016). "Overview of the Coupled Model Intercomparison Project Phase 6 (CMIP6)." Geoscientific Model Development, 9(5), 1937-1958.
-
-### IPCC Assessments
-- IPCC (2021). "Climate Change 2021: The Physical Science Basis." Sixth Assessment Report. https://www.ipcc.ch/report/ar6/wg1/
-
-### Yahoo Finance Data
+### Market Data
 - Yahoo Finance (2024). Historical Price Data. https://finance.yahoo.com/
-- yfinance Python Library: https://pypi.org/project/yfinance/
+- yfinance Python Library. https://pypi.org/project/yfinance/
+
+### Calibration Data - Carbon
+- CDP (2024). Corporate Climate Disclosures. https://www.cdp.net/
+- OECD (2023). Air Emissions Accounts. https://stats.oecd.org/
+- World Bank (2024). Carbon Pricing Dashboard. https://carbonpricingdashboard.worldbank.org/
+- OECD (2021). Effective Carbon Rates 2021. https://www.oecd.org/tax/
+- Bolton, P., & Kacperczyk, M. (2021). Do investors care about carbon risk? JFE, 142(2), 517-549.
+- Görgen, M., et al. (2020). Carbon risk. SSRN Working Paper.
+
+### Calibration Data - Physical Risk
+- IPCC (2022). Climate Change 2022: Impacts, Adaptation and Vulnerability. AR6 WGII.
+- Burke, M., Hsiang, S. M., & Miguel, E. (2015). Global non-linear effect of temperature. Nature, 527, 235-239.
+- Hsiang, S., et al. (2017). Estimating economic damage from climate change in the US. Science, 356, 1362-1369.
+- Kahn, M. E., et al. (2021). Long-term macroeconomic effects of climate change. RES, 88(4), 1802-1829.
 
 ---
 
-## Contact and Support
-
-**Data Questions**: Refer to individual provider websites
-**Model Questions**: See `/docs/credit_portfolio_model_climate_overlay.md`
-**Processing Scripts**: See `/scripts/README.md` (to be created)
-
+**Document Status**: Living document, updated as data is collected
 **Last Review**: 2026-02-25
-**Next Review Due**: 2027-02-25 (annual cycle)
+**Next Review**: After Phase 1 downloads complete
