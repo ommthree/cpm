@@ -14,9 +14,9 @@
 | **Physical Risk Projections** | World Bank CCKP | ✅ Downloaded & Processed | `/data/scenarios/*.csv` (integrated) |
 | **Regional Correlations** | Yahoo Finance (7 ETFs) | ✅ Downloaded | `/data/market_data/regional_etf_prices.csv` |
 | **Sector Correlations** | Yahoo Finance (13 ETFs) | ✅ Downloaded | `/data/market_data/sector_etf_prices.csv` |
-| **Sector Carbon Scores** | IEA + OECD + UNECE | ✅ Researched | `/data/calibration/data_collection_summary.md` |
-| **Regional Carbon Scores** | World Bank Dashboard 2024 | ✅ Researched | `/data/calibration/data_collection_summary.md` |
-| **Physical Vulnerability** | IPCC AR6 WGII | ✅ Researched | `/data/calibration/data_collection_summary.md` |
+| **Sector Carbon Scores** | IEA + OECD + UNECE | 🔄 Partially Downloaded | `/data/calibration/raw_data/` (5 files, 3 pending) |
+| **Regional Carbon Scores** | World Bank Dashboard 2024 | ✅ Downloaded | `/data/calibration/raw_data/WorldBank_State_Trends_Carbon_Pricing_2024.pdf` |
+| **Physical Vulnerability** | IPCC AR6 WGII | ⏳ Manual Download Required | `/data/calibration/raw_data/DATA_INVENTORY.md` (instructions) |
 
 ---
 
@@ -220,8 +220,9 @@
 
 - **URL**: https://stats.oecd.org/ → Environment → Air and Climate
 - **What**: Sectoral GHG emissions by ISIC sector code
-- **Access**: Free download
-- **Status**: ⏳ **To be downloaded**
+- **Access**: Free download (requires interactive data selection)
+- **Status**: ⏳ **Manual download required** (instructions in `/data/calibration/raw_data/DATA_INVENTORY.md`)
+- **Documentation**: ✅ Downloaded - `OECD_GHG_Data_Documentation_2024.pdf`
 
 **How to use**:
 1. Download "Air emissions accounts by industry"
@@ -248,13 +249,16 @@
 - Status: Available but requires manual download/extraction
 
 **IEA CO2 Emissions in 2022 Report**:
+- ✅ Downloaded: `IEA_CO2_Emissions_2022.pdf` (665 KB) + `IEA_GHG_Documentation_2022.pdf` (1.7 MB)
 - Key Finding: Cement, iron/steel, chemicals account for 27%, 25%, 14% of industrial CO2
 - Emissions intensity trends (2019-2023):
   - Iron/steel/aluminum: 31% decrease
   - Chemicals: 8% increase
   - Cement/lime: 11% increase
+- **Raw Data**: ⏳ Requires IEA account (instructions in `/data/calibration/raw_data/DATA_INVENTORY.md`)
 
 **UNECE COP27 Report - Emissions Intensity by Revenue**:
+- ✅ Downloaded: `UNECE_COP27_Industry_Brief.pdf` (7 KB)
 - Cement: ~7 kg CO2 per $ revenue
 - Steel: ~1.5 kg CO2 per $ revenue
 - Chemicals: ~0.3 kg CO2 per $ revenue
@@ -292,8 +296,8 @@ Other: 0.50 (average)
 
 - **URL**: https://carbonpricingdashboard.worldbank.org/
 - **What**: Carbon pricing coverage (% emissions), effective carbon rates by country
-- **Access**: Free (web scraping or manual download)
-- **Status**: ⏳ **To be collected**
+- **Access**: Free report download
+- **Status**: ✅ **Downloaded** - `WorldBank_State_Trends_Carbon_Pricing_2024.pdf` (6.9 MB)
 
 **How to use**:
 1. Visit dashboard, extract coverage by country
@@ -378,14 +382,16 @@ Global: 0.70 (weighted average)
 **Primary Source: IPCC AR6 Working Group II**
 
 - **URL**: https://www.ipcc.ch/report/ar6/wg2/
-- **Chapters**:
+- **Database**: AR6 WGII Observed and Projected Impact Assessment Database
+- **Database URL**: https://sedac.ciesin.columbia.edu/ddc/impactsassess_ar6/
+- **Chapters** (qualitative assessments):
   - Chapter 4: Water (drought)
   - Chapter 5: Food and agriculture
   - Chapter 7: Health (heat stress)
   - Chapter 8: Poverty and livelihoods (sectoral impacts)
-- **What**: Qualitative vulnerability assessments (HIGH/MEDIUM/LOW confidence)
-- **Access**: Free download (full report PDF)
-- **Status**: ⏳ **To be reviewed**
+- **What**: Quantitative impact data + qualitative vulnerability assessments
+- **Access**: Free download (Excel workbook 442 KB + PDF chapters)
+- **Status**: ⏳ **Manual download required** (server timeout on 2026-02-25, instructions in `/data/calibration/raw_data/DATA_INVENTORY.md`)
 
 **How to use**:
 1. Download WGII report chapters 4, 5, 7, 8
@@ -553,29 +559,30 @@ python scripts/compute_correlations.py
 
 ---
 
-### Phase 2: Calibration Data Research (COMPLETE ✅)
+### Phase 2: Calibration Data Collection (🔄 PARTIAL)
 
 **Completed 2026-02-25:**
 
-**Sector Carbon Scores**:
-- ✅ IEA CO2 Emissions Report (2022) reviewed
-- ✅ OECD Air Emissions Accounts identified (data to 2021)
-- ✅ UNECE emissions intensity data collected
-- ✅ Recommended scores documented in Section 3.1
+**Downloaded Files (5 files, 11.2 MB)** → `/data/calibration/raw_data/`:
+- ✅ UNECE COP27 Industry Brief (7 KB) - emissions intensity data
+- ✅ IEA CO2 Emissions 2022 Report (665 KB) - sectoral emissions
+- ✅ IEA GHG Documentation 2022 (1.7 MB) - methodology
+- ✅ World Bank State & Trends Carbon Pricing 2024 (6.9 MB) - regional pricing
+- ✅ OECD GHG Data Documentation 2024 (1.7 MB) - emissions accounts overview
 
-**Regional Carbon Scores**:
-- ✅ World Bank Carbon Pricing Dashboard 2024 researched
-- ✅ Regional pricing data collected (Europe $50/tCO2, NA $48/tCO2, etc.)
-- ✅ Cross-validated with NGFS carbon price rankings
-- ✅ Recommended scores documented in Section 3.2
+**Pending Manual Downloads (3 files)**:
+- ⏳ IPCC AR6 WGII Impact Assessment Database (Excel, 442 KB) - server timeout, requires manual download
+- ⏳ OECD Air Emissions Accounts sectoral CSV - requires interactive data selection
+- ⏳ IEA GHG sectoral data (Excel) - requires free IEA account
 
-**Physical Vulnerability Scores**:
-- ✅ IPCC AR6 WGII key findings extracted
-- ✅ Sectoral vulnerability assessments summarized
-- ✅ Quantitative damage estimates documented
-- ✅ Recommended scores for heat/flood/drought in Section 3.3
+**Detailed instructions**: `/data/calibration/raw_data/DATA_INVENTORY.md`
 
-**Status**: ✅ All calibration research complete and documented in this file
+**Research Findings**:
+- ✅ Sector carbon scores: Recommended values documented in Section 3.1
+- ✅ Regional carbon scores: Recommended values documented in Section 3.2
+- ✅ Physical vulnerability scores: Recommended values documented in Section 3.3
+
+**Status**: 🔄 Core documentation downloaded, 3 datasets pending manual download
 
 ---
 
@@ -604,9 +611,10 @@ Yahoo Finance → download_market_data.py → /data/market_data/*.csv (120 month
 ETF prices → compute_correlations.py → Corr_S (15×15), Corr_R (7×7)
 
 CALIBRATION DATA:
-CDP + OECD → sector_scores.csv (S matrix: 15×8)
-World Bank + OECD → region_scores.csv (R matrix: 7×8)
-IPCC + Academic → sector_scores.csv (physical vulnerability scores)
+Raw sources → /data/calibration/raw_data/*.pdf (5 files + 3 pending)
+Processing scripts → sector_scores.csv (S matrix: 15×8)
+Processing scripts → region_scores.csv (R matrix: 7×8)
+See: /data/calibration/raw_data/DATA_INVENTORY.md for inventory
 ```
 
 ---
