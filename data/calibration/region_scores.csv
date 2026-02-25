@@ -1,0 +1,85 @@
+Region,CarbonPrice,CoalPrice,OilPrice,GasPrice,GDP,HeatIndex,FloodRisk,DroughtRisk,Notes
+North America,0.70,0.60,0.70,0.70,1.00,0.50,0.50,0.50,Moderate policy risk; varied hazard exposure; high GDP sensitivity
+Europe,0.90,0.50,0.70,0.80,0.80,0.40,0.40,0.40,Highest carbon policy stringency (EU ETS); moderate physical risk
+Asia-Pacific (developed),0.70,0.60,0.80,0.70,0.90,0.60,0.80,0.50,Strong policy; high typhoon/flood exposure (Japan cyclones)
+Asia-Pacific (emerging),0.60,0.80,0.80,0.70,1.00,0.90,0.80,0.70,High physical risk; coal-dependent energy; rapid development
+Latin America,0.50,0.60,0.70,0.60,1.00,0.60,0.70,0.60,Moderate policy; hurricane/flood exposure; commodity-dependent
+Middle East & Africa,0.40,0.40,1.00,0.80,0.90,1.00,0.60,0.90,Fossil fuel producers; extreme heat/drought; water stress
+Global,0.70,0.60,0.70,0.70,0.80,0.60,0.60,0.60,Weighted average for globally-diversified corporations
+
+# CSV Template: Region Exposure Scores (R matrix)
+#
+# Purpose: Define relative exposure of each region to climate/economic drivers
+# Used in: w_{s,r,k} = λ_k · S_{s,k} · R_{r,k}
+#
+# Column Definitions:
+# - Region: Region name (must match portfolio taxonomy, 7 regions)
+# - CarbonPrice: Relative regional exposure to carbon pricing policies (0-1 scale)
+# - CoalPrice: Relative regional exposure to coal price shocks (0-1 scale)
+# - OilPrice: Relative regional exposure to oil price shocks (0-1 scale)
+# - GasPrice: Relative regional exposure to natural gas price shocks (0-1 scale)
+# - GDP: Relative regional macroeconomic sensitivity (0-1 scale)
+# - HeatIndex: Relative regional heat stress exposure (0-1 scale)
+# - FloodRisk: Relative regional flood hazard propensity (0-1 scale)
+# - DroughtRisk: Relative regional drought propensity (0-1 scale)
+# - Notes: Explanation of regional characteristics (string)
+#
+# Scoring Guidance (0-1 scale):
+# - 1.0 = Maximum exposure/vulnerability among all regions
+# - 0.5 = Moderate exposure
+# - 0.0 = Minimal exposure
+#
+# Transition Risk Calibration (CarbonPrice, CoalPrice, OilPrice, GasPrice, GDP):
+# - CarbonPrice: Policy stringency and likelihood of carbon pricing
+#   * High (0.8-1.0): Europe (EU ETS), developed Asia-Pacific
+#   * Medium (0.5-0.7): North America (state-level policies), Latin America
+#   * Low (0.0-0.4): Middle East & Africa (weak carbon pricing)
+# - Energy prices: Energy import dependence, fossil fuel share in economy
+#   * High oil: Middle East & Africa (producer economies, paradoxically vulnerable to transition)
+#   * High coal: Asia-Pacific emerging (China, India, Indonesia coal-dependent)
+#   * High gas: Europe (import-dependent), Middle East (producer)
+# - GDP: Economic volatility and structural vulnerability
+#   * High (0.9-1.0): Emerging markets (more volatile growth, commodity-dependent)
+#   * Medium (0.7-0.8): Developed markets (more stable, diversified)
+#
+# Physical Risk Calibration (HeatIndex, FloodRisk, DroughtRisk):
+# - Based on historical hazard frequency and IPCC AR6 regional projections
+# - HeatIndex: Based on World Bank CCKP hi35 indicator and labor force outdoor exposure
+#   * High (0.9-1.0): Middle East & Africa, Asia-Pacific emerging (tropical/arid climates)
+#   * Medium (0.5-0.7): Latin America, developed Asia-Pacific, North America
+#   * Low (0.3-0.5): Europe (temperate climate, adaptation capacity)
+# - FloodRisk: Based on coastal exposure, river basins, monsoon patterns
+#   * High (0.7-0.8): Asia-Pacific regions (monsoons, typhoons, riverine flooding)
+#   * Medium (0.5-0.7): Latin America (hurricanes, coastal), Middle East & Africa (flash floods)
+#   * Low (0.4-0.5): Europe, North America (better drainage infrastructure)
+# - DroughtRisk: Based on water stress indicators and precipitation patterns
+#   * High (0.9-1.0): Middle East & Africa (arid, water-scarce)
+#   * Medium (0.5-0.7): Asia-Pacific emerging, Latin America (variable)
+#   * Low (0.4-0.5): Europe, North America, developed Asia-Pacific (water management)
+#
+# Data Sources for Calibration:
+# - Carbon policy: OECD Climate Policy Tracker, World Bank carbon pricing database
+# - Energy mix: IEA World Energy Outlook, regional energy statistics
+# - GDP volatility: World Bank development indicators, historical GDP growth std dev
+# - Physical hazards:
+#   * World Bank Climate Change Knowledge Portal (CCKP)
+#   * EM-DAT disaster database (historical events)
+#   * IPCC AR6 regional assessments
+#   * NGFS physical risk indicators (hi35, rx1day, cdd)
+#
+# Validation Approach:
+# - Compare with NGFS regional aggregations
+# - Expert review by regional economists and climate scientists
+# - Sensitivity analysis: Vary regional scores ±30% and check portfolio impact
+# - Historical validation: Check alignment with past regional climate impacts
+#
+# Special Considerations:
+# - "Global" region: Use portfolio-weighted average for multinational corporations
+# - Regional heterogeneity: These are regional averages; country-level variation exists
+# - Temporal dynamics: Physical risk scores increase over time (should be time-dependent in future versions)
+#
+# Governance:
+# - Region scores should be reviewed annually or after major climate events
+# - Updates require documentation of rationale and impact on portfolio EL
+# - Model Risk Management approval required for material changes (>0.2 change in any score)
+# - IPCC report releases (every 5-7 years) should trigger comprehensive review

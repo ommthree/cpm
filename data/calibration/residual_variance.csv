@@ -1,0 +1,162 @@
+Component,Symbol,Value,ImpliedCorrelation,CorrelationType,Notes
+Sector,sigma_a,0.50,0.397,Within-sector,Sector-wide systematic shocks (brown sectors co-move)
+Region,sigma_b,0.40,0.254,Within-region,Region-wide systematic shocks (regional business cycles)
+Cell,sigma_xi,0.47,0.000,Cross-cell (off-diagonal),Cell-specific idiosyncratic shocks
+
+# CSV Template: Residual Variance Parameters
+#
+# Purpose: Define variance decomposition for stochastic residuals u_{s,r}
+# Used in: u_{s,r} = a_s + b_r + ξ_{s,r} where a_s ~ N(0,σ_a²), b_r ~ N(0,σ_b²), ξ_{s,r} ~ N(0,σ_ξ²)
+#
+# Column Definitions:
+# - Component: Name of variance component (Sector, Region, Cell)
+# - Symbol: Mathematical symbol used in documentation (string, for reference)
+# - Value: Standard deviation parameter (numeric, typically 0.3-0.8)
+# - ImpliedCorrelation: Correlation induced by this component (numeric, computed)
+# - CorrelationType: What type of correlation this generates (string)
+# - Notes: Explanation of economic interpretation (string)
+#
+# Model Structure:
+# Each factor cell F_{s,r} decomposes as:
+#   F_{s,r} = m_{s,r}(X) + u_{s,r}
+#
+# Where:
+# - m_{s,r}(X) = Σ_k λ_k · S_{s,k} · R_{r,k} · φ_k(X)  [deterministic climate mean]
+# - u_{s,r} = a_s + b_r + ξ_{s,r}  [stochastic residual with random effects structure]
+#
+# Random Effects Components:
+# - a_s ~ N(0, σ_a²): Sector-wide shock, affects all cells in sector s
+# - b_r ~ N(0, σ_b²): Region-wide shock, affects all cells in region r
+# - ξ_{s,r} ~ N(0, σ_ξ²): Cell-specific shock, affects only cell (s,r)
+# - All components mutually independent
+#
+# Induced Correlation Structure:
+# Cov(u_{s,r}, u_{s',r'}) = {
+#   σ_a² + σ_b² + σ_ξ²    if s = s', r = r'   (same cell, = total variance)
+#   σ_a²                  if s = s', r ≠ r'   (same sector, different region)
+#   σ_b²                  if s ≠ s', r = r'   (different sector, same region)
+#   0                     if s ≠ s', r ≠ r'   (different sector AND region)
+# }
+#
+# Implied Correlations:
+# - Within-sector correlation:  ρ_s = σ_a² / (σ_a² + σ_b² + σ_ξ²)
+# - Within-region correlation:  ρ_r = σ_b² / (σ_a² + σ_b² + σ_ξ²)
+# - Cross-sector-region correlation: ρ = 0
+#
+# Proposed Calibration (Based on Equity Market Empirics):
+# Target correlations from equity sector and regional indices:
+# - Within-sector correlation (e.g., Corr(coal, oil&gas)): ρ_s ≈ 0.40
+# - Within-region correlation (e.g., Corr(Europe, Asia)): ρ_r ≈ 0.25
+# - Total factor variance: Var(F_{s,r}) ≈ 0.64 (σ_total ≈ 0.80)
+#
+# Solving the system:
+#   σ_a² / (σ_a² + σ_b² + σ_ξ²) = 0.40
+#   σ_b² / (σ_a² + σ_b² + σ_ξ²) = 0.25
+#   σ_a² + σ_b² + σ_ξ² = 0.64
+#
+# Solution:
+#   σ_a² = 0.40 × 0.64 = 0.256  →  σ_a = 0.506 ≈ 0.50
+#   σ_b² = 0.25 × 0.64 = 0.160  →  σ_b = 0.400 ≈ 0.40
+#   σ_ξ² = 0.35 × 0.64 = 0.224  →  σ_ξ = 0.473 ≈ 0.47
+#
+# Check:
+#   σ_a² + σ_b² + σ_ξ² = 0.25 + 0.16 + 0.22 = 0.63 ≈ 0.64 ✓
+#   ρ_s = 0.25 / 0.63 = 0.397 ≈ 0.40 ✓
+#   ρ_r = 0.16 / 0.63 = 0.254 ≈ 0.25 ✓
+#
+# Economic Interpretation:
+# - **σ_a (sector variance)**: Captures sector-wide credit conditions beyond climate
+#   * Brown sectors co-move due to regulatory risk, stranded assets, investor sentiment
+#   * Financial sectors co-move due to systemic risk, funding conditions
+#   * Examples: Coal and oil&gas both stressed by ESG divestment beyond carbon price
+#
+# - **σ_b (region variance)**: Captures regional business cycles and macro shocks
+#   * Regional GDP shocks, fiscal policy, monetary policy, trade patterns
+#   * Examples: European sovereign debt crisis affecting all European corporates
+#
+# - **σ_ξ (cell variance)**: Captures cell-specific variation
+#   * Sector-region interactions: e.g., European coal vs Asian coal face different transitions
+#   * Supply/demand imbalances, local regulation, competitive dynamics
+#   * Examples: European coal phased out faster than Asian coal despite same carbon price
+#
+# Calibration Approach:
+# 1. **Empirical equity correlations** (primary method):
+#    - Compute rolling 5-year correlations of MSCI sector indices
+#    - Compute rolling 5-year correlations of MSCI regional indices
+#    - Use median correlations as targets: ρ_s ≈ 0.40, ρ_r ≈ 0.25
+#    - Set total variance to match typical factor model (σ_total ≈ 0.8)
+#    - Solve for σ_a, σ_b, σ_ξ
+#
+# 2. **Credit spread co-movement** (validation):
+#    - Compute correlations of sector CDS indices (e.g., iTraxx sector sub-indices)
+#    - Compute correlations of regional credit spreads
+#    - Check consistency with equity-based calibration
+#
+# 3. **Expert judgment** (fallback if data limited):
+#    - Start with σ_a = σ_b = σ_ξ (equal variance split)
+#    - Adjust based on intuition about relative importance of sector vs region effects
+#    - Sensitivity analysis to check robustness
+#
+# Typical Ranges by Component:
+# - **σ_a (sector std dev)**: 0.40-0.60
+#   * Higher if sectors have strong identity (e.g., brown vs green is salient)
+#   * Lower if sector definitions are heterogeneous (e.g., "Other" sector)
+#
+# - **σ_b (region std dev)**: 0.30-0.50
+#   * Higher for emerging markets (more volatile regional cycles)
+#   * Lower for developed markets (more synchronized globally)
+#
+# - **σ_ξ (cell std dev)**: 0.40-0.60
+#   * Higher to allow cell-specific dynamics
+#   * Lower if sector and region are dominant drivers
+#
+# Validation Checks:
+# 1. **Correlation targets**: Check implied ρ_s and ρ_r match empirical targets
+# 2. **Total variance**: Check σ_total = √(σ_a² + σ_b² + σ_ξ²) ≈ 0.8 (typical factor model)
+# 3. **Portfolio concentration**: High σ_ξ relative to σ_a, σ_b means diversification helps
+# 4. **Tail risk**: All three components contribute to VaR, check if reasonable
+#
+# Sensitivity Analysis:
+# - Vary each σ independently by ±30%
+# - Observe impact on:
+#   * Portfolio EL (should be modest, ~5-10% change)
+#   * Portfolio VaR 99.9% (should be larger, ~15-25% change due to tail correlation)
+#   * Efficient frontier (shape should be robust)
+# - Report results as ranges for VaR and stress test metrics
+#
+# Advantages of This Structure (vs Full Covariance Matrix):
+# 1. **Parsimony**: 3 parameters vs 5,460 for full 105×105 covariance matrix
+# 2. **Interpretability**: Each component has clear economic meaning
+# 3. **Easy simulation**:
+#    - Draw S independent sector shocks: a_s ~ N(0, σ_a²) for s = 1,...,15
+#    - Draw R independent region shocks: b_r ~ N(0, σ_b²) for r = 1,...,7
+#    - Draw M independent cell shocks: ξ_{s,r} ~ N(0, σ_ξ²) for each (s,r)
+#    - Construct: u_{s,r} = a_s + b_r + ξ_{s,r}
+#    - No Cholesky decomposition needed!
+# 4. **Stable estimation**: Only 3 parameters, so less overfitting risk
+# 5. **Governance-friendly**: Easy to explain to non-technical stakeholders
+#
+# Limitations and Extensions:
+# 1. **Time-varying variance**: Future versions could allow σ_a, σ_b, σ_ξ to depend on time or volatility regime
+# 2. **Scenario-dependent variance**: Residual variance might be higher under "Delayed Transition" (higher uncertainty)
+# 3. **Cross-sector-region correlation**: Current model sets Corr(coal Europe, oil Asia) = 0. Could add global factor for oil price shocks affecting all oil-exposed cells.
+# 4. **Fat tails**: Gaussian residuals might underestimate tail risk. Could use t-distribution with calibrated degrees of freedom.
+#
+# Governance and Review:
+# - Residual variance parameters should be reviewed:
+#   * Annually (routine model validation)
+#   * After major credit events (to check if correlations changed)
+#   * When portfolio composition shifts materially
+# - Changes require:
+#   * Documentation of rationale
+#   * Validation against updated empirical correlations
+#   * Impact analysis on VaR and stress test metrics
+#   * Model Risk Management approval for changes >20%
+# - Sensitivity analysis for these parameters should be included in all Board reporting
+#
+# Data Sources for Empirical Calibration:
+# - MSCI sector indices: Global sector equity returns (2000-2025)
+# - MSCI regional indices: Developed and emerging market regional returns
+# - iTraxx/CDX sector sub-indices: Credit spread co-movement by sector
+# - Corporate bond spreads: Regional credit indices (Barclays, Bloomberg)
+# - Academic literature: Typical factor model loadings (e.g., Fama-French regional/industry factors)

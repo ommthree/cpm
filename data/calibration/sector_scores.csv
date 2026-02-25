@@ -1,0 +1,73 @@
+Sector,CarbonPrice,CoalPrice,OilPrice,GasPrice,GDP,HeatIndex,FloodRisk,DroughtRisk,Notes
+Energy - Oil & Gas,0.90,0.20,1.00,0.70,0.70,0.20,0.30,0.20,High fossil fuel exposure; benefits from high oil/gas prices
+Energy - Coal,1.00,1.00,0.30,0.20,0.60,0.20,0.20,0.20,Maximum carbon exposure; stranded asset risk
+Energy - Renewables,0.20,0.10,0.10,0.10,0.60,0.30,0.30,0.30,Benefits from carbon price (reverse exposure); some physical risk
+Utilities,0.70,0.60,0.50,0.70,0.50,0.40,0.40,0.40,Mixed energy portfolio; infrastructure exposure
+Transportation,0.80,0.20,0.90,0.60,0.80,0.40,0.40,0.30,High oil dependency; cyclical
+Manufacturing - Heavy Industry,0.80,0.50,0.60,0.60,0.90,0.50,0.50,0.40,Energy-intensive production; supply chain risks
+Manufacturing - Light Industry,0.40,0.30,0.40,0.40,0.80,0.40,0.40,0.30,Lower energy intensity; moderate exposure
+Agriculture,0.30,0.20,0.30,0.30,0.60,0.80,0.70,0.90,Maximum physical risk exposure; weather-dependent
+Real Estate & Construction,0.50,0.30,0.40,0.40,0.90,0.60,0.90,0.50,Fixed asset exposure to floods; cyclical
+Financial Services,0.20,0.10,0.20,0.20,0.80,0.20,0.20,0.20,Indirect exposure via portfolios; macro-sensitive
+Technology & Services,0.20,0.10,0.20,0.20,0.70,0.20,0.20,0.20,Low direct climate exposure; some cyclicality
+Consumer Goods,0.40,0.30,0.40,0.40,0.90,0.30,0.30,0.30,Moderate energy use; consumer cyclical
+Healthcare,0.30,0.20,0.30,0.30,0.50,0.30,0.30,0.30,Essential services; moderate energy use
+Mining & Metals,0.70,0.50,0.60,0.50,0.80,0.50,0.50,0.50,Energy-intensive extraction; commodity exposure
+Other,0.50,0.40,0.40,0.40,0.60,0.40,0.40,0.40,Default moderate exposure across drivers
+
+# CSV Template: Sector Exposure Scores (S matrix)
+#
+# Purpose: Define relative exposure of each sector to climate/economic drivers
+# Used in: w_{s,r,k} = λ_k · S_{s,k} · R_{r,k}
+#
+# Column Definitions:
+# - Sector: Sector name (must match portfolio taxonomy, 15 sectors)
+# - CarbonPrice: Relative exposure to carbon pricing (0-1 scale)
+# - CoalPrice: Relative exposure to coal price changes (0-1 scale)
+# - OilPrice: Relative exposure to oil price changes (0-1 scale)
+# - GasPrice: Relative exposure to natural gas price changes (0-1 scale)
+# - GDP: Relative exposure to GDP/macro shocks (0-1 scale)
+# - HeatIndex: Relative exposure to heat stress (0-1 scale)
+# - FloodRisk: Relative exposure to flood hazards (0-1 scale)
+# - DroughtRisk: Relative exposure to drought stress (0-1 scale)
+# - Notes: Explanation of scoring rationale (string)
+#
+# Scoring Guidance (0-1 scale):
+# - 1.0 = Maximum exposure/sensitivity among all sectors
+# - 0.5 = Moderate/average exposure
+# - 0.0 = No exposure/insensitive
+#
+# Special Cases:
+# - Reverse exposure: Use low scores (0.1-0.3) for sectors that BENEFIT from driver increases
+#   Example: Renewables have S_{renewables,carbon} = 0.2 (benefit from high carbon prices)
+#
+# Transition Risk Calibration (CarbonPrice, CoalPrice, OilPrice, GasPrice, GDP):
+# - CarbonPrice: Based on emissions intensity, carbon costs as % of revenue
+#   * High (0.8-1.0): Coal, oil & gas, heavy manufacturing
+#   * Medium (0.4-0.7): Utilities, transportation, general manufacturing
+#   * Low (0.0-0.3): Services, renewables, healthcare
+# - Energy prices: Based on energy input costs, fuel dependency
+# - GDP: Based on business cycle sensitivity (discretionary vs essential)
+#
+# Physical Risk Calibration (HeatIndex, FloodRisk, DroughtRisk):
+# - Consider: Fixed asset exposure, supply chain fragility, worker productivity
+# - Agriculture: Maximum exposure to all physical drivers (water-dependent)
+# - Real Estate: Maximum flood exposure (fixed assets in floodplains)
+# - Services/Tech: Minimal physical exposure (adaptable, indoor work)
+#
+# Data Sources for Calibration:
+# - Emissions intensity: CDP, Scope 1+2 disclosures, OECD sector data
+# - Energy intensity: IEA sector statistics, national accounts
+# - Physical exposure: Industry studies (e.g., Munich Re, Swiss Re sector risk reports)
+# - Abatement costs: McKinsey sector abatement curves
+#
+# Validation Approach:
+# - Expert review by sector specialists
+# - Comparison with peer models (e.g., NGFS sectoral vulnerabilities)
+# - Sensitivity analysis: Vary scores ±30% and check portfolio impact
+# - Historical validation: Check if scores align with past energy/climate shocks
+#
+# Governance:
+# - Sector scores should be reviewed annually or when major regulatory changes occur
+# - Updates require documentation of rationale and impact on portfolio EL
+# - Model Risk Management approval required for material changes (>0.2 change in any score)

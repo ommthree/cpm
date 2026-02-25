@@ -1,0 +1,107 @@
+Driver,Lambda,Units,CalibrationTarget,Notes
+CarbonPrice,0.80,USD/tCO2,Max cell move ~2σ under Net Zero 2050,Strong transition signal; well-understood transmission
+CoalPrice,0.70,USD/GJ,Moderate cell moves ~1-1.5σ,Secondary transition indicator; correlated with carbon price
+OilPrice,0.75,USD/GJ,Moderate cell moves ~1-1.5σ,Energy transition impact; less direct than carbon price
+GasPrice,0.65,USD/GJ,Moderate cell moves ~1-1.5σ,Bridge fuel; medium-term transition relevance
+GDP,1.00,Billion USD PPP,Full weight; macro channel,Well-understood cyclical transmission; empirical validation available
+HeatIndex,0.70,Days >35°C,Chronic stress ~1σ per scenario,Increasing impact over time; labor productivity and health costs
+FloodRisk,0.60,mm precip,Episodic events ~0.5-1σ,Regional variation; not all exposures equally impacted
+DroughtRisk,0.70,Consecutive dry days,Chronic stress ~1σ per scenario,Water stress; agriculture and supply chain impacts
+
+# CSV Template: Lambda Scale Parameters (λ vector)
+#
+# Purpose: Global magnitude control for climate-to-credit transmission
+# Used in: w_{s,r,k} = λ_k · S_{s,k} · R_{r,k}, then F_{s,r} = Σ_k w_{s,r,k} · φ_k(X) + u_{s,r}
+#
+# Column Definitions:
+# - Driver: Name of the climate/economic driver (string, must match scenario drivers)
+# - Lambda: Scale parameter value (numeric, typically 0.3-1.5)
+# - Units: Physical units of the driver in scenario data (string, for reference)
+# - CalibrationTarget: Target behavior for most-exposed cells (string)
+# - Notes: Explanation of calibration rationale (string)
+#
+# Purpose of Lambda Parameters:
+# - Lambda (λ_k) controls the overall magnitude of the credit system's response to driver k
+# - S and R matrices determine RELATIVE exposure (which sectors/regions are most exposed)
+# - Lambda determines ABSOLUTE magnitude (how big is the overall effect)
+# - Final factor mean: m_{s,r}(X) = Σ_k λ_k · S_{s,k} · R_{r,k} · φ_k(X)
+#
+# Calibration Philosophy:
+# 1. **Reasonableness targets** (not statistical estimation):
+#    - We lack long climate-credit time series for regression-based calibration
+#    - Instead, use economic reasoning and plausibility checks
+#    - Target: Most-exposed cells should move ~2σ under severe scenarios
+#    - Target: Portfolio EL uplift should be plausible (2-5x baseline under severe scenario)
+#
+# 2. **Relative confidence**:
+#    - High lambda (0.9-1.2): Well-understood transmission (GDP, carbon price)
+#    - Medium lambda (0.6-0.8): Established but uncertain (energy prices, chronic physical risk)
+#    - Low lambda (0.3-0.5): Uncertain or weak transmission (emerging risks)
+#
+# Calibration Workflow:
+# 1. **Initialize**: Set all λ = 1.0
+# 2. **Run scenarios**: Simulate "Net Zero 2050" and "Current Policies"
+# 3. **Check factor magnitudes**:
+#    - F_{coal,global} should reach ~-2σ under Net Zero 2050
+#    - F_{agriculture,MEA} should reach ~-1.5σ under Current Policies (high physical risk)
+#    - If F values too high, reduce λ proportionally
+# 4. **Check portfolio EL**:
+#    - EL uplift under Net Zero should be ~2-3x baseline (orderly transition)
+#    - EL uplift under Current Policies should be ~3-5x baseline (high physical risk)
+#    - If EL too high/low, adjust λ globally or by risk type (transition vs physical)
+# 5. **Check sectoral contribution**:
+#    - Coal + Oil&Gas should contribute >50% of EL uplift under Net Zero
+#    - Agriculture + Real Estate should contribute >40% under Current Policies
+#    - If wrong sectors dominate, review S and R matrices (not lambda)
+# 6. **Document**: Record final λ values, targets achieved, and sensitivity
+#
+# Typical Lambda Ranges by Driver Type:
+# - **Transition drivers** (CarbonPrice, CoalPrice, OilPrice, GasPrice):
+#   * 0.6-0.9: Reflects uncertainty in transition speed and sectoral pass-through
+#   * Higher for carbon price (direct policy signal)
+#   * Lower for fossil fuel prices (indirect, market-mediated)
+# - **Macroeconomic drivers** (GDP):
+#   * 0.9-1.2: Well-understood cyclical channel, empirical validation available
+#   * Can use historical PD-GDP elasticities as anchor
+# - **Physical drivers** (HeatIndex, FloodRisk, DroughtRisk):
+#   * 0.5-0.8: Chronic vs episodic distinction
+#   * Higher for chronic stress (heat, drought) - persistent impact
+#   * Lower for episodic events (floods, storms) - localized, temporary
+#
+# Advanced Calibration: Portfolio-Level Anchors
+# - **Baseline EL**: Compute expected loss under no climate stress
+# - **Scenario EL**: Compute expected loss under each NGFS scenario
+# - **EL Multiplier**: Ratio of scenario EL to baseline EL
+# - **Target ranges**:
+#   * Net Zero 2050: 1.5-3x (orderly transition, moderate impact)
+#   * Delayed Transition: 3-5x (disorderly, sharp adjustment)
+#   * Current Policies: 2-4x (high physical risk, gradual onset)
+# - Adjust λ to hit these ranges (all λ proportionally, or by risk type)
+#
+# Sensitivity Analysis:
+# - Vary each λ_k by ±30% independently
+# - Observe impact on:
+#   * Portfolio EL (% change)
+#   * VaR 99.9% (% change)
+#   * Sector contributions (rank order)
+# - Report results as ranges: "EL uplift = 2.5x [2.0x, 3.2x] across lambda sensitivity"
+# - Document parameter uncertainty in model validation reports
+#
+# Governance and Review:
+# - Lambda parameters should be reviewed:
+#   * Annually (routine model validation)
+#   * When portfolio composition changes materially (>20% turnover)
+#   * When new climate science emerges (e.g., IPCC reports)
+#   * After major climate events (e.g., to update physical risk perception)
+# - Changes require:
+#   * Documentation of rationale (why changing, what evidence)
+#   * Impact analysis (how does EL, VaR, efficient frontier change)
+#   * Model Risk Management approval for material changes (>30% change in any λ)
+#   * Senior management notification if portfolio EL impact >10%
+# - Sensitivity analysis should accompany all scenario reporting to boards/regulators
+#
+# Future Enhancements:
+# - Time-dependent lambda: λ_k(t) increases for physical risk over time
+# - Scenario-dependent lambda: Different λ for orderly vs disorderly transitions
+# - Portfolio-dependent lambda: Adjust based on actual sector composition
+# - Empirical validation: As climate-credit data accumulates, move toward statistical estimation
