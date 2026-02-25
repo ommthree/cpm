@@ -221,7 +221,7 @@
 - **URL**: https://stats.oecd.org/ → Environment → Air and Climate
 - **What**: Sectoral GHG emissions by ISIC sector code
 - **Access**: Free download (requires interactive data selection)
-- **Status**: ⏳ **Manual download required** (instructions in `/data/calibration/raw_data/DATA_INVENTORY.md`)
+- **Status**: ⏳ **Manual download required** (instructions in Section 3.4)
 - **Documentation**: ✅ Downloaded - `OECD_GHG_Data_Documentation_2024.pdf`
 
 **How to use**:
@@ -255,7 +255,7 @@
   - Iron/steel/aluminum: 31% decrease
   - Chemicals: 8% increase
   - Cement/lime: 11% increase
-- **Raw Data**: ⏳ Requires IEA account (instructions in `/data/calibration/raw_data/DATA_INVENTORY.md`)
+- **Raw Data**: ⏳ Requires IEA account (instructions in Section 3.4)
 
 **UNECE COP27 Report - Emissions Intensity by Revenue**:
 - ✅ Downloaded: `UNECE_COP27_Industry_Brief.pdf` (7 KB)
@@ -391,7 +391,7 @@ Global: 0.70 (weighted average)
   - Chapter 8: Poverty and livelihoods (sectoral impacts)
 - **What**: Quantitative impact data + qualitative vulnerability assessments
 - **Access**: Free download (Excel workbook 442 KB + PDF chapters)
-- **Status**: ⏳ **Manual download required** (server timeout on 2026-02-25, instructions in `/data/calibration/raw_data/DATA_INVENTORY.md`)
+- **Status**: ⏳ **Manual download required** (server timeout on 2026-02-25, instructions in Section 3.4)
 
 **How to use**:
 1. Download WGII report chapters 4, 5, 7, 8
@@ -708,7 +708,7 @@ python scripts/compute_correlations.py
 - ⏳ OECD Air Emissions Accounts sectoral CSV - requires interactive data selection
 - ⏳ IEA GHG sectoral data (Excel) - requires free IEA account
 
-**Detailed instructions**: `/data/calibration/raw_data/DATA_INVENTORY.md`
+**Detailed instructions**: See Section 3.4 above
 
 **Research Findings**:
 - ✅ Sector carbon scores: Recommended values documented in Section 3.1
@@ -747,7 +747,7 @@ CALIBRATION DATA:
 Raw sources → /data/calibration/raw_data/*.pdf (5 files + 3 pending)
 Processing scripts → sector_scores.csv (S matrix: 15×8)
 Processing scripts → region_scores.csv (R matrix: 7×8)
-See: /data/calibration/raw_data/DATA_INVENTORY.md for inventory
+See: Section 3.4 for complete file inventory and download instructions
 ```
 
 ---
