@@ -201,12 +201,13 @@ Extract, transform, and standardize NGFS climate scenarios into model-ready driv
 ## Phase 3: Sensitivity Calibration (Weeks 5-8)
 
 ### Objectives
-Calibrate the hybrid sensitivity parameters (S, R, λ) and residual variance decomposition (σ_a, σ_b, σ_ξ) for the cell-level factor model with climate overlay.
+Calibrate the climate-to-credit transmission parameters (S, R, λ) and residual covariance structure (Σ_u) from market data for the cell-level factor model with climate overlay.
 
 ### Prerequisites
 - Completed Phase 1 (portfolio data with sector/region mappings)
 - Completed Phase 2 (standardized climate drivers φ(X))
-- Updated model documentation (cell-level factors with residual decomposition)
+- Updated model documentation (cell-level factors with market-calibrated Σ_u)
+- Access to MSCI sector/regional indices or equivalent equity market data
 
 ### Tasks
 
@@ -285,57 +286,120 @@ Calibrate the hybrid sensitivity parameters (S, R, λ) and residual variance dec
 
 **Expected ranges:** λ_k ∈ [0.5, 1.2] (most drivers), with adjustments based on validation
 
-#### 3.4 Residual Variance Parameters (σ_a, σ_b, σ_ξ)
-- [ ] Target correlation structure from equity markets:
-  - Within-sector correlation: ρ_s ≈ 0.40
-  - Within-region correlation: ρ_r ≈ 0.25
-  - Total residual volatility: σ_total ≈ 0.8
+#### 3.4 Residual Covariance Σ_u from Market Data
 
-- [ ] Solve for variance decomposition:
-  ```
-  σ_a² / (σ_a² + σ_b² + σ_ξ²) = 0.40
-  σ_b² / (σ_a² + σ_b² + σ_ξ²) = 0.25
-  σ_a² + σ_b² + σ_ξ² = 0.64
-  ```
+**Step 1**: Download and process equity sector index data
+- [ ] Download MSCI Global Sector Indices (or equivalent):
+  - Energy, Materials, Industrials, Consumer Discretionary, Consumer Staples,
+    Health Care, Financials, Information Technology, Communication Services,
+    Utilities, Real Estate
+  - 5-10 year history, monthly returns
+- [ ] Map MSCI sectors to our 15-sector taxonomy:
+  - Create mapping table (e.g., MSCI Energy → our Coal, Oil&Gas, Renewables)
+  - Document any aggregation/splitting decisions
+- [ ] Compute sector correlation matrix Corr_S (15×15):
+  - Use 5-year rolling window for robustness
+  - Consider residualizing against market factor (optional)
+  - Apply shrinkage if needed for stability (Ledoit-Wolf)
+- [ ] Set sector volatilities D_S (15×1 diagonal):
+  - Start with D_S = I (unit volatility)
+  - Alternative: Use empirical std devs if sector-specific volatilities desired
+- [ ] Compute sector covariance: Σ_S = D_S · Corr_S · D_S
 
-  **Solution:**
-  - σ_a = 0.50 (sector std dev)
-  - σ_b = 0.40 (region std dev)
-  - σ_ξ = 0.47 (cell std dev)
+**Step 2**: Download and process equity regional index data
+- [ ] Download MSCI Regional Indices (or equivalent):
+  - North America (USA, Canada)
+  - Europe (Developed)
+  - Pacific (Japan, Australia, Korea)
+  - Emerging Asia (China, India, ASEAN)
+  - Latin America
+  - Middle East & Africa
+  - World/Global
+- [ ] Map to our 7-region taxonomy
+- [ ] Compute region correlation matrix Corr_R (7×7):
+  - 5-year rolling window
+  - Consider residualizing against global market
+  - Apply shrinkage if needed
+- [ ] Set region volatilities D_R (7×1 diagonal):
+  - Start with D_R = I (unit volatility)
+- [ ] Compute region covariance: Σ_R = D_R · Corr_R · D_R
 
-- [ ] (Optional) Validate against historical data:
-  - Download MSCI sector indices (10 years monthly returns)
-  - Residualize against market factor and macro variables
-  - Compute average pairwise correlation → compare to 0.40
-  - Download MSCI regional indices
-  - Compute regional correlations → compare to 0.25
+**Step 3**: Define membership matrices
+- [ ] Construct A ∈ ℝ^(M×S) where M = S×R = 105:
+  - A_{j,s} = 1 if cell j belongs to sector s, else 0
+  - Using sector-major indexing: j = (s-1)R + r
+- [ ] Construct B ∈ ℝ^(M×R):
+  - B_{j,r} = 1 if cell j belongs to region r, else 0
 
-- [ ] Document calibration and validation
+**Step 4**: Choose cell-specific residual variance σ_ξ²
+- [ ] Start with σ_ξ² = 0.25 (σ_ξ = 0.5)
+- [ ] Rationale: Balance between systematic (A Σ_S A^T + B Σ_R B^T) and idiosyncratic (σ_ξ² I) components
+- [ ] Perform sensitivity analysis: vary σ_ξ ∈ [0.3, 0.7]
 
-- [ ] Perform sensitivity analysis: vary σ_a, σ_b, σ_ξ by ±30%
-  - Check impact on portfolio loss distribution
-  - Check impact on tail correlations
+**Step 5**: Construct full residual covariance
+- [ ] Compute Σ_u = A Σ_S A^T + B Σ_R B^T + σ_ξ² I_M
+- [ ] Verify Σ_u is positive definite (should be by construction)
+- [ ] Compute induced correlations:
+  - Within-sector correlation: Corr(u_{s,r}, u_{s,r'})
+  - Within-region correlation: Corr(u_{s,r}, u_{s',r})
+  - Check these are reasonable (e.g., within-sector ≈ 0.3-0.5)
+
+**Step 6**: Validate correlation structure
+- [ ] Compare induced correlations to empirical targets:
+  - Within-sector: Should reflect Σ_S structure
+  - Within-region: Should reflect Σ_R structure
+- [ ] Check total variance: Tr(Σ_u)/M ≈ 0.6-0.8
+- [ ] Perform eigenvalue analysis: All eigenvalues > 0, no excessive concentration
+- [ ] Document any shrinkage or adjustments made
+
+**Data sources:**
+- MSCI indices (preferred): https://www.msci.com/end-of-day-data-search
+- Alternative: S&P sector indices, FTSE sector indices
+- Alternative: Credit sector sub-indices (iTraxx, CDX) if equity data unavailable
+
+#### 3.5 Asset Correlation Parameter ρ
+- [ ] Choose global asset correlation ρ ∈ (0,1):
+  - **Start with ρ = 0.20** (20% of variance is systematic)
+  - Typical range in credit models: ρ ∈ [0.15, 0.25]
+  - Higher ρ → fatter tails, more default clustering
+  - Lower ρ → thinner tails, more diversification
+- [ ] Perform sensitivity analysis: ρ ∈ {0.15, 0.18, 0.20, 0.23, 0.25}
+  - Check impact on VaR, ES, loss distribution quantiles
+  - Document sensitivity ranges for reporting
+- [ ] (Optional) Consider sector-specific ρ_s in future enhancement
+- [ ] Document rationale for chosen ρ and sensitivity ranges
 
 ### Deliverables
 ✅ Sector exposure score matrix S (15 × 8) with documented rationale
 ✅ Region exposure score matrix R (7 × 8) with documented rationale
 ✅ Global scale parameters λ (8 values) with calibration report
-✅ Residual variance parameters (σ_a, σ_b, σ_ξ) with correlation validation
+- [ ] Market data calibration report:
+  - MSCI sector index data (15 sectors, 5-10 years)
+  - MSCI regional index data (7 regions, 5-10 years)
+  - Sector correlation matrix Corr_S (15×15)
+  - Region correlation matrix Corr_R (7×7)
+  - Membership matrices A (M×S) and B (M×R)
+  - Cell-specific residual variance σ_ξ²
+  - Full residual covariance matrix Σ_u (M×M)
+- [ ] Asset correlation parameter ρ with sensitivity analysis
 ✅ Calibration CSV templates:
   - `sector_scores.csv` (15 sectors × 8 drivers)
   - `region_scores.csv` (7 regions × 8 drivers)
   - `lambda_parameters.csv` (8 scale parameters)
-  - `residual_variance.csv` (3 variance components)
-✅ Anchor target specification document
-✅ Validation report (factor magnitudes, portfolio losses, sector decompositions)
-✅ Sensitivity analysis report (impact of λ, σ uncertainty)
-✅ (Optional) Empirical correlation validation using MSCI data
+- [ ] `residual_covariance.csv` (Corr_S, Corr_R, D_S, D_R, σ_ξ²)
+- [ ] `asset_correlation.csv` (ρ parameter with sensitivity ranges)
+- [ ] Anchor target specification document
+- [ ] Validation report (factor magnitudes, portfolio losses, sector decompositions)
+- [ ] Sensitivity analysis report (impact of λ, σ_ξ, ρ uncertainty)
+- [ ] Correlation validation report (within-sector, within-region co-movement)
 
 ### Success Criteria
 - All S and R scores have documented economic/physical rationale
 - λ calibration meets anchor targets (max cell ~2σ, portfolio EL 2x-5x baseline)
-- Residual correlations match equity market targets (0.40 sector, 0.25 region ± 0.10)
-- Sensitivity analysis shows stability (±30% parameter changes → <50% metric changes)
+- Corr_S and Corr_R successfully estimated from MSCI data (or equivalent)
+- Induced correlations are reasonable (within-sector ≈ 0.3-0.5, within-region ≈ 0.2-0.4)
+- Σ_u is positive definite with no numerical issues
+- ρ sensitivity analysis shows impact on tail risk (VaR, ES)
 - Factor magnitudes make intuitive sense across scenarios
 
 ---
@@ -380,44 +444,52 @@ Build the core C++ simulation engine with REST API, computing both risk metrics 
 #### 4.3 Core Data Structures
 - [ ] Define `Portfolio` class:
   - Obligor list with sector/region assignments
-  - β matrix (N × 22): obligor loadings on factors
+  - β matrix (N × M): obligor loadings on factors (M = S×R = 105 cells)
   - PD, LGD, EAD vectors
+  - Expected returns (for return analytics)
 - [ ] Define `Scenario` class:
-  - Raw drivers C (K × 1 vector, K=8)
+  - Raw drivers X (K × 1 vector, K=8)
   - Standardized φ (K × 1 vector)
   - Scenario metadata (name, year, narrative)
 - [ ] Define `CalibrationParams` class:
-  - A matrix (22 × 8): factor loadings
-  - Σ_F|C (22 × 22): residual covariance
-  - Variance parameter σ² for diagonal case
+  - W matrix (M × K): sensitivity matrix (or S, R, λ for hybrid structure)
+  - Σ_u (M × M): residual covariance matrix
+  - ρ: asset correlation parameter
+  - Corr_S, Corr_R, D_S, D_R, σ_ξ² (for Σ_u construction)
+  - Membership matrices A (M × S) and B (M × R)
 - [ ] Define `FactorRealization` class:
-  - Factor vector F (22 × 1)
-  - Conditional mean μ(C) = A · φ(C)
-  - Covariance Σ_F|C
+  - Factor vector f (M × 1)
+  - Conditional mean m(X) = α + W · φ(X)
+  - Covariance Σ_u
 - [ ] Use Eigen for all matrix/vector operations
 
 #### 4.4 Factor Generation Module
 - [ ] Implement `FactorGenerator` class:
   - `computeConditionalMean(Scenario, CalibrationParams) -> Eigen::VectorXd`:
-    * μ(C) = A · φ(C)  (22 × 1 vector)
-  - `sampleFactors(μ, Σ_F|C, rng) -> Eigen::VectorXd`:
-    * F ~ MVN(μ, Σ_F|C)
+    * m(X) = α + W · φ(X)  (M × 1 vector)
+  - `sampleFactors(m, Σ_u, rng) -> Eigen::VectorXd`:
+    * u ~ MVN(0, Σ_u)
+    * f = m + u
     * Use Cholesky decomposition for sampling
-  - `sampleFactorsBatch(μ, Σ_F|C, n_simulations, rng) -> Eigen::MatrixXd`:
-    * Generate n_simulations draws (22 × n_simulations matrix)
+  - `sampleFactorsBatch(m, Σ_u, n_simulations, rng) -> Eigen::MatrixXd`:
+    * Generate n_simulations draws (M × n_simulations matrix)
 - [ ] Vectorized operations using Eigen
 - [ ] Factor diagnostics (min, max, mean, covariance across simulations)
 - [ ] Unit tests for MVN sampling
+- [ ] Precompute Cholesky decomposition of Σ_u for efficiency
 
 #### 4.5 Monte Carlo Simulation Engine
 - [ ] Implement `SimulationEngine` class with parallel execution:
-  - `simulate(Portfolio, FactorMatrix, N_sims) -> SimulationResults`
+  - `simulate(Portfolio, FactorMatrix, CalibrationParams, N_sims) -> SimulationResults`
   - For each simulation (parallelized with OpenMP):
-    - Draw ε ~ N(0, I) using thread-safe RNG
-    - Compute Z = β · vec(F) + ε
-    - Determine defaults: D = (Z < τ), where τ = Φ^(-1)(PD)
+    - Compute systematic scores: S_i = β_i^T · f for each obligor i
+    - Standardize: S̃_i = S_i / √(β_i^T Σ_u β_i)
+    - Draw ε_i ~ N(0,1) using thread-safe RNG
+    - Compute Z_i = √ρ · S̃_i + √(1-ρ) · ε_i
+    - Determine defaults: D_i = (Z_i < τ_i), where τ_i = Φ^(-1)(PD_i)
     - Compute loss: L = Σ_i D_i · LGD_i · EAD_i
   - Collect loss distribution across simulations
+- [ ] Precompute β_i^T Σ_u β_i for all obligors (variance of systematic score)
 - [ ] Implement efficient normal CDF/inverse (use boost or Eigen or hand-rolled)
 - [ ] Multi-threading with configurable thread count
 - [ ] Progress callback for long simulations
