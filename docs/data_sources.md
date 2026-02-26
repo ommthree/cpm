@@ -14,8 +14,8 @@
 | **Physical Risk Projections** | World Bank CCKP | ✅ Downloaded & Processed | `/data/scenarios/*.csv` (integrated) |
 | **Regional Correlations** | Yahoo Finance (7 ETFs) | ✅ Downloaded | `/data/market_data/regional_etf_prices.csv` |
 | **Sector Correlations** | Yahoo Finance (13 ETFs) | ✅ Downloaded | `/data/market_data/sector_etf_prices.csv` |
-| **Sector Carbon Scores** | IEA + OECD + UNECE | 🔄 Partially Downloaded | `/data/calibration/raw_data/` (5 files, 3 pending) |
-| **Regional Carbon Scores** | World Bank Dashboard 2024 | ✅ Downloaded | `/data/calibration/raw_data/WorldBank_State_Trends_Carbon_Pricing_2024.pdf` |
+| **Sector Carbon Scores** | IEA + OECD + UNECE | ✅ Downloaded | `/data/calibration/raw_data/` (OECD CSV + IEA Excel + PDFs) |
+| **Regional Carbon Scores** | World Bank + IEA | ✅ Downloaded | `/data/calibration/raw_data/` (World Bank PDF + IEA Excel) |
 | **Physical Vulnerability** | IPCC AR6 WGII | ⏳ Manual Download Required | Section 3.4 (download instructions) |
 
 ---
@@ -511,10 +511,10 @@ Other: 0.40
 ### 3.4 Downloaded Files and Manual Download Instructions
 
 **Location:** `/data/calibration/raw_data/`
-**Collection Date:** 2026-02-25
-**Status:** 5 files downloaded (11.2 MB), 3 files require manual download
+**Collection Date:** 2026-02-25 (updated 2026-02-26)
+**Status:** 7 files downloaded (839.4 MB), 1 file requires manual download
 
-#### Downloaded Files (5 files)
+#### Downloaded Files (7 files)
 
 **1. UNECE_COP27_Industry_Brief.pdf (7 KB)**
 - **Source:** UNECE Technology Brief on Carbon Neutral Energy Intensive Industries
@@ -546,9 +546,58 @@ Other: 0.40
 - **Content:** Overview of OECD GHG datasets including Air Emissions Accounts
 - **Use Case:** Understanding sectoral emissions data availability and methodology
 
-#### Files Requiring Manual Download (3 files)
+**6. OECD.SDD.NAD.SEEA,DSD_AEA@DF_AEA,1.2+all.csv (826 MB)**
+- **Source:** OECD Air Emissions Accounts - Complete Dataset
+- **URL:** https://data-explorer.oecd.org (dataset SEEA_AEA_A v1.2)
+- **Collection Date:** 2026-02-26
+- **Content:**
+  - 2,052,780 data points
+  - Sectoral emissions by economic activity (ISIC Rev.4 classification)
+  - CO2-equivalent emissions (tonnes)
+  - Coverage: 63 countries, 1990-2021
+  - Multiple pollutants (CO2, CH4, N2O, F-gases)
+  - Breakdown by: Country, Year, Sector, Pollutant type
+- **Data Structure:**
+  - Columns: Country, Year, Economic Activity Code, Pollutant, Unit, Emissions Value
+  - Economic activities mapped to ISIC sectors (e.g., Manufacturing, Transport, Energy)
+  - Ready for aggregation to our 15-sector taxonomy
+- **Use Case:** Primary source for sector carbon dependencies (S_{s,carbon})
+  - Map ISIC activities to 15 Midas sectors
+  - Compute emissions intensity by sector
+  - Normalize to [0,1] scores for calibration matrix
+- **Quality:** ✅ Verified - contains comprehensive sectoral CO2 data
 
-**6. IPCC AR6 WGII Observed and Projected Impact Assessment Database (Excel, 442 KB)**
+**7. GHGHighlights.xlsx (1.8 MB)**
+- **Source:** IEA Greenhouse Gas Emissions from Energy Highlights 2022 Edition
+- **URL:** https://www.iea.org/data-and-statistics/data-product/greenhouse-gas-emissions-from-energy-highlights
+- **Collection Date:** 2026-02-26
+- **Content:**
+  - 19 data sheets
+  - Sectoral CO2 emissions: Electricity/heat, Manufacturing, Transport, Residential, Commercial
+  - Fuel-specific emissions: Coal, Oil, Gas
+  - Regional breakdowns: World, North America, Europe, Asia-Pacific, Latin America, Africa, Middle East
+  - Time series data (1971-2023)
+  - Intensity metrics: CO2/GDP, CO2/population
+- **Key Sheets:**
+  - `SECTOR`: CO2 by economic sector (2023 data)
+  - `SECTOREH`: Extended historical sectoral data
+  - `GHG FC - Coal/Oil/Gas`: Fuel-specific emissions
+  - `TIMEEXTENDED`: Long-term time series
+  - `GEO COVERAGE`: Geographic coverage documentation
+- **Data Structure:**
+  - Rows: Countries and regions
+  - Columns: Sectors (Energy, Manufacturing, Transport, Buildings, etc.)
+  - Values: Million tonnes CO2
+- **Use Case:**
+  - Cross-validation with OECD sector emissions
+  - Regional carbon dependencies (R_{r,carbon}) - regional emission patterns
+  - Time trends for sensitivity analysis
+  - Fuel mix analysis (coal/oil/gas intensity by sector)
+- **Quality:** ✅ Verified - clean sectoral data with regional coverage
+
+#### Files Requiring Manual Download (1 file)
+
+**8. IPCC AR6 WGII Observed and Projected Impact Assessment Database (Excel, 442 KB)**
 - **Source:** IPCC Data Distribution Centre (Columbia University SEDAC)
 - **URL:** https://sedac.ciesin.columbia.edu/ddc/impactsassess_ar6/
 - **Direct Download:** https://sedac.ciesin.columbia.edu/ddc/impactsassess_ar6/data/AR6-WGII-Observed_and_Projected_Impacts_Assessment.xlsx
@@ -567,77 +616,45 @@ wget -O /Users/Owen/cpm/data/calibration/raw_data/IPCC_AR6_WGII_Observed_Project
   "https://sedac.ciesin.columbia.edu/ddc/impactsassess_ar6/data/AR6-WGII-Observed_and_Projected_Impacts_Assessment.xlsx"
 ```
 
-**7. OECD Air Emissions Accounts - Sectoral CO2 Data (CSV)**
-- **Source:** OECD Data Explorer - Air Emissions Accounts (SEEA_AEA_A)
-- **URL:** https://data-explorer.oecd.org
-- **Status:** Requires interactive data selection (no direct download link)
-- **Content:** Sectoral CO2 emissions by ISIC classification, 63 countries, 1990-2021
-- **Use Case:** Sector carbon dependencies (S_{s,carbon} for all 15 sectors)
-
-**Download Instructions:**
-1. Visit OECD Data Explorer: https://data-explorer.oecd.org
-2. Search for "Air Emissions Accounts" or navigate to dataset SEEA_AEA_A
-3. Apply filters:
-   - **Pollutant:** CO2 (carbon dioxide)
-   - **Activity:** Select all ISIC Rev.4 sectors (or total by industry)
-   - **Time:** 2021 (latest available)
-   - **Countries:** All OECD countries or select representative sample
-4. Click download icon (top right) → "Select data only (.csv)" or "with labels (.csv)"
-5. Save as `OECD_Air_Emissions_Accounts_Sectoral_2021.csv` in `/data/calibration/raw_data/`
-
-**API Alternative:** Use OECD SDMX API with custom query (requires building filter):
-```bash
-# Example API structure (customize filter based on data explorer selection):
-curl "https://sdmx.oecd.org/public/rest/data/ESTAT,SEEA_AEA_A,1.4/{FILTER}?startPeriod=2021&endPeriod=2021&format=csvfilewithlabels" \
-  -o /Users/Owen/cpm/data/calibration/raw_data/OECD_Air_Emissions_Accounts_Sectoral_2021.csv
-```
-
-**Note:** Get exact API query by clicking "Developer API" icon in data explorer after selecting data.
-
-**8. IEA Greenhouse Gas Emissions from Energy Highlights (Excel)**
-- **Source:** IEA Greenhouse Gas Emissions from Energy Highlights 2022 Edition
-- **URL:** https://www.iea.org/data-and-statistics/data-product/greenhouse-gas-emissions-from-energy-highlights
-- **Status:** Requires free IEA account registration
-- **Content:** Sectoral GHG emissions for 190+ countries, 1971-2022
-- **Use Case:** Sector carbon dependencies, cross-validation with OECD
-
-**Download Instructions:**
-1. Visit product page: https://www.iea.org/data-and-statistics/data-product/greenhouse-gas-emissions-from-energy-highlights
-2. Create free IEA account or log in
-3. Download September 2022 edition (XLSX format)
-4. Save as `IEA_GHG_Emissions_Energy_Highlights_2022.xlsx` in `/data/calibration/raw_data/`
-
-**Alternative - Data Explorer:**
-1. Use interactive tool: https://www.iea.org/data-and-statistics/data-tools/greenhouse-gas-emissions-from-energy-data-explorer
-2. Select:
-   - **Countries:** World or regional aggregates
-   - **Sectors:** All available (energy, industry, transport, etc.)
-   - **Years:** 2015-2022
-3. Export to Excel/CSV
+---
 
 #### Data Coverage Summary
 
 | Data Type | Files | Status | Format | Size |
 |-----------|-------|--------|--------|------|
-| **Sector Carbon (S_{s,carbon})** | UNECE, IEA PDFs, OECD docs | ✅ Docs downloaded, ❌ Raw data pending | PDF + CSV (pending) | ~4 MB |
-| **Regional Carbon (R_{r,carbon})** | World Bank 2024 | ✅ Downloaded | PDF | 7 MB |
-| **Physical Vulnerability (S_{s,heat/flood/drought})** | IPCC AR6 | ❌ Manual download required | Excel (442 KB) | TBD |
-| **Total Downloaded** | 5 files | ✅ Complete | PDF | 11.2 MB |
-| **Total Pending** | 3 files | ❌ Manual required | Excel + CSV | ~1-2 MB |
+| **Sector Carbon (S_{s,carbon})** | OECD CSV + IEA Excel + UNECE/IEA PDFs | ✅ Downloaded | CSV + Excel + PDF | 828 MB |
+| **Regional Carbon (R_{r,carbon})** | World Bank 2024 PDF + IEA Excel | ✅ Downloaded | PDF + Excel | 8.7 MB |
+| **Physical Vulnerability (S_{s,heat/flood/drought})** | IPCC AR6 Excel | ⏳ Manual download required | Excel (442 KB) | TBD |
+| **Total Downloaded** | 7 files | ✅ 87.5% Complete | PDF + CSV + Excel | 839.4 MB |
+| **Total Pending** | 1 file | ⏳ Manual required | Excel | 442 KB |
 
 #### Next Steps for Data Processing
 
-**After Manual Downloads Complete:**
-1. Extract relevant tables from PDFs (World Bank regional pricing, UNECE emissions intensity)
-2. Process IPCC Excel workbook to extract sectoral vulnerability assessments
-3. Aggregate OECD sectoral emissions to our 15-sector taxonomy
-4. Aggregate IEA sectoral emissions to our 15-sector taxonomy
-5. Cross-validate emissions intensity estimates across sources
+**Ready to Process (7 files downloaded):**
 
-**Calibration Matrix Population:**
-1. Populate `sector_scores.csv` (S matrix, 15×8) using processed data
-2. Populate `region_scores.csv` (R matrix, 7×8) using processed data
-3. Document data-to-score mapping rationale in `/data/calibration/README.md`
+1. **Sector Carbon Dependencies (S_{s,carbon}):**
+   - Extract OECD CSV: Filter CO2 emissions, map ISIC codes to 15 Midas sectors
+   - Extract IEA Excel: Use SECTOR and SECTOREH sheets for sectoral emissions
+   - Extract UNECE PDF: Emissions intensity by revenue (cement, steel, chemicals)
+   - Cross-validate: Compare OECD vs IEA sectoral rankings
+   - Normalize: Convert to [0,1] scores based on relative emissions intensity
+
+2. **Regional Carbon Dependencies (R_{r,carbon}):**
+   - Extract World Bank PDF: Regional carbon pricing averages (Table 1-2)
+   - Extract IEA Excel: Regional emission patterns from GEO sheets
+   - Cross-validate: Rankings should align with NGFS carbon price trajectories
+   - Normalize: Scale to [0,1] based on policy stringency and coverage
+
+3. **Physical Vulnerability (pending IPCC download):**
+   - Extract IPCC Excel: Sectoral impact assessments for heat, flood, drought
+   - Map IPCC sectors to 15 Midas sectors
+   - Quantify qualitative assessments (HIGH → 0.8-1.0, MEDIUM → 0.4-0.7, LOW → 0.1-0.3)
+
+**Calibration Matrix Population (after processing):**
+1. Populate `sector_scores.csv` (S matrix, 15×8) with normalized scores
+2. Populate `region_scores.csv` (R matrix, 7×8) with normalized scores
+3. Document mapping methodology in `/data/calibration/README.md`
+4. Sensitivity analysis: Test ±30% variation in key scores
 
 ---
 
@@ -692,30 +709,30 @@ python scripts/compute_correlations.py
 
 ---
 
-### Phase 2: Calibration Data Collection (🔄 PARTIAL)
+### Phase 2: Calibration Data Collection (✅ 87.5% COMPLETE)
 
-**Completed 2026-02-25:**
+**Completed 2026-02-25 to 2026-02-26:**
 
-**Downloaded Files (5 files, 11.2 MB)** → `/data/calibration/raw_data/`:
+**Downloaded Files (7 files, 839.4 MB)** → `/data/calibration/raw_data/`:
 - ✅ UNECE COP27 Industry Brief (7 KB) - emissions intensity data
 - ✅ IEA CO2 Emissions 2022 Report (665 KB) - sectoral emissions
 - ✅ IEA GHG Documentation 2022 (1.7 MB) - methodology
 - ✅ World Bank State & Trends Carbon Pricing 2024 (6.9 MB) - regional pricing
 - ✅ OECD GHG Data Documentation 2024 (1.7 MB) - emissions accounts overview
+- ✅ OECD Air Emissions Accounts CSV (826 MB) - 2M+ sectoral emissions data points (2026-02-26)
+- ✅ IEA GHG Highlights Excel (1.8 MB) - sectoral/regional CO2 by fuel type (2026-02-26)
 
-**Pending Manual Downloads (3 files)**:
-- ⏳ IPCC AR6 WGII Impact Assessment Database (Excel, 442 KB) - server timeout, requires manual download
-- ⏳ OECD Air Emissions Accounts sectoral CSV - requires interactive data selection
-- ⏳ IEA GHG sectoral data (Excel) - requires free IEA account
+**Pending Manual Downloads (1 file)**:
+- ⏳ IPCC AR6 WGII Impact Assessment Database (Excel, 442 KB) - requires manual download
 
 **Detailed instructions**: See Section 3.4 above
 
 **Research Findings**:
-- ✅ Sector carbon scores: Recommended values documented in Section 3.1
-- ✅ Regional carbon scores: Recommended values documented in Section 3.2
-- ✅ Physical vulnerability scores: Recommended values documented in Section 3.3
+- ✅ Sector carbon scores: Raw data downloaded, ready for processing
+- ✅ Regional carbon scores: Raw data downloaded, ready for processing
+- ⏳ Physical vulnerability scores: IPCC data pending, recommended values in Section 3.3
 
-**Status**: 🔄 Core documentation downloaded, 3 datasets pending manual download
+**Status**: ✅ 7/8 files complete (87.5%), ready to begin data processing
 
 ---
 
