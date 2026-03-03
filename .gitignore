@@ -56,9 +56,9 @@ Makefile
 *.gcno
 coverage/
 
-# Dependencies
-external/*/
-!external/.gitkeep
+# Dependencies (allow git submodules)
+# external/*/
+# !external/.gitkeep
 
 # Large data files (>100MB)
 data/calibration/raw_data/*.csv
